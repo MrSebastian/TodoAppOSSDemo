@@ -37,14 +37,14 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
                 "config.map5xxto400:true",
         }
 )
-public class GlobalBackend5xxTo400MapperTest {
+class GlobalBackend5xxTo400MapperTest {
 
     @Autowired
     private WebTestClient webTestClient;
 
     @Test
     @WithMockUser
-    public void backendError500() {
+    void backendError500() {
 
         stubFor(get(urlEqualTo("/remote"))
                 .willReturn(aResponse()
@@ -69,7 +69,7 @@ public class GlobalBackend5xxTo400MapperTest {
 
     @Test
     @WithMockUser
-    public void backendError200() {
+    void backendError200() {
 
         stubFor(get(urlEqualTo("/remote"))
                 .willReturn(aResponse()

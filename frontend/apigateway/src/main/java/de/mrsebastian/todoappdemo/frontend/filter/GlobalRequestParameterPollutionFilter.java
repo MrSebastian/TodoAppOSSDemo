@@ -5,10 +5,8 @@
 package de.mrsebastian.todoappdemo.frontend.filter;
 
 import de.mrsebastian.todoappdemo.frontend.exception.ParameterPollutionException;
-
 import java.util.List;
 import java.util.Map;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -24,7 +22,6 @@ import reactor.core.publisher.Mono;
 
 /**
  * This {@link GlobalFilter} is used to detect and to fend off a parameter pollution attack.
- *
  * Within a {@link HttpRequest} each request parameter should only exist once.
  * This check is necessary to avoid e.g. SQL injection split over multiple request parameters with
  * the same name.
