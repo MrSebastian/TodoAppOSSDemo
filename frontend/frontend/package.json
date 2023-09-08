@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
+    "@muenchen/appswitcher-vue": "^1.0.0",
     "core-js": "^3.17.3",
-    "itm-appswitcher-vue": "^1.1.0",
     "moment": "^2.29.1",
     "vue": "^2.7.14",
     "vue-router": "^3.5.4",
