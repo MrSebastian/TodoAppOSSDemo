@@ -77,13 +77,3 @@ function showTaskCreateDialog() {
     taskCreateDialogVisible.value = true;
 }
 </script>
-
-<style scoped>
-.UP {
-    color: limegreen;
-}
-
-.DOWN {
-    color: lightcoral;
-}
-</style>
