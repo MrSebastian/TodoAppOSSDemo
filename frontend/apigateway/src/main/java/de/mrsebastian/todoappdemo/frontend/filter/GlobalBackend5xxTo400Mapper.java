@@ -42,7 +42,7 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
      * Variable entscheidet, ob alle 5xx Fehler auf 400 gemappt werden sollen.
      **/
     @Value("${config.map5xxto400: true}")
-    private boolean MAP_5xx_TO_400;
+    private boolean map5xxTo400;
 
     static final String GENERIC_ERROR_400 = "{ \"status\":400, \"error\":\"Bad Request\" }";
     static final String GENERIC_ERROR_500 = "{ \"status\":500, \"error\":\"Internal Server Error\" }";
@@ -67,7 +67,7 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
 
                 final Flux<? extends DataBuffer> flux = (Flux<? extends DataBuffer>) body;
 
-                if (body instanceof Flux && responseHttpStatus.is5xxServerError()) {
+                if (body instanceof Flux && responseHttpStatus!= null && responseHttpStatus.is5xxServerError()) {
 
                     return super.writeWith(flux.buffer().map(
                             // replace old body represented by dataBuffer by the new one
@@ -83,7 +83,7 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
 
                                 // Response manipulieren
                                 final DataBuffer newDataBuffer;
-                                if (MAP_5xx_TO_400) {
+                                if (map5xxTo400) {
                                     getDelegate().setStatusCode(HttpStatus.BAD_REQUEST);
                                     newDataBuffer = dataBufferFactory.wrap(
                                             StringUtils.getBytesUtf8(ObjectUtils.defaultIfNull(GENERIC_ERROR_400, EMPTY_JSON_OBJECT)));

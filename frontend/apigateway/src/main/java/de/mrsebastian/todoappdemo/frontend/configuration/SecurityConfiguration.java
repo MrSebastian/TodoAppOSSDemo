@@ -65,7 +65,7 @@ public class SecurityConfiguration {
                     * The necessary subscription for csrf token attachment to {@link ServerHttpResponse}
                     * is done in class {@link CsrfTokenAppendingHelperFilter}.
                     */
-                    .csrf((csrf) -> csrf
+                    .csrf(csrf -> csrf
                             .csrfTokenRepository(tokenRepository)
                             .csrfTokenRequestHandler(requestHandler))
                     .cors()

@@ -88,6 +88,6 @@ public class GlobalAuthenticationErrorFilter implements GlobalFilter, Ordered {
 
         final ServerWebExchange swe = exchange.mutate().response(decoratedResponse).build();
         return chain.filter(swe);
-    };
+    }
 
 }
