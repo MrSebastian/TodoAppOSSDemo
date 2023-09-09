@@ -15,9 +15,7 @@
                     <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
                     <router-link to="/">
                         <v-toolbar-title class="font-weight-bold">
-                            <span class="white--text">RefArch-</span>
-                            <span class="secondary--text">Kick</span>
-                            <span class="white--text">Starter</span>
+                            <span class="white--text">TodoApp</span>
                         </v-toolbar-title>
                     </router-link>
                 </v-col>
