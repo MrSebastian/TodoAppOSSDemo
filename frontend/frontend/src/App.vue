@@ -38,24 +38,6 @@
                         @keyup.enter="search"
                     />
                 </v-col>
-                <v-col
-                    cols="3"
-                    class="d-flex align-center justify-end"
-                >
-                    <itm-appswitcher
-                        v-if="appswitcherBaseUrl"
-                        :uri="appswitcherBaseUrl"
-                        :tags="['global']"
-                    />
-                    <v-btn
-                        text
-                        fab
-                    >
-                        <v-icon class="white--text">
-                            mdi-account-circle
-                        </v-icon>
-                    </v-btn>
-                </v-col>
             </v-row>
         </v-app-bar>
         <v-navigation-drawer
@@ -82,7 +64,6 @@
 </template>
 
 <script setup lang="ts">
-import ItmAppswitcher from "itm-appswitcher-vue";
 import InfoService from "@/api/InfoService";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router/composables";
