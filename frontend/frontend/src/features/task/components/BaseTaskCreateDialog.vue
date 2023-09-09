@@ -36,7 +36,10 @@ const props = withDefaults(defineProps<IProps>(), {
     value: false,
 });
 
-const emit = defineEmits<(e: "input", value: boolean) => void>();
+const emit = defineEmits<{
+    (e: "input", value: boolean): void;
+    (e: "added"): void;
+}>();
 
 const refForm = ref<HTMLFormElement>();
 const task = ref(Task.createDefault());
@@ -52,7 +55,10 @@ function handleCancelClicked(): void {
 
 function handleSaveClicked(): void {
     if (refForm.value?.validate()) {
-        taskService.createTask(task.value).then(() => closeDialog());
+        taskService
+            .createTask(task.value)
+            .then(() => closeDialog())
+            .then(() => emit("added"));
     }
 }
 

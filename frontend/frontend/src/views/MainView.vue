@@ -19,7 +19,10 @@
             </v-col>
         </v-row>
 
-        <base-task-create-dialog v-model="taskCreateDialogVisible" />
+        <base-task-create-dialog
+            v-model="taskCreateDialogVisible"
+            @added="handleNewTaskAdded"
+        />
     </v-container>
 </template>
 
@@ -53,6 +56,10 @@ onMounted(() => {
 
     loadTasks();
 });
+
+function handleNewTaskAdded(): void {
+    loadTasks();
+}
 
 function handleTaskAddClicked(): void {
     showTaskCreateDialog();
