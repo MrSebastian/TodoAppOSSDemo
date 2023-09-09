@@ -12,7 +12,15 @@ spring:
       return-body-on-create: true
 
   # Spring JPA
+  flyway:
+    enabled: true
+    locations:
+    - classpath:db/h2
   h2.console.enabled: true
+  datasource:
+    username: admin
+    password:
+    url: jdbc:h2:mem:testdb
   jpa:
     database: H2
     hibernate:
@@ -20,7 +28,7 @@ spring:
       # configuration for local (development) mode. this
       # is also the default, that spring offers by convention.
       # but here explicite:
-      ddl-auto: create-drop
+      ddl-auto: validate
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     # Logging for database operation
     show-sql: true

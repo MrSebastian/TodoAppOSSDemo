@@ -36,6 +36,7 @@
         <!-- Version muss mit der in den spring-boot-dependencies bereitgestellten Lombok-Version übereinstimmen -->
         <org.projectlombok.lombok.version>1.18.26</org.projectlombok.lombok.version>
         <org.projectlombok.mapstructbinding.version>0.2.0</org.projectlombok.mapstructbinding.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
 
@@ -139,6 +140,10 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
+        </dependency>
+            <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
         <!-- Hibernate Model Gen for type safe criterias -->
         <dependency>
@@ -245,6 +250,11 @@
             <artifactId>commons-validator</artifactId>
             <version>${apache.commons.validator}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
 
         <!-- Configuration Processor -->
         <dependency>
@@ -293,7 +303,15 @@
                             <artifactId>lombok-mapstruct-binding</artifactId>
                             <version>${org.projectlombok.mapstructbinding.version}</version>
                         </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
                     </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Amapstruct.defaultComponentModel=SPRING</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
