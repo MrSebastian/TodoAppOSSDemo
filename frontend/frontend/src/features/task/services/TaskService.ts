@@ -24,4 +24,12 @@ export default class TaskService {
                 return task;
             });
     }
+
+    getTasks(): Promise<TaskPersisted[]> {
+        return this.taskClient
+            .getTasks()
+            .then((dtos) =>
+                dtos.map((dto) => this.taskMapper.taskDtoToTaskPersisted(dto))
+            );
+    }
 }
