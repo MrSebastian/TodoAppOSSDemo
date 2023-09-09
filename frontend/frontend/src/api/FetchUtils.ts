@@ -1,6 +1,20 @@
 import { ApiError, Levels } from "@/api/error";
 
 export default class FetchUtils {
+    doFetch<T>(url: string, config: RequestInit): Promise<T> {
+        return fetch(`${url}`, config)
+            .then((response) => {
+                FetchUtils.defaultResponseHandler(response);
+                if (response.status === 204) {
+                    return Promise.resolve();
+                } else {
+                    return response.json();
+                }
+            })
+            .catch((err) => {
+                FetchUtils.defaultResponseHandler(err);
+            });
+    }
     /**
      * Liefert eine default GET-Config für fetch
      */
@@ -138,9 +152,9 @@ export default class FetchUtils {
      * @returns {string|string}
      */
     static _getXSRFToken(): string {
-        const help = document.cookie.match(
+        const help = RegExp(
             "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
-        );
+        ).exec(document.cookie);
         return (help ? help.pop() : "") as string;
     }
 }
