@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("tasks")
 @AllArgsConstructor
@@ -17,5 +19,10 @@ public class TaskController {
     @ResponseStatus(HttpStatus.CREATED)
     public TaskDTO createTask(@Valid @RequestBody TaskCreateDTO newTask) {
         return taskService.createTask(newTask);
+    }
+
+    @GetMapping
+    public List<TaskDTO> getTasks() {
+        return taskService.getTasks();
     }
 }
