@@ -4,19 +4,25 @@
             <v-col cols="12">
                 <base-task-add-button @click="handleTaskAddClicked" />
             </v-col>
+        </v-row>
 
-            <v-col class="mb-4">
-                <h1 class="text-h3 font-weight-bold mb-3">
-                    Willkommen beim RefArch-Kickstarter
-                </h1>
-                <p>
-                    Das API-Gateway ist:
-                    <span :class="status">{{ status }}</span>
-                </p>
+        <v-row>
+            <v-col cols="12">
+                <div>
+                    <v-btn
+                        icon
+                        @click="handleReloadClicked"
+                        ><v-icon>mdi-reload</v-icon></v-btn
+                    >
+                    <base-task-list :tasks="tasks" />
+                </div>
             </v-col>
         </v-row>
 
-        <base-task-create-dialog v-model="taskCreateDialogVisible" />
+        <base-task-create-dialog
+            v-model="taskCreateDialogVisible"
+            @added="handleNewTaskAdded"
+        />
     </v-container>
 </template>
 
@@ -28,10 +34,18 @@ import { onMounted, ref } from "vue";
 
 import BaseTaskAddButton from "@/features/task/components/BaseTaskAddButton.vue";
 import BaseTaskCreateDialog from "@/features/task/components/BaseTaskCreateDialog.vue";
+import BaseTaskList from "@/features/task/components/BaseTaskList.vue";
+
+import TaskPersisted from "@/features/task/types/TaskPersisted";
+import TaskService from "@/features/task/services/TaskService";
 
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");
+
+const taskService = new TaskService();
 const taskCreateDialogVisible = ref(false);
+
+const tasks = ref<TaskPersisted[]>([]);
 
 onMounted(() => {
     HealthService.checkHealth()
@@ -39,23 +53,27 @@ onMounted(() => {
         .catch((error) => {
             snackbarStore.showMessage(error);
         });
+
+    loadTasks();
 });
+
+function handleNewTaskAdded(): void {
+    loadTasks();
+}
 
 function handleTaskAddClicked(): void {
     showTaskCreateDialog();
+}
+
+function handleReloadClicked(): void {
+    loadTasks();
+}
+
+function loadTasks(): void {
+    taskService.getTasks().then((result) => (tasks.value = result));
 }
 
 function showTaskCreateDialog() {
     taskCreateDialogVisible.value = true;
 }
 </script>
-
-<style scoped>
-.UP {
-    color: limegreen;
-}
-
-.DOWN {
-    color: lightcoral;
-}
-</style>
