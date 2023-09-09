@@ -6,5 +6,5 @@ import lombok.Builder;
 import java.time.LocalDate;
 
 @Builder
-public record TaskCreateDTO(@NotNull String title, String description, LocalDate dueDate) {
+public record TaskCreateDTO(@NotNull String title, @NotNull String description, LocalDate dueDate) {
 }

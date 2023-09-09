@@ -4,6 +4,7 @@ import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,8 +21,11 @@ import java.time.LocalDate;
 public class Task extends BaseEntity {
 
     @NotNull
+    @Size(min = 1)
     private String title;
 
+    @NotNull
+    @Size(max = 1000, min = 1)
     private String description;
 
     private LocalDate dueDate;
