@@ -1,5 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.task.service;
 
+import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
+import de.mrsebastian.todoappdemo.backend.task.domain.Task;
 import de.mrsebastian.todoappdemo.backend.task.domain.TaskRepository;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskCreateDTO;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
@@ -9,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -28,5 +31,17 @@ public class TaskService {
     @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READ.name())")
     public List<TaskDTO> getTasks() {
         return taskResposiroty.findAll().stream().map(taskMapper::toDTO).toList();
+    }
+
+    @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_DELETE.name())")
+    public void deleteTask(final UUID taskId) {
+        checkIfExistsOrThrow(taskId);
+        taskResposiroty.deleteById(taskId);
+    }
+
+    private void checkIfExistsOrThrow(final UUID taskId) {
+        if (!taskResposiroty.existsById(taskId)) {
+            throw new NotFoundException(taskId, Task.class);
+        }
     }
 }

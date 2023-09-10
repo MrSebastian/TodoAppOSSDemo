@@ -32,4 +32,13 @@ export default class TaskService {
                 dtos.map((dto) => this.taskMapper.taskDtoToTaskPersisted(dto))
             );
     }
+
+    deleteTask(taskId: string): Promise<void> {
+        return this.taskClient.deleteTask(taskId).then(() =>
+            this.snackbarStore.showMessage({
+                message: "Task gelöscht",
+                level: Levels.INFO,
+            })
+        );
+    }
 }
