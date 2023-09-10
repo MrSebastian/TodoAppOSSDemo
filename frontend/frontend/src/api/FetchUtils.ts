@@ -86,6 +86,18 @@ export default class FetchUtils {
             redirect: "manual",
         };
     }
+    /**
+     * Liefert eine default GET-Config für fetch
+     */
+    static getDeletConfig(): RequestInit {
+        return {
+            method: "DELETE",
+            headers: this.getHeaders(),
+            mode: "cors",
+            credentials: "same-origin",
+            redirect: "manual",
+        };
+    }
 
     /**
      * Deckt das Default-Handling einer Response ab. Dazu zählt:

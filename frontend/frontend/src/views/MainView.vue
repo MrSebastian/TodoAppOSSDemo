@@ -14,7 +14,10 @@
                         @click="handleReloadClicked"
                         ><v-icon>mdi-reload</v-icon></v-btn
                     >
-                    <base-task-list :tasks="tasks" />
+                    <base-task-list
+                        :tasks="tasks"
+                        @changed="handleTaskListChanged"
+                    />
                 </div>
             </v-col>
         </v-row>
@@ -63,6 +66,10 @@ function handleNewTaskAdded(): void {
 
 function handleTaskAddClicked(): void {
     showTaskCreateDialog();
+}
+
+function handleTaskListChanged(): void {
+    loadTasks();
 }
 
 function handleReloadClicked(): void {

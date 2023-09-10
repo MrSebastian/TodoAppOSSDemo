@@ -21,4 +21,11 @@ export default class TaskClient {
             FetchUtils.getGETConfig()
         );
     }
+
+    deleteTask(taskId: string): Promise<void> {
+        return this.fetchUtils.doFetch<void>(
+            `${API_BACKEND_BASE}${this.PATH_TASKS}/${taskId}`,
+            FetchUtils.getDeletConfig()
+        );
+    }
 }
