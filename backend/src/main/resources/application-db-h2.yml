@@ -1,0 +1,16 @@
+spring:
+  # Spring JPA
+  h2.console.enabled: true
+  datasource:
+    username: admin
+    password:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    database: H2
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    # Logging for database operation
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
