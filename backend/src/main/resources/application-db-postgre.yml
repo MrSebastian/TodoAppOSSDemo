@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    username: todo
+    password: todo
+    url: jdbc:postgresql://localhost/postgres
