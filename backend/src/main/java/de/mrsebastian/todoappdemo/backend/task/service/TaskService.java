@@ -1,6 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.task.service;
 
 import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
+import de.mrsebastian.todoappdemo.backend.person.service.PersonService;
 import de.mrsebastian.todoappdemo.backend.task.domain.Task;
 import de.mrsebastian.todoappdemo.backend.task.domain.TaskRepository;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskCreateDTO;
@@ -21,9 +22,13 @@ public class TaskService {
 
     private final TaskMapper taskMapper;
 
+    private final PersonService personService;
+
 
     @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_CREATE.name())")
     public TaskDTO createTask(TaskCreateDTO newTask) {
+        personService.existsOrThrow(newTask.creatorId());
+
         val newEntity = taskMapper.toEntity(newTask);
         return taskMapper.toDTO(taskResposiroty.save(newEntity));
     }

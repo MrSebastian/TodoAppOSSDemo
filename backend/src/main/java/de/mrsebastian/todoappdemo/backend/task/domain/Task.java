@@ -1,7 +1,10 @@
 package de.mrsebastian.todoappdemo.backend.task.domain;
 
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
+import de.mrsebastian.todoappdemo.backend.person.domain.Person;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -29,4 +32,8 @@ public class Task extends BaseEntity {
     private String description;
 
     private LocalDate dueDate;
+
+    @OneToOne
+    @JoinColumn(name = "creator")
+    private Person creator;
 }

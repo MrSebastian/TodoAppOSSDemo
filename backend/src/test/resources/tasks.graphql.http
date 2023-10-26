@@ -11,5 +11,9 @@ query {
       id
       title
       dueDate
+      creator {
+       email
+       id
+      }
     }
 }
