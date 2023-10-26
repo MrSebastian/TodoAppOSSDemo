@@ -1,0 +1,12 @@
+### Get Personen
+GET http://localhost:39146/person
+
+### Create Person
+POST http://localhost:39146/person
+Content-Type: application/json
+
+{
+  "firstname": "firstname",
+  "lastname": "lastname",
+  "email": "email"
+}
