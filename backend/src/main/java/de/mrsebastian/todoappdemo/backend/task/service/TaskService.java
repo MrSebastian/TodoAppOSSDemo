@@ -24,7 +24,6 @@ public class TaskService {
 
     private final PersonService personService;
 
-
     @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_CREATE.name())")
     public TaskDTO createTask(TaskCreateDTO newTask) {
         personService.existsOrThrow(newTask.creatorId());

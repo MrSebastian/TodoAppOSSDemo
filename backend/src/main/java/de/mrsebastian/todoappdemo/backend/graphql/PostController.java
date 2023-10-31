@@ -24,5 +24,7 @@ public class PostController {
     }
 
     @QueryMapping
-    public List<PersonDTO> getPersons() { return personService.getPersonen(); }
+    public List<PersonDTO> getPersons() {
+        return personService.getPersonen();
+    }
 }
