@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,9 @@ public class TaskService {
 
     @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_CREATE.name())")
     public TaskDTO createTask(TaskCreateDTO newTask) {
-        personService.existsOrThrow(newTask.creatorId());
+        if (newTask.creatorId() != null) {
+            personService.existsOrThrow(newTask.creatorId());
+        }
 
         val newEntity = taskMapper.toEntity(newTask);
         return taskMapper.toDTO(taskResposiroty.save(newEntity));
