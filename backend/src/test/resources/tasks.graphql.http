@@ -1,0 +1,19 @@
+GET http://localhost:39146/graphql
+
+### get healthstatus
+GET http://localhost:39146/actuator/health
+
+### GraphQL Tasks
+GRAPHQL http://localhost:39146/graphql
+
+query {
+    getTasks {
+      id
+      title
+      dueDate
+      creator {
+       email
+       id
+      }
+    }
+}

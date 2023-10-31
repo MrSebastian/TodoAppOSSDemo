@@ -1,0 +1,13 @@
+GET http://localhost:39146/graphql
+
+### GraphQL Tasks
+GRAPHQL http://localhost:39146/graphql
+
+query {
+    getPersons {
+      id
+      firstname
+      lastname
+      email
+    }
+}

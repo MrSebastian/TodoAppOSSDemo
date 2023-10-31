@@ -1,0 +1,19 @@
+type Task {
+    id: ID!
+    title: String!,
+    description: String!,
+    dueDate: String
+    creator: Person
+}
+
+type Person {
+    id: ID!
+    firstname: String
+    lastname: String,
+    email: String!
+}
+
+type Query {
+    getTasks: [Task]!
+    getPersons: [Person]!
+}

@@ -38,7 +38,7 @@ public class UnicodeConfiguration {
         registration.setFilter(nfcRequestFilter);
         registration.setName(NFC_FILTER_NAME);
         registration.setOrder(Ordered.LOWEST_PRECEDENCE);
-        registration.setAsyncSupported(false);
+        registration.setAsyncSupported(true);
 
         //
         // Setzen der URLs, auf die Filter anzuwenden ist.
