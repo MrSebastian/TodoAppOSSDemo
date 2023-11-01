@@ -1,6 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.person.service;
 
-import de.mrsebastian.todoappdemo.backend.person.domain.Person;
+import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonCreateDao;
+import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDao;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonCreateDTO;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
 import org.mapstruct.Mapper;
@@ -8,7 +9,7 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface PersonMapper {
 
-    PersonDTO toDTO(Person entity);
+    PersonDTO toDto(PersonDao entity);
 
-    Person toEntity(PersonCreateDTO createDTO);
+    PersonCreateDao toCreateDao(PersonCreateDTO createDTO);
 }

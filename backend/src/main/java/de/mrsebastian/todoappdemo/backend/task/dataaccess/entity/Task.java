@@ -1,7 +1,7 @@
-package de.mrsebastian.todoappdemo.backend.task.domain;
+package de.mrsebastian.todoappdemo.backend.task.dataaccess.entity;
 
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
-import de.mrsebastian.todoappdemo.backend.person.domain.Person;
+import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;

@@ -1,4 +1,4 @@
-package de.mrsebastian.todoappdemo.backend.person.domain;
+package de.mrsebastian.todoappdemo.backend.person.dataaccess.entity;
 
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
 import jakarta.persistence.Entity;
