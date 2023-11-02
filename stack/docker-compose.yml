@@ -3,6 +3,24 @@ version: '3.1'
 
 services:
 
+  oracledb-xe:
+    image: gvenzl/oracle-xe
+    ports:
+      - 1521:1521
+    environment:
+      ORACLE_PASSWORD: secret
+      APP_USER: pp
+      APP_USER_PASSWORD: ppsecret
+
+  mariadb:
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_USER: example-user
+      MARIADB_PASSWORD: my_cool_secret
+      MARIADB_DATABASE: exmple-database
+      MARIADB_ROOT_PASSWORD: my-secret-pw
   mongo:
     image: mongo
     restart: always
