@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 
@@ -26,6 +27,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 @Setter
 @ToString
 @EqualsAndHashCode
+@SuperBuilder
 public abstract class BaseEntity implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
