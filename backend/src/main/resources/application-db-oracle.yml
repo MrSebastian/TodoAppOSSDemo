@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    database: oracle
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    username: pp
+    password: ppsecret
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
