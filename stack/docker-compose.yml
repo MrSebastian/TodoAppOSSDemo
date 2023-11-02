@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+
+  oracledb-xe:
+    image: gvenzl/oracle-xe
+    ports:
+      - 1521:1521
+    environment:
+      ORACLE_PASSWORD: secret
+      APP_USER: pp
+      APP_USER_PASSWORD: ppsecret
