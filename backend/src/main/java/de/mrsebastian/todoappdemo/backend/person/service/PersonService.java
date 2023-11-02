@@ -1,8 +1,8 @@
 package de.mrsebastian.todoappdemo.backend.person.service;
 
 import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
-import de.mrsebastian.todoappdemo.backend.person.domain.Person;
-import de.mrsebastian.todoappdemo.backend.person.domain.PersonRepository;
+import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDataAccessService;
+import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonCreateDTO;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +18,19 @@ public class PersonService {
 
     private final PersonMapper personMapper;
 
-    private final PersonRepository personRepository;
+    private final PersonDataAccessService personDAService;
 
     public List<PersonDTO> getPersonen() {
-        return personRepository.findAll().stream().map(personMapper::toDTO).toList();
+        return personDAService.getPersonen().stream().map(personMapper::toDto).toList();
     }
 
     public PersonDTO createPerson(final PersonCreateDTO personCreateDTO) {
-        val entityToSave = personMapper.toEntity(personCreateDTO);
-        return personMapper.toDTO(personRepository.save(entityToSave));
+        val personDaoForCreate = personMapper.toCreateDao(personCreateDTO);
+        return personMapper.toDto(personDAService.createPerson(personDaoForCreate));
     }
 
     public void existsOrThrow(final UUID personId) {
-        if (!personRepository.existsById(personId)) {
+        if (!personDAService.personExists(personId)) {
             throw new NotFoundException(personId, Person.class);
         }
     }

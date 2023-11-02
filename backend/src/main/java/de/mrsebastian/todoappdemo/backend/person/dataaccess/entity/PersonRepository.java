@@ -1,4 +1,4 @@
-package de.mrsebastian.todoappdemo.backend.person.domain;
+package de.mrsebastian.todoappdemo.backend.person.dataaccess.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

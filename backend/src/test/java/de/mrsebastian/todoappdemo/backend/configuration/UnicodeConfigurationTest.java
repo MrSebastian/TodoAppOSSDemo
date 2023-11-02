@@ -5,8 +5,8 @@
 package de.mrsebastian.todoappdemo.backend.configuration;
 
 import de.mrsebastian.todoappdemo.backend.MicroServiceApplication;
-import de.mrsebastian.todoappdemo.backend.task.domain.Task;
-import de.mrsebastian.todoappdemo.backend.task.domain.TaskRepository;
+import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.Task;
+import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.TaskRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

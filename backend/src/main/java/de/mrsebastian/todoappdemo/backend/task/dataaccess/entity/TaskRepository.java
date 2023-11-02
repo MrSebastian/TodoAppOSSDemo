@@ -1,4 +1,4 @@
-package de.mrsebastian.todoappdemo.backend.task.domain;
+package de.mrsebastian.todoappdemo.backend.task.dataaccess.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

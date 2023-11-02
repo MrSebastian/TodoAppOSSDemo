@@ -1,0 +1,6 @@
+app:
+  mongodb:
+    username: root
+    password: example
+    databasename: admin
+    url: mongodb://${app.mongodb.username}:${app.mongodb.password}@localhost:27017/${app.mongodb.databasename}
