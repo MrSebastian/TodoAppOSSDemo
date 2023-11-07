@@ -10,12 +10,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(
         basePackages = {
                 "org.springframework.data.jpa.convert.threeten",
-                "de.mrsebastian.todoappdemo.backend"
+                "de.mrsebastian.todoappdemo.backend.person.dataaccess.entity",
+                "de.mrsebastian.todoappdemo.backend.task.dataaccess.entity"
         }
 )
 @EnableJpaRepositories(
         basePackages = {
-                "de.mrsebastian.todoappdemo.backend"
+                "de.mrsebastian.todoappdemo.backend.person.dataaccess.entity",
+                "de.mrsebastian.todoappdemo.backend.task.dataaccess.entity"
         }
 )
 public class SQLConfiguration {
