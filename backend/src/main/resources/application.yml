@@ -10,6 +10,8 @@ spring:
         - persistence-sql
       db-postgre:
         - persistence-sql
+      db-oracle:
+        - persistence-sql
       db-mongo:
         - persistence-mongo
 
