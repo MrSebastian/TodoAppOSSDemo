@@ -7,3 +7,5 @@ spring:
     username: pp
     password: ppsecret
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+  flyway:
+    enabled: true

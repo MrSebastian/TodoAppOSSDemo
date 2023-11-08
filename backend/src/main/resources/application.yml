@@ -8,6 +8,8 @@ spring:
     group:
       db-h2:
         - persistence-sql
+      db-maria:
+        - persistence-sql
       db-postgre:
         - persistence-sql
       db-oracle:
