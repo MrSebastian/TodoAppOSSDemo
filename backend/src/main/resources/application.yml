@@ -14,6 +14,9 @@ spring:
         - persistence-sql
       db-mongo:
         - persistence-mongo
+  mvc:
+    servlet:
+      path: "/api"
 
 server:
   shutdown: "graceful"

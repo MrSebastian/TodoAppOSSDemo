@@ -34,7 +34,7 @@ spring:
           predicates:
             - Path=/api/clientid-backend-service/**
           filters:
-            - RewritePath=/api/clientid-backend-service/(?<urlsegments>.*), /$\{urlsegments}
+            - RewritePath=/api/clientid-backend-service/(?<urlsegments>.*), /api/$\{urlsegments}
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires
