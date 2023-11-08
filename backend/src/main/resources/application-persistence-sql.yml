@@ -1,6 +1,5 @@
 spring:
   flyway:
-    enabled: true
     locations:
       - classpath:db/migrations/{vendor}
   jpa:
