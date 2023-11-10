@@ -5,6 +5,7 @@
 package de.mrsebastian.todoappdemo.backend.configuration;
 
 import lombok.val;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -30,9 +31,9 @@ public class NoSecurityConfiguration {
 
         http
                 .headers(customizer -> customizer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .authorizeHttpRequests(requests -> requests.requestMatchers(mvcRequestMatcher.pattern("/api/**"))
+                .authorizeHttpRequests(requests -> requests.requestMatchers(mvcRequestMatcher.pattern("/**"))
                         .permitAll()
-                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .anyRequest()
                         .permitAll())
                 .csrf(AbstractHttpConfigurer::disable);
