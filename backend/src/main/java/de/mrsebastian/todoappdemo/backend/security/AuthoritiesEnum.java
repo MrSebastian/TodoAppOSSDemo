@@ -16,6 +16,6 @@ public enum AuthoritiesEnum {
     BACKEND_READ_THEENTITY, BACKEND_WRITE_THEENTITY, BACKEND_DELETE_THEENTITY,
     // add your authorities here and also add these new authorities to sso-authorisation.json.
 
-    TASK_CREATE, TASK_READ, TASK_DELETE
+    TASK_ADMIN, TASK_READER
 
 }

@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile(Profiles.NOT + Profiles.PROFILE_MONGO)
-@EnableAutoConfiguration(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
 public class NoMongoDBConfiguration {
 }

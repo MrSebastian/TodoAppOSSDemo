@@ -22,7 +22,7 @@ export default class FetchUtils {
         return {
             headers: this.getHeaders(),
             mode: "cors",
-            credentials: "same-origin",
+            credentials: FetchUtils.getCredentials(),
             redirect: "manual",
         };
     }
@@ -38,7 +38,7 @@ export default class FetchUtils {
             body: body ? JSON.stringify(body) : undefined,
             headers: FetchUtils.getHeaders(),
             mode: "cors",
-            credentials: "same-origin",
+            credentials: FetchUtils.getCredentials(),
             redirect: "manual",
         };
     }
@@ -60,7 +60,7 @@ export default class FetchUtils {
             body: body ? JSON.stringify(body) : undefined,
             headers,
             mode: "cors",
-            credentials: "same-origin",
+            credentials: FetchUtils.getCredentials(),
             redirect: "manual",
         };
     }
@@ -82,7 +82,7 @@ export default class FetchUtils {
             body: body ? JSON.stringify(body) : undefined,
             headers,
             mode: "cors",
-            credentials: "same-origin",
+            credentials: FetchUtils.getCredentials(),
             redirect: "manual",
         };
     }
@@ -94,7 +94,7 @@ export default class FetchUtils {
             method: "DELETE",
             headers: this.getHeaders(),
             mode: "cors",
-            credentials: "same-origin",
+            credentials: FetchUtils.getCredentials(),
             redirect: "manual",
         };
     }
@@ -168,5 +168,11 @@ export default class FetchUtils {
             "(^|;)\\s*" + "XSRF-TOKEN" + "\\s*=\\s*([^;]+)"
         ).exec(document.cookie);
         return (help ? help.pop() : "") as string;
+    }
+
+    private static getCredentials(): RequestCredentials {
+        return import.meta.env.MODE === "development"
+            ? "include"
+            : "same-origin";
     }
 }
