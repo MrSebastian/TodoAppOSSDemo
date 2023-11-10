@@ -47,3 +47,53 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+  # Keycloak (SSO)
+  test-keycloak:
+    image: quay.io/keycloak/keycloak:20.0.3
+    container_name: test-keycloak
+    command:
+      - start-dev --http-relative-path /auth
+    depends_on:
+      - test-postgres-keycloak
+    ports:
+      - 8100:8080
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: change_me
+      KC_HOSTNAME_STRICT: false
+      db: postgress
+      features: token-exchange
+      db-url: jdbc:postgresql://postgres-keycloak:5432/keycloak
+      db-username: keycloak-user
+      db-password: keycloak-secret
+    networks:
+      - keycloak
+
+  test-init-keycloak:
+    image: klg71/keycloakmigration
+    depends_on:
+      - test-keycloak
+    environment:
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: change_me
+      BASEURL: http://test-keycloak:8080/auth # uses internal docker network to access the keycloak via its back channel port
+      WAIT_FOR_KEYCLOAK: 'true'
+      KEYCLOAK_CHANGELOG: /migration/keycloak-changelog.yml
+    volumes:
+      - './keycloak/migration:/migration'
+    networks:
+      - keycloak
+
+  test-postgres-keycloak:
+    image: postgres:13.2
+    container_name: test-postgres-keycloak
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak-user
+      POSTGRES_PASSWORD: keycloak-secret
+    networks:
+      - keycloak
+
+networks:
+  keycloak:

@@ -1,0 +1,40 @@
+id: add testuser
+author: MrSebastian
+realm: testrealm
+changes:
+  - addUser:
+      name: admin
+      lastName: Lastname
+      firstName: admin
+      enabled: true
+      emailVerified: true
+      email: admin.lastname@example.com
+      groups:
+        - group1
+      attributes:
+        user_name:
+          - admin.user
+      clientRoles:
+        - client: testclient
+          role: TASK_ADMIN
+  - updateUserPassword:
+      name: admin
+      password: "admin"
+  - addUser:
+      name: normal
+      lastName: Lastname
+      firstName: normal
+      enabled: true
+      emailVerified: true
+      email: normal.lastname@example.com
+      groups:
+        - group1
+      attributes:
+        user_name:
+          - normal.user
+      clientRoles:
+        - client: testclient
+          role: TASK_READER
+  - updateUserPassword:
+      name: normal
+      password: "normal"
