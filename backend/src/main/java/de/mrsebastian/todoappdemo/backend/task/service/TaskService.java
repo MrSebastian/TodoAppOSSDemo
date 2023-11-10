@@ -24,7 +24,7 @@ public class TaskService {
 
     private final PersonService personService;
 
-    @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_CREATE.name())")
+    @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
     public TaskDTO createTask(TaskCreateDTO newTask) {
         if (newTask.creatorId() != null) {
             personService.existsOrThrow(newTask.creatorId());
@@ -34,12 +34,14 @@ public class TaskService {
         return taskMapper.toDTO(taskDAService.createTask(taskCreateDao));
     }
 
-    @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READ.name())")
+    @PreAuthorize(
+        "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
+    )
     public List<TaskDTO> getTasks() {
         return taskDAService.getTasks().stream().map(taskMapper::toDTO).toList();
     }
 
-    @PreAuthorize("hasAuthority(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_DELETE.name())")
+    @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
     public void deleteTask(final UUID taskId) {
         checkIfExistsOrThrow(taskId);
         taskDAService.deleteTask(taskId);
