@@ -14,9 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -26,12 +23,10 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class NoSecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-        val mvcRequestMatcher = new MvcRequestMatcher.Builder(introspector);
-
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .headers(customizer -> customizer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .authorizeHttpRequests(requests -> requests.requestMatchers(mvcRequestMatcher.pattern("/**"))
+                .authorizeHttpRequests(requests -> requests.requestMatchers(antMatcher("/**"))
                         .permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .anyRequest()

@@ -18,8 +18,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -40,9 +38,7 @@ public class SecurityConfiguration {
     private String userInfoUri;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-        val mvcRequestMatcher = new MvcRequestMatcher.Builder(introspector);
-
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests.requestMatchers(antMatcher("/**"),
                         // allow access to /actuator/info
@@ -56,7 +52,7 @@ public class SecurityConfiguration {
                         // allow access to /actuator/metrics for Prometheus monitoring in OpenShift
                         antMatcher("/actuator/metrics"))
                         .permitAll())
-                .authorizeHttpRequests(requests -> requests.requestMatchers(mvcRequestMatcher.pattern("/**"))
+                .authorizeHttpRequests(requests -> requests.requestMatchers(antMatcher("/**"))
                         .authenticated()
                         .requestMatchers(PathRequest.toH2Console()).permitAll())
                 .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> httpSecurityOAuth2ResourceServerConfigurer
