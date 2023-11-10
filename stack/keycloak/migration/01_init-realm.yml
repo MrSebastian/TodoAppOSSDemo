@@ -1,0 +1,17 @@
+id: initial_realm
+author: MrSebastian
+changes:
+  - addRealm:
+      name: testrealm
+
+  - updateRealm:
+      id: testrealm
+      displayName: Local Realm
+
+  - addGroup:
+      realm: testrealm
+      name: group1
+
+  - addClientScope:
+      realm: testrealm
+      name: openid
