@@ -66,6 +66,7 @@ import InfoService from "@/api/InfoService";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router/composables";
 import { useSnackbarStore } from "@/stores/snackbar";
+import UserService from "@/features/user/services/UserService";
 
 const drawer = ref(true);
 const query = ref("");
@@ -73,6 +74,8 @@ const appswitcherBaseUrl = ref<string | null>(null);
 
 const route = useRoute();
 const snackbarStore = useSnackbarStore();
+
+const userService = new UserService();
 
 onMounted(() => {
     /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -85,6 +88,8 @@ onMounted(() => {
             snackbarStore.showMessage(error);
         });
     /* eslint-enable  @typescript-eslint/no-explicit-any */
+
+    userService.loadUserInfo();
 });
 
 watch(
