@@ -15,6 +15,7 @@ import java.util.Map;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.apache.commons.collections4.map.CaseInsensitiveMap;
 
 /**
@@ -56,7 +57,8 @@ public class NfcHelper {
      * @see Normalizer#normalize(CharSequence, Normalizer.Form)
      */
     public static StringBuffer nfcConverter(final StringBuffer in) {
-        return new StringBuffer(nfcConverter(in.toString()));
+        val nfcConverted = nfcConverter(in.toString());
+        return nfcConverted == null ? new StringBuffer() : new StringBuffer(nfcConverted);
     }
 
     /**
@@ -116,7 +118,7 @@ public class NfcHelper {
      */
     public static Cookie[] nfcConverter(final Cookie[] original) {
         if (original == null) {
-            return null;
+            return new Cookie[0];
         }
         return Arrays.stream(original)
                 .map(NfcHelper::nfcConverter)
