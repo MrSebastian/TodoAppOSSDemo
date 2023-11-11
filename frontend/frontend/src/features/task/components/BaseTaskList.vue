@@ -23,9 +23,7 @@ interface IProps {
 const taskService = new TaskService();
 
 const props = defineProps<IProps>();
-const emit = defineEmits<{
-    (e: "changed"): void;
-}>();
+const emit = defineEmits<(e: "changed") => void>();
 
 function handleDeleteRequest(taskId: string) {
     taskService.deleteTask(taskId).then(() => emit("changed"));

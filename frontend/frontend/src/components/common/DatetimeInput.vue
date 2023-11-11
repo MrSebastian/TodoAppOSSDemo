@@ -97,7 +97,7 @@ interface Props {
     persistentHint: boolean;
     hint: string;
     label: string;
-    rules: { (v: string): string | boolean }[];
+    rules: ((v: string) => string | boolean)[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -120,9 +120,7 @@ const errorMessages = ref("");
 const dateFilled = (): string | boolean =>
     checkBothFieldsFilled() || "Datum und Zeit muss ausgefüllt werden";
 
-const emits = defineEmits<{
-    (e: "input", v: string | null): void;
-}>();
+const emits = defineEmits<(e: "input", v: string | null) => void>();
 
 const validierungsRegeln = computed(() => {
     if (props.rules) {
