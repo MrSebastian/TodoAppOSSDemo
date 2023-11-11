@@ -6,7 +6,6 @@ package de.mrsebastian.todoappdemo.frontend.filter;
 
 import io.micrometer.tracing.Tracer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -26,8 +25,11 @@ public class DistributedTracingFilter implements WebFilter {
     public static final String TRACE_ID = "TraceId";
     public static final String SPAN_ID = "SpanId";
 
-    @Autowired
-    private Tracer tracer;
+    private final Tracer tracer;
+
+    public DistributedTracingFilter(Tracer tracer) {
+        this.tracer = tracer;
+    }
 
     /**
      * This method adds the zipkin headers "X-B3-SpanId" and "X-B3-TraceId"

@@ -4,7 +4,6 @@
  */
 package de.mrsebastian.todoappdemo.backend.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
@@ -30,11 +29,14 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @Import(RestTemplateAutoConfiguration.class)
 public class SecurityConfiguration {
 
-    @Autowired
-    private RestTemplateBuilder restTemplateBuilder;
+    private final RestTemplateBuilder restTemplateBuilder;
 
     @Value("${security.oauth2.resource.user-info-uri}")
     private String userInfoUri;
+
+    public SecurityConfiguration(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplateBuilder = restTemplateBuilder;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
