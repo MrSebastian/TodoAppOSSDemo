@@ -115,8 +115,15 @@ public class NfcRequest extends HttpServletRequestWrapper implements HttpServlet
     }
 
     @Override
+    @SuppressWarnings("java:S2254")
     public String getRequestedSessionId() {
         convert();
+        /*
+         * we can ignore the hint java:S2254
+         * "HttpServletRequest.getRequestedSessionId()" should not be used
+         * cause this class is only a wrapper
+         */
+        log.warn("using these method could interfere with a responsibility issue java:S2254");
         return NfcHelper.nfcConverter(getOriginalRequest().getRequestedSessionId());
     }
 
