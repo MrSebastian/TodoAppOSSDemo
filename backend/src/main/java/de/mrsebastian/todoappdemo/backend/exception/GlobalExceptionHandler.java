@@ -16,4 +16,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(ex.getMessage()));
     }
 
+    @ExceptionHandler(NfcException.class)
+    public ResponseEntity<Object> handleNfcException(final NfcException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDTO(ex.getMessage()));
+    }
 }

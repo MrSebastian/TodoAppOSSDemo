@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.apache.commons.collections4.map.CaseInsensitiveMap;
 
 /**
@@ -57,7 +57,8 @@ public class NfcHelper {
      * @see Normalizer#normalize(CharSequence, Normalizer.Form)
      */
     public static StringBuffer nfcConverter(final StringBuffer in) {
-        return new StringBuffer(nfcConverter(in.toString()));
+        val nfcConverted = nfcConverter(in.toString());
+        return nfcConverted == null ? new StringBuffer() : new StringBuffer(nfcConverted);
     }
 
     /**
@@ -100,7 +101,6 @@ public class NfcHelper {
      */
     public static Cookie nfcConverter(Cookie original) {
         final Cookie nfcCookie = new Cookie(NfcHelper.nfcConverter(original.getName()), NfcHelper.nfcConverter(original.getValue()));
-        nfcCookie.setComment(NfcHelper.nfcConverter(original.getComment()));
         if (original.getDomain() != null) {
             nfcCookie.setDomain(NfcHelper.nfcConverter(original.getDomain()));
         }
@@ -118,7 +118,7 @@ public class NfcHelper {
      */
     public static Cookie[] nfcConverter(final Cookie[] original) {
         if (original == null) {
-            return null;
+            return new Cookie[0];
         }
         return Arrays.stream(original)
                 .map(NfcHelper::nfcConverter)
@@ -141,7 +141,7 @@ public class NfcHelper {
             final String nfcHeaderName = NfcHelper.nfcConverter(nfdHeaderName);
             final List<String> nfcHeaderEntries = Collections.list(originalRequest.getHeaders(nfdHeaderName)).stream()
                     .map(NfcHelper::nfcConverter)
-                    .collect(Collectors.toList());
+                    .toList();
             converted.put(nfcHeaderName, nfcHeaderEntries);
         });
         return converted;

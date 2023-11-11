@@ -62,7 +62,6 @@
 </template>
 
 <script setup lang="ts">
-import InfoService from "@/api/InfoService";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router/composables";
 import { useSnackbarStore } from "@/stores/snackbar";
@@ -101,8 +100,4 @@ async function search(): Promise<void> {
 }
 </script>
 
-<style>
-.main {
-    background-color: white;
-}
-</style>
+<style></style>

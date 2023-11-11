@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -84,7 +85,7 @@ public class NfcRequestFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
         log.debug("Request-Type={}", request.getClass().getName());
@@ -92,9 +93,9 @@ public class NfcRequestFilter extends OncePerRequestFilter {
 
         final String contentType = request.getContentType();
         log.debug("ContentType for request with URI: \"{}\"", contentType);
-        if ((contentTypes != null) && (contentTypes.contains(contentType))) {
+        if (contentTypes.contains(contentType)) {
             log.debug("Processing request {}.", request.getRequestURI());
-            filterChain.doFilter(new NfcRequest(request, contentTypes), response);
+            filterChain.doFilter(new NfcRequest(request), response);
         } else {
             log.debug("Skip processing of HTTP request since it's content type \"{}\" is not in whitelist.", contentType);
             filterChain.doFilter(request, response);

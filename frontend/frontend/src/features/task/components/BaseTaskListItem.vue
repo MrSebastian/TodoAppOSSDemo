@@ -24,9 +24,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits<{
-    (e: "delete", value: string): void;
-}>();
+const emit = defineEmits<(e: "delete", value: string) => void>();
 
 const dueDate = computed(() => (props.task.dueDate ? props.task.dueDate : "-"));
 
