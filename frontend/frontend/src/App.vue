@@ -100,8 +100,4 @@ async function search(): Promise<void> {
 }
 </script>
 
-<style>
-.main {
-    background-color: white;
-}
-</style>
+<style></style>
