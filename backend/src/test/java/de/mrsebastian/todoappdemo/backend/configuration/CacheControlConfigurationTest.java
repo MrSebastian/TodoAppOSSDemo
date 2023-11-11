@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
 import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
 import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
                 "refarch.gracefulshutdown.pre-wait-seconds=0"
         }
 )
-@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
+@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE, SPRING_TEST_DB_H2 })
 class CacheControlConfigurationTest {
 
     private static final String ENTITY_ENDPOINT_URL = "/theEntities";

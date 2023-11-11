@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.net.URI;
 import java.util.UUID;
 
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
 import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
 import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
 import static de.mrsebastian.todoappdemo.backend.TestConstants.TheEntityDto;
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
                 "refarch.gracefulshutdown.pre-wait-seconds=0"
         }
 )
-@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE })
+@ActiveProfiles(profiles = { SPRING_TEST_PROFILE, SPRING_NO_SECURITY_PROFILE, SPRING_TEST_DB_H2 })
 class UnicodeConfigurationTest {
 
     private static final String ENTITY_ENDPOINT_URL = "/theEntities";
