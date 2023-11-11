@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 /**
  * Das Date-Time-Input` Feld bietet eine Eingabemöglichkeit von Date-Times ohne zusätzliche
@@ -87,17 +87,17 @@ import {computed, onMounted, ref, watch} from "vue";
  */
 
 interface Props {
-    value: string,
-    readonly: boolean,
-    hideDetails: boolean,
-    dense: boolean,
-    filled: boolean,
-    outlined: boolean,
-    clearable: boolean,
-    persistentHint: boolean,
-    hint: string,
-    label: string,
-    rules: { (v: string): string | boolean; } []
+    value: string;
+    readonly: boolean;
+    hideDetails: boolean;
+    dense: boolean;
+    filled: boolean;
+    outlined: boolean;
+    clearable: boolean;
+    persistentHint: boolean;
+    hint: string;
+    label: string;
+    rules: { (v: string): string | boolean }[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -111,7 +111,7 @@ const props = withDefaults(defineProps<Props>(), {
     hint: "",
     label: "",
     rules: () => [],
-})
+});
 
 const day = ref<string | null>(null);
 const time = ref<string | null>(null);
@@ -130,7 +130,7 @@ const validierungsRegeln = computed(() => {
     } else {
         return [dateFilled];
     }
-})
+});
 
 onMounted(() => {
     parseValue();
@@ -164,10 +164,9 @@ function parseValue(): void {
     }
 }
 
-
 watch(
     () => props.value,
-    () => parseValue(),
+    () => parseValue()
 );
 
 function parseDay(timestamp: Date): string {
@@ -204,5 +203,4 @@ function sendInput(): void {
 function checkBothFieldsFilled(): boolean {
     return !!(time.value && day.value) || (!time.value && !day.value);
 }
-
 </script>
