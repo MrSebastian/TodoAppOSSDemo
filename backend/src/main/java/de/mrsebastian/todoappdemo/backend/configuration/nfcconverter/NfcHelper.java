@@ -141,7 +141,7 @@ public class NfcHelper {
             final String nfcHeaderName = NfcHelper.nfcConverter(nfdHeaderName);
             final List<String> nfcHeaderEntries = Collections.list(originalRequest.getHeaders(nfdHeaderName)).stream()
                     .map(NfcHelper::nfcConverter)
-                    .collect(Collectors.toList());
+                    .toList();
             converted.put(nfcHeaderName, nfcHeaderEntries);
         });
         return converted;
