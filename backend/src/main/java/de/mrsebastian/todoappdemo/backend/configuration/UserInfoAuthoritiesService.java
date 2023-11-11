@@ -87,6 +87,10 @@ public class UserInfoAuthoritiesService {
                     Map.class).getBody();
 
             log.debug("Response from user-info Endpoint: {}", map);
+            if (map == null) {
+                log.error("map from fetch is null - user is granted NO authorities");
+                return authorities;
+            }
             if (map.containsKey(CLAIM_AUTHORITIES)) {
                 authorities = asAuthorities(map.get(CLAIM_AUTHORITIES));
             }
