@@ -94,7 +94,7 @@ public class NfcRequestFilter extends OncePerRequestFilter {
         log.debug("ContentType for request with URI: \"{}\"", contentType);
         if (contentTypes.contains(contentType)) {
             log.debug("Processing request {}.", request.getRequestURI());
-            filterChain.doFilter(new NfcRequest(request, contentTypes), response);
+            filterChain.doFilter(new NfcRequest(request), response);
         } else {
             log.debug("Skip processing of HTTP request since it's content type \"{}\" is not in whitelist.", contentType);
             filterChain.doFilter(request, response);
