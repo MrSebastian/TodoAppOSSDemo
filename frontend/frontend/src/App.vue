@@ -70,7 +70,6 @@ import UserService from "@/features/user/services/UserService";
 
 const drawer = ref(true);
 const query = ref("");
-const appswitcherBaseUrl = ref<string | null>(null);
 
 const route = useRoute();
 const snackbarStore = useSnackbarStore();
@@ -78,16 +77,7 @@ const snackbarStore = useSnackbarStore();
 const userService = new UserService();
 
 onMounted(() => {
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
     query.value = route.params.query;
-    InfoService.getInfo()
-        .then((content: any) => {
-            appswitcherBaseUrl.value = content.appswitcher.url;
-        })
-        .catch((error) => {
-            snackbarStore.showMessage(error);
-        });
-    /* eslint-enable  @typescript-eslint/no-explicit-any */
 
     userService.loadUserInfo();
 });

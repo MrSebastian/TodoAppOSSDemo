@@ -5,7 +5,6 @@
 package de.mrsebastian.todoappdemo.frontend.controller;
 
 import de.mrsebastian.todoappdemo.frontend.ApiGatewayApplication;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,15 +24,5 @@ class ActuatorInfoEndpointTest {
 
     @Autowired
     private WebTestClient webTestClient;
-
-    @Test
-    void actuatorInfoProvidesAppswitcherUrl() {
-        //@formatter:off
-        webTestClient.get().uri("/actuator/info").exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                    .jsonPath("$.appswitcher.url").isEqualTo("https://test-url-appswitcher.muenchen.de");
-        //@formatter:on
-    }
 
 }
