@@ -100,7 +100,6 @@ public class NfcHelper {
      */
     public static Cookie nfcConverter(Cookie original) {
         final Cookie nfcCookie = new Cookie(NfcHelper.nfcConverter(original.getName()), NfcHelper.nfcConverter(original.getValue()));
-        nfcCookie.setComment(NfcHelper.nfcConverter(original.getComment()));
         if (original.getDomain() != null) {
             nfcCookie.setDomain(NfcHelper.nfcConverter(original.getDomain()));
         }
