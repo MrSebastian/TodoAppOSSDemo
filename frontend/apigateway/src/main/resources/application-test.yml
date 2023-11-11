@@ -59,5 +59,3 @@ spring:
 
   mvc:
     log-request-details: on
-
-info.appswitcher.url: https://test-url-appswitcher.muenchen.de
