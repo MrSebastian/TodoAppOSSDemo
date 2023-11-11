@@ -20,6 +20,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.id.IdentifierGenerator;
 
 @MappedSuperclass
 @NoArgsConstructor
@@ -35,7 +36,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
     @Column(name = "id", length = 36)
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid", type = IdentifierGenerator.class)
     @JdbcTypeCode(VARCHAR)
     private UUID id;
 
