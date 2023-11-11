@@ -41,7 +41,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests.requestMatchers(antMatcher("/**"),
+                .authorizeHttpRequests(requests -> requests.requestMatchers(antMatcher("/**"),
                         // allow access to /actuator/info
                         antMatcher("/actuator/info"),
                         // allow access to /actuator/health for OpenShift Health Check
