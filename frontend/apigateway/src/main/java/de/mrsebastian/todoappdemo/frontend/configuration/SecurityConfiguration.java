@@ -43,47 +43,37 @@ public class SecurityConfiguration {
         // requestHandler needed for handling the raw CSRF tokens
         final ServerCsrfTokenRequestAttributeHandler requestHandler = new ServerCsrfTokenRequestAttributeHandler();
 
-        // @formatter:off
         http
-                .logout()
-                    .logoutSuccessHandler(createLogoutSuccessHandler(LOGOUT_SUCCESS_URL))
-                    .logoutUrl(LOGOUT_URL)
-                    .requiresLogout(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, LOGOUT_URL))
-                .and()
-                    .authorizeExchange()
-                        // permitAll
-                        .pathMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-                        .pathMatchers(LOGOUT_SUCCESS_URL).permitAll()
-                        .pathMatchers("/api/*/info",
-                                "/actuator/health",
-                                "/actuator/info",
-                                "/actuator/metrics").permitAll()
-                        // only authenticated
-                        .anyExchange().authenticated()
-                .and()
-                    /*
-                    * The necessary subscription for csrf token attachment to {@link ServerHttpResponse}
-                    * is done in class {@link CsrfTokenAppendingHelperFilter}.
-                    */
-                    .csrf(csrf -> csrf
-                            .csrfTokenRepository(tokenRepository)
-                            .csrfTokenRequestHandler(requestHandler))
-                    .cors()
-                .and()
-                    .oauth2Login()
-                    /*
-                    * Set security session timeout.
-                    */
-                    .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler() {
-                        @Override
-                        public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-                            webFilterExchange.getExchange().getSession().subscribe(
-                                    webSession -> webSession.setMaxIdleTime(Duration.ofSeconds(springSessionTimeoutSeconds)));
-                            return super.onAuthenticationSuccess(webFilterExchange, authentication);
-                        }
-                    });
+                .logout(
+                        logoutSpec -> {
+                            logoutSpec.logoutSuccessHandler(createLogoutSuccessHandler(LOGOUT_SUCCESS_URL));
+                            logoutSpec.logoutUrl(LOGOUT_URL);
+                            logoutSpec.requiresLogout(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, LOGOUT_URL));
+                        })
+                .authorizeExchange(
+                        authorizeExchangeSpec -> {
+                            authorizeExchangeSpec.pathMatchers(HttpMethod.OPTIONS, "/api/**").permitAll();
+                            authorizeExchangeSpec.pathMatchers(LOGOUT_SUCCESS_URL).permitAll();
+                            authorizeExchangeSpec.pathMatchers("/api/*/info",
+                                    "/actuator/health",
+                                    "/actuator/info",
+                                    "/actuator/metrics").permitAll();
+                            authorizeExchangeSpec.anyExchange().authenticated();
+                        })
+                .oauth2Login(oAuth2LoginSpec -> oAuth2LoginSpec.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler() {
+                    @Override
+                    public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
+                        webFilterExchange.getExchange().getSession().subscribe(
+                                webSession -> webSession.setMaxIdleTime(Duration.ofSeconds(springSessionTimeoutSeconds)));
+                        return super.onAuthenticationSuccess(webFilterExchange, authentication);
+                    }
+                }))
+                .csrf(csrfSpec -> {
+                    csrfSpec.csrfTokenRepository(tokenRepository);
+                    csrfSpec.csrfTokenRequestHandler(requestHandler);
+                });
+
         return http.build();
-        // @formatter:on
     }
 
     /**
