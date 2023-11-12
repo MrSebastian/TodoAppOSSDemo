@@ -10,4 +10,13 @@ spring:
         - RemoveResponseHeader=Expires
         - RemoveRequestHeader=cookie
         - RemoveRequestHeader=x-xsrf-token
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - '*'
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
 
