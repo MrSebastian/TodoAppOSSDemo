@@ -1,12 +1,7 @@
 <template>
     <v-app>
         <the-snackbar />
-        <v-app-bar
-            app
-            clipped-left
-            dark
-            color="primary"
-        >
+        <v-app-bar color="primary">
             <v-row align="center">
                 <v-col
                     cols="3"
@@ -15,7 +10,7 @@
                     <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
                     <router-link to="/">
                         <v-toolbar-title class="font-weight-bold">
-                            <span class="white--text">TodoApp</span>
+                            <span class="text-white">TodoApp</span>
                         </v-toolbar-title>
                     </router-link>
                 </v-col>
@@ -27,7 +22,7 @@
                         id="suchfeld"
                         v-model="query"
                         flat
-                        solo-inverted
+                        variant="solo-inverted"
                         hide-details
                         label="Suche"
                         clearable
@@ -38,24 +33,20 @@
                 </v-col>
             </v-row>
         </v-app-bar>
-        <v-navigation-drawer
-            v-model="drawer"
-            app
-            clipped
-        >
+        <v-navigation-drawer v-model="drawer">
             <v-list>
                 <v-list-item :to="{ path: '/getstarted' }">
-                    <v-list-item-content>
-                        <v-list-item-title>Get started</v-list-item-title>
-                    </v-list-item-content>
+                    <v-list-item-title>Get started</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-main>
             <v-container fluid>
-                <v-fade-transition mode="out-in">
-                    <router-view />
-                </v-fade-transition>
+                <router-view v-slot="{ Component }">
+                    <v-fade-transition mode="out-in">
+                        <component :is="Component"></component>
+                    </v-fade-transition>
+                </router-view>
             </v-container>
         </v-main>
     </v-app>
@@ -63,12 +54,13 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router/composables";
+import { useRoute } from "vue-router";
 import { useSnackbarStore } from "@/stores/snackbar";
 import UserService from "@/features/user/services/UserService";
+import TheSnackbar from "@/components/TheSnackbar.vue";
 
 const drawer = ref(true);
-const query = ref("");
+const query = ref<string | string[]>("");
 
 const route = useRoute();
 const snackbarStore = useSnackbarStore();
@@ -83,7 +75,7 @@ onMounted(() => {
 
 watch(
     () => route.params.query,
-    (q: string) => {
+    (q: string | string[]) => {
         if (query.value !== q) {
             query.value = q;
         }

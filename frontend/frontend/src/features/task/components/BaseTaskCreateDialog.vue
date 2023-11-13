@@ -1,7 +1,7 @@
 <template>
     <v-dialog
         v-model="dialogVisible"
-        persistent
+        :persistent="true"
         width="400px"
     >
         <v-card>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, ref, withDefaults } from "vue";
+import { computed, ref } from "vue";
 
 import BaseTaskFields from "@/features/task/components/BaseTaskFields.vue";
 
@@ -30,14 +30,14 @@ import Task from "@/features/task/types/Task";
 const taskService = new TaskService();
 
 interface IProps {
-    value: boolean;
+    modelValue: boolean;
 }
 const props = withDefaults(defineProps<IProps>(), {
-    value: false,
+    modelValue: false,
 });
 
 const emit = defineEmits<{
-    (e: "input", value: boolean): void;
+    (e: "update:modelValue", value: boolean): void;
     (e: "added"): void;
 }>();
 
@@ -45,8 +45,8 @@ const refForm = ref<HTMLFormElement>();
 const task = ref(Task.createDefault());
 
 const dialogVisible = computed({
-    get: () => props.value,
-    set: (value: boolean) => emit("input", value),
+    get: () => props.modelValue,
+    set: (value: boolean) => emit("update:modelValue", value),
 });
 
 function handleCancelClicked(): void {
@@ -54,16 +54,25 @@ function handleCancelClicked(): void {
 }
 
 function handleSaveClicked(): void {
-    if (refForm.value?.validate()) {
-        taskService
-            .createTask(task.value)
-            .then(() => closeDialog())
-            .then(() => emit("added"));
-    }
+    refForm.value
+        ?.validate()
+        .then((validationResult) => {
+            //TODO an das submit-Event in der Form hängen?
+            console.log(`isValid > ${validationResult.valid}`);
+            console.log(
+                `validationErrors > ${JSON.stringify(validationResult.errors)}`
+            );
+            return validationResult.valid
+                ? Promise.resolve()
+                : Promise.reject();
+        })
+        .then(() => taskService.createTask(task.value))
+        .then(() => closeDialog())
+        .then(() => emit("added"));
 }
 
 function closeDialog(): void {
-    emit("input", false);
+    emit("update:modelValue", false);
     resetForm();
 }
 
