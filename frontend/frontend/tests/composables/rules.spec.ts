@@ -1,4 +1,5 @@
 import { useRules } from "@/composables/rules";
+import { describe, expect, it } from "vitest";
 
 const { required, maxlength } = useRules();
 describe("rules.ts", () => {

@@ -4,11 +4,11 @@
             {{ props.label }}
         </div>
         <v-input
+            v-model:error="error"
             :readonly="props.readonly"
             :hide-details="props.hideDetails"
             :rules="validierungsRegeln"
-            :dense="props.dense"
-            :error.sync="error"
+            :density="props.dense ? 'compact' : 'default'"
             :error-messages="errorMessages"
             :persistent-hint="props.persistentHint"
             :hint="props.hint"
@@ -23,9 +23,14 @@
                         :readonly="props.readonly"
                         :error="error"
                         hide-details
-                        :dense="props.dense"
-                        :filled="props.filled"
-                        :outlined="props.outlined"
+                        :density="props.dense ? 'compact' : 'default'"
+                        :variant="
+                            props.outlined
+                                ? 'outlined'
+                                : props.filled
+                                  ? 'filled'
+                                  : 'filled'
+                        "
                         type="date"
                         @focusout="leaveInput"
                         @focus="enterInput"
@@ -41,9 +46,14 @@
                         :readonly="props.readonly"
                         :error="error"
                         hide-details
-                        :dense="props.dense"
-                        :filled="props.filled"
-                        :outlined="props.outlined"
+                        :density="props.dense ? 'compact' : 'default'"
+                        :variant="
+                            props.outlined
+                                ? 'outlined'
+                                : props.filled
+                                  ? 'filled'
+                                  : 'filled'
+                        "
                         type="time"
                         @focusout="leaveInput"
                         @focus="enterInput"
@@ -51,7 +61,7 @@
                     >
                         <template
                             v-if="props.clearable && !props.readonly"
-                            #append-outer
+                            #append-inner
                         >
                             <v-btn
                                 icon

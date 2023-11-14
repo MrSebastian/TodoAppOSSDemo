@@ -1,26 +1,25 @@
 <template>
     <v-dialog
-        :key="props.value"
         v-model="visible"
         persistent
         width="800"
     >
-        <template #activator="{ on }">
+        <template #activator="{ props: open }">
             <template v-if="props.buttontext">
                 <v-btn
                     color="primary"
-                    v-on="on"
+                    v-bind="open"
                 >
                     {{ buttontext }}
                 </v-btn>
             </template>
             <template v-else-if="props.icontext">
                 <v-btn
-                    text
+                    variant="text"
                     color="primary"
-                    v-on="on"
+                    v-bind="props"
                 >
-                    <v-icon large>
+                    <v-icon size="large">
                         {{ props.icontext }}
                     </v-icon>
                 </v-btn>
@@ -37,7 +36,7 @@
                 <v-spacer />
                 <v-btn
                     id="yesnodialog-btn-no"
-                    text
+                    variant="text"
                     @click="no"
                 >
                     Nein
@@ -87,7 +86,7 @@ const props = defineProps<{
     /**
      * Steuerflag für den Dialog
      */
-    value: boolean;
+    modelValue: boolean;
 }>();
 
 const emits = defineEmits<{
@@ -97,7 +96,7 @@ const emits = defineEmits<{
 }>();
 
 const visible = computed({
-    get: () => props.value,
+    get: () => props.modelValue,
     set: (v) => emits("input", v),
 });
 

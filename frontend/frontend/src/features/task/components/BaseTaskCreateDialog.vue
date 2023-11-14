@@ -1,43 +1,49 @@
 <template>
     <v-dialog
         v-model="dialogVisible"
-        persistent
+        :persistent="true"
         width="400px"
     >
         <v-card>
             <v-card-title>Task erstellen</v-card-title>
             <v-card-text>
-                <v-form ref="refForm">
+                <v-form
+                    ref="refForm"
+                    @submit="onSubmit"
+                >
                     <base-task-fields :value="task" />
                 </v-form>
             </v-card-text>
             <v-card-actions>
                 <v-btn @click="handleCancelClicked">Abbrechen</v-btn>
-                <v-btn @click="handleSaveClicked">Erstellen</v-btn>
+                <v-btn type="submit">Erstellen</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, ref, withDefaults } from "vue";
+import { computed, ref } from "vue";
 
 import BaseTaskFields from "@/features/task/components/BaseTaskFields.vue";
 
 import TaskService from "@/features/task/services/TaskService";
 import Task from "@/features/task/types/Task";
+import { useValidationUtils } from "@/composables/useValidationUtils";
+import type { SubmitEventPromise } from "vuetify";
 
 const taskService = new TaskService();
+const validationUtils = useValidationUtils();
 
 interface IProps {
-    value: boolean;
+    modelValue: boolean;
 }
 const props = withDefaults(defineProps<IProps>(), {
-    value: false,
+    modelValue: false,
 });
 
 const emit = defineEmits<{
-    (e: "input", value: boolean): void;
+    (e: "update:modelValue", value: boolean): void;
     (e: "added"): void;
 }>();
 
@@ -45,25 +51,24 @@ const refForm = ref<HTMLFormElement>();
 const task = ref(Task.createDefault());
 
 const dialogVisible = computed({
-    get: () => props.value,
-    set: (value: boolean) => emit("input", value),
+    get: () => props.modelValue,
+    set: (value: boolean) => emit("update:modelValue", value),
 });
 
 function handleCancelClicked(): void {
     closeDialog();
 }
 
-function handleSaveClicked(): void {
-    if (refForm.value?.validate()) {
-        taskService
-            .createTask(task.value)
-            .then(() => closeDialog())
-            .then(() => emit("added"));
-    }
+function onSubmit(validationPromise: SubmitEventPromise): void {
+    validationUtils
+        .proceedOnValid(validationPromise)
+        .then(() => taskService.createTask(task.value))
+        .then(() => closeDialog())
+        .then(() => emit("added"));
 }
 
 function closeDialog(): void {
-    emit("input", false);
+    emit("update:modelValue", false);
     resetForm();
 }
 
