@@ -7,16 +7,13 @@
         <v-card>
             <v-card-title>Task erstellen</v-card-title>
             <v-card-text>
-                <v-form
-                    ref="refForm"
-                    @submit="onSubmit"
-                >
+                <v-form ref="refForm">
                     <base-task-fields :value="task" />
                 </v-form>
             </v-card-text>
             <v-card-actions>
                 <v-btn @click="handleCancelClicked">Abbrechen</v-btn>
-                <v-btn type="submit">Erstellen</v-btn>
+                <v-btn @click="handleSaveClicked">Erstellen</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -59,9 +56,9 @@ function handleCancelClicked(): void {
     closeDialog();
 }
 
-function onSubmit(validationPromise: SubmitEventPromise): void {
+function handleSaveClicked(): void {
     validationUtils
-        .proceedOnValid(validationPromise)
+        .proceedOnValid(refForm.value?.validate() as SubmitEventPromise)
         .then(() => taskService.createTask(task.value))
         .then(() => closeDialog())
         .then(() => emit("added"));
