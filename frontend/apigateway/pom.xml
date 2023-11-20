@@ -106,11 +106,6 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-hazelcast</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-all</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
 
         <!-- Testing -->
         <dependency>
