@@ -48,6 +48,18 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+  test-postgres:
+    image: postgres:16.1-alpine3.18
+    container_name: todo-app-postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: todo
+    networks:
+      postgres:
+
   # Keycloak (SSO)
   test-keycloak:
     image: quay.io/keycloak/keycloak:20.0.3
@@ -94,6 +106,20 @@ services:
       POSTGRES_PASSWORD: keycloak-secret
     networks:
       - keycloak
+      - postgres
+
+  # Tools
+  postgres-pg-admin:
+    image: dpage/pgadmin4:7.8
+    container_name: todo-app-pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@a.de
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 8101:80
+    networks:
+      - postgres
 
 networks:
   keycloak:
+  postgres:
