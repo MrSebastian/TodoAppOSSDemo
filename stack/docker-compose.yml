@@ -9,8 +9,9 @@ services:
       - 1521:1521
     environment:
       ORACLE_PWD: secret
-  # SQL> CREATE USER pp IDENTIFIED BY ppsecret QUOTA UNLIMITED ON USERS;
-  # SQL> GRANT CONNECT, RESOURCE TO pp;
+  # sqlplus sys/secret@XEPDB1 as sysdba
+  # SQL> CREATE USER todoapp IDENTIFIED BY todosecret QUOTA UNLIMITED ON USERS;
+  # SQL> GRANT CONNECT, RESOURCE TO todoapp;
 
   gvenzl-oracledb-xe:
     image: gvenzl/oracle-xe
