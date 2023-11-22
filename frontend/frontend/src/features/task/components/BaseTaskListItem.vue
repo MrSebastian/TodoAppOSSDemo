@@ -1,17 +1,18 @@
 <template>
-    <v-list-item>
-        <v-list-item-content>
-            <v-list-item-title>{{ props.task.title }}</v-list-item-title>
-            <v-list-item-subtitle>{{ dueDate }}</v-list-item-subtitle>
-            <p>{{ props.task.description }}</p>
-        </v-list-item-content>
-        <v-list-item-action>
+    <v-list-item
+        :title="props.task.title"
+        :subtitle="dueDate"
+    >
+        <p>{{ props.task.description }}</p>
+
+        <template #append>
             <v-btn
                 icon
+                variant="flat"
                 @click="handleDeleteClicked"
                 ><v-icon>mdi-delete</v-icon></v-btn
             >
-        </v-list-item-action>
+        </template>
     </v-list-item>
 </template>
 
