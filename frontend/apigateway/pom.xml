@@ -4,10 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>de.mrsebastian.todoappdemo</groupId>
+        <artifactId>frontend</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-    <groupId>de.mrsebastian.todoappdemo</groupId>
+
     <artifactId>frontend-apigateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>frontend_apigateway</name>
 
@@ -24,7 +28,7 @@
         <hazelcast.version>4.2.8</hazelcast.version>
         <apache.commons.lang.version>3.12.0</apache.commons.lang.version>
         <jvm.options>-Dorg.conscrypt.native.workdir=$(pwd)</jvm.options>
-        <jacoco.version>0.8.7</jacoco.version>
+        <jacoco.version>0.8.11</jacoco.version>
     </properties>
 
 
@@ -170,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.2.2</version>
                 <configuration>
                     <argLine>${jvm.options}</argLine>
                 </configuration>

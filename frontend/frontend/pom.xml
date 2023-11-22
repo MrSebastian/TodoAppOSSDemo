@@ -2,10 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>de.mrsebastian.todoappdemo</groupId>
+        <artifactId>frontend</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-    <groupId>de.mrsebastian.todoappdemo</groupId>
     <artifactId>frontend-frontend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>frontend_frontend</name>
 
@@ -14,8 +17,8 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.maven.plugin>3.0.0</exec.maven.plugin>
-        <maven.clean.plugin>3.1.0</maven.clean.plugin>
+        <exec.maven.plugin>3.1.1</exec.maven.plugin>
+        <maven.clean.plugin>3.3.2</maven.clean.plugin>
         <sonar.sources>src</sonar.sources>
         <sonar.coverage.exclusions>src</sonar.coverage.exclusions>
     </properties>
