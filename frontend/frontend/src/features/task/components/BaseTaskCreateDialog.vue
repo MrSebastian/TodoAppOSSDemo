@@ -20,14 +20,14 @@
 </template>
 
 <script setup lang="ts">
+import type { SubmitEventPromise } from "vuetify";
+
 import { computed, ref } from "vue";
 
+import { useValidationUtils } from "@/composables/useValidationUtils";
 import BaseTaskFields from "@/features/task/components/BaseTaskFields.vue";
-
 import TaskService from "@/features/task/services/TaskService";
 import Task from "@/features/task/types/Task";
-import { useValidationUtils } from "@/composables/useValidationUtils";
-import type { SubmitEventPromise } from "vuetify";
 
 const taskService = new TaskService();
 const validationUtils = useValidationUtils();

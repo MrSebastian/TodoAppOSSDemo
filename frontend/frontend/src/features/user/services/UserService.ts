@@ -1,5 +1,5 @@
-import UserInfoClient from "@/features/user/services/api/UserInfoClient";
 import UserInfoMapper from "@/features/user/services/api/model/UserInfoMapper";
+import UserInfoClient from "@/features/user/services/api/UserInfoClient";
 import { useUserStore } from "@/stores/user";
 
 export default class UserService {

@@ -55,9 +55,10 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useSnackbarStore } from "@/stores/snackbar";
-import UserService from "@/features/user/services/UserService";
+
 import TheSnackbar from "@/components/TheSnackbar.vue";
+import UserService from "@/features/user/services/UserService";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const drawer = ref(true);
 const query = ref<string | string[]>("");

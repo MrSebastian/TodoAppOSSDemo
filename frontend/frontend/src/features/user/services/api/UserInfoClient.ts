@@ -1,6 +1,6 @@
 import FetchUtils from "@/api/FetchUtils";
-import UserInfoDTO from "@/features/user/services/api/model/UserInfoDTO";
 import { API_BASE } from "@/Constants";
+import UserInfoDTO from "@/features/user/services/api/model/UserInfoDTO";
 
 export default class UserInfoClient {
     private readonly URL = `${API_BASE}/api/sso/userinfo`;
