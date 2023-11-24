@@ -11,6 +11,7 @@
                 <div>
                     <v-btn
                         icon
+                        variant="flat"
                         @click="handleReloadClicked"
                         ><v-icon>mdi-reload</v-icon></v-btn
                     >
