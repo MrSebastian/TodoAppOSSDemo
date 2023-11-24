@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { computed, defineEmits, defineProps } from "vue";
+
 import TaskPersisted from "@/features/task/types/TaskPersisted";
 
 interface IProps {

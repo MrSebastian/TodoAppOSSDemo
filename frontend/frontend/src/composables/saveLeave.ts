@@ -10,8 +10,9 @@
  * Mit dem Aufruf von `leave()` oder `cancel()` kann die Entscheidung des Nutzers ausgeführt werden.
  */
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-import { onBeforeRouteLeave } from "vue-router";
+
 import { ref } from "vue";
+import { onBeforeRouteLeave } from "vue-router";
 
 export function useSaveLeave(isDirty: () => boolean) {
     const saveLeaveDialogTitle = ref("Ungespeicherte Änderungen");
@@ -23,15 +24,21 @@ export function useSaveLeave(isDirty: () => boolean) {
 
     const nextRoute = ref<NavigationGuardNext | null>(null);
 
-    onBeforeRouteLeave((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    onBeforeRouteLeave(
+        (
+            to: RouteLocationNormalized,
+            from: RouteLocationNormalized,
+            next: NavigationGuardNext
+        ) => {
             if (isDirty() && !isSave.value) {
                 saveLeaveDialog.value = true;
                 nextRoute.value = next;
             } else {
-            saveLeaveDialog.value = false;
-            next();
+                saveLeaveDialog.value = false;
+                next();
+            }
         }
-    });
+    );
 
     function cancel(): void {
         saveLeaveDialog.value = false;

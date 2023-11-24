@@ -1,10 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
-import { createVuetify } from "vuetify";
-import TheSnackbar from "@/components/TheSnackbar.vue";
 import { createPinia } from "pinia";
-import { describe, beforeEach, beforeAll, expect, it } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+
+import TheSnackbar from "@/components/TheSnackbar.vue";
 
 const pinia = createPinia();
 

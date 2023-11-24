@@ -1,9 +1,9 @@
+import { Levels } from "@/api/error";
+import TaskMapper from "@/features/task/services/api/model/TaskMapper";
+import TaskClient from "@/features/task/services/api/TaskClient";
 import Task from "@/features/task/types/Task";
 import TaskPersisted from "@/features/task/types/TaskPersisted";
-import TaskClient from "@/features/task/services/api/TaskClient";
-import TaskMapper from "@/features/task/services/api/model/TaskMapper";
 import { useSnackbarStore } from "@/stores/snackbar";
-import { Levels } from "@/api/error";
 
 export default class TaskService {
     private readonly taskClient = new TaskClient();

@@ -22,9 +22,9 @@
 
 <script setup lang="ts">
 import { computed, defineEmits, defineProps } from "vue";
-import Task from "@/features/task/types/Task";
 
 import { useRules } from "@/composables/rules";
+import Task from "@/features/task/types/Task";
 
 interface IProps {
     value: Task;

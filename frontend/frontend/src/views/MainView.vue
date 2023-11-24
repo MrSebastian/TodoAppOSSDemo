@@ -31,17 +31,16 @@
 </template>
 
 <script setup lang="ts">
-import HealthService from "@/api/HealthService";
-import HealthState from "@/types/HealthState";
-import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref } from "vue";
 
+import HealthService from "@/api/HealthService";
 import BaseTaskAddButton from "@/features/task/components/BaseTaskAddButton.vue";
 import BaseTaskCreateDialog from "@/features/task/components/BaseTaskCreateDialog.vue";
 import BaseTaskList from "@/features/task/components/BaseTaskList.vue";
-
-import TaskPersisted from "@/features/task/types/TaskPersisted";
 import TaskService from "@/features/task/services/TaskService";
+import TaskPersisted from "@/features/task/types/TaskPersisted";
+import { useSnackbarStore } from "@/stores/snackbar";
+import HealthState from "@/types/HealthState";
 
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");

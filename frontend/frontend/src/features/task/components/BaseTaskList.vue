@@ -11,10 +11,10 @@
 
 <script setup lang="ts">
 import { defineEmits, defineProps } from "vue";
-import TaskPersisted from "@/features/task/types/TaskPersisted";
 
 import BaseTaskListItem from "@/features/task/components/BaseTaskListItem.vue";
 import TaskService from "@/features/task/services/TaskService";
+import TaskPersisted from "@/features/task/types/TaskPersisted";
 
 interface IProps {
     tasks: TaskPersisted[];

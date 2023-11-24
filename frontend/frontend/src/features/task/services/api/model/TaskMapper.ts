@@ -1,6 +1,6 @@
-import Task from "@/features/task/types/Task";
 import TaskCreateDTO from "@/features/task/services/api/model/TaskCreateDTO";
 import TaskDTO from "@/features/task/services/api/model/TaskDTO";
+import Task from "@/features/task/types/Task";
 import TaskPersisted from "@/features/task/types/TaskPersisted";
 
 export default class TaskMapper {

@@ -41,7 +41,7 @@
             </v-list>
         </v-navigation-drawer>
         <v-main>
-            <v-container fluid>
+            <v-container :fluid="true">
                 <router-view v-slot="{ Component }">
                     <v-fade-transition mode="out-in">
                         <component :is="Component"></component>
@@ -55,9 +55,10 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useSnackbarStore } from "@/stores/snackbar";
-import UserService from "@/features/user/services/UserService";
+
 import TheSnackbar from "@/components/TheSnackbar.vue";
+import UserService from "@/features/user/services/UserService";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 const drawer = ref(true);
 const query = ref<string | string[]>("");

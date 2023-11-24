@@ -1,8 +1,9 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
 import { fileURLToPath, URL } from "url";
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+
+import vue from "@vitejs/plugin-vue";
 import ViteFonts from "unplugin-fonts/vite";
+import { defineConfig } from "vite";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineConfig({
     plugins: [
