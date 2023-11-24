@@ -23,15 +23,21 @@ export function useSaveLeave(isDirty: () => boolean) {
 
     const nextRoute = ref<NavigationGuardNext | null>(null);
 
-    onBeforeRouteLeave((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    onBeforeRouteLeave(
+        (
+            to: RouteLocationNormalized,
+            from: RouteLocationNormalized,
+            next: NavigationGuardNext
+        ) => {
             if (isDirty() && !isSave.value) {
                 saveLeaveDialog.value = true;
                 nextRoute.value = next;
             } else {
-            saveLeaveDialog.value = false;
-            next();
+                saveLeaveDialog.value = false;
+                next();
+            }
         }
-    });
+    );
 
     function cancel(): void {
         saveLeaveDialog.value = false;

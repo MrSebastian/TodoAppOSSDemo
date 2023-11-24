@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from "vue-router";
 import Main from "./views/MainView.vue";
 import GetStarted from "./views/GetStarted.vue";
