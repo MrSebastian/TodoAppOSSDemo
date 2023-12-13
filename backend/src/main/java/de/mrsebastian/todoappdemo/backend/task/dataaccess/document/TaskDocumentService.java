@@ -1,9 +1,11 @@
 package de.mrsebastian.todoappdemo.backend.task.dataaccess.document;
 
 import de.mrsebastian.todoappdemo.backend.configuration.Profiles;
+import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskCreateDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
+import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskUpdateDao;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.context.annotation.Profile;
@@ -36,6 +38,13 @@ public class TaskDocumentService implements TaskDataAccessService {
     @Override
     public boolean taskExsits(UUID taskId) {
         return repository.existsById(taskId);
+    }
+
+    @Override
+    public void updateTask(UUID taskId, TaskUpdateDao taskUpdateDao) {
+        val task = repository.findById(taskId).orElseThrow(() -> new NotFoundException(taskId, TaskDocument.class));
+        taskDaoMapper.updateDocument(taskUpdateDao, task);
+        repository.save(task);
     }
 
     @Override
