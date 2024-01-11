@@ -9,4 +9,17 @@ export default class TaskPersisted extends Task {
     ) {
         super(title, description, dueDate);
     }
+
+    static createDefault(): TaskPersisted {
+        return new TaskPersisted("", "", null, null);
+    }
+
+    clone(): TaskPersisted {
+        return new TaskPersisted(
+            this.id,
+            this.title,
+            this.description,
+            this.dueDate
+        );
+    }
 }

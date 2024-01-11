@@ -1,3 +1,5 @@
+import type TaskUpdateDTO from "@/features/task/services/api/model/TaskUpdateDTO";
+
 import FetchUtils from "@/api/FetchUtils";
 import { API_BACKEND_BASE } from "@/Constants";
 import TaskCreateDTO from "@/features/task/services/api/model/TaskCreateDTO";
@@ -26,6 +28,13 @@ export default class TaskClient {
         return this.fetchUtils.doFetch<void>(
             `${API_BACKEND_BASE}${this.PATH_TASKS}/${taskId}`,
             FetchUtils.getDeletConfig()
+        );
+    }
+
+    updateTask(taskId: string, taskUpdateDTO: TaskUpdateDTO): Promise<void> {
+        return this.fetchUtils.doFetch<void>(
+            `${API_BACKEND_BASE}${this.PATH_TASKS}/${taskId}`,
+            FetchUtils.getPUTConfig(taskUpdateDTO)
         );
     }
 }
