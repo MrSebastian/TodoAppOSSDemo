@@ -42,6 +42,7 @@ public class TaskController {
     }
 
     @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateTask(@PathVariable("id") final UUID taskId, @Valid @RequestBody TaskUpdateDTO updateTaskData) {
         taskService.updateTask(taskId, updateTaskData);
     }
