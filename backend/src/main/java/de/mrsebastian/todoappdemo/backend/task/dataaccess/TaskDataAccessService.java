@@ -11,5 +11,7 @@ public interface TaskDataAccessService {
 
     boolean taskExsits(UUID taskId);
 
+    void updateTask(UUID taskId, TaskUpdateDao taskUpdateDao);
+
     List<TaskDao> getTasks();
 }

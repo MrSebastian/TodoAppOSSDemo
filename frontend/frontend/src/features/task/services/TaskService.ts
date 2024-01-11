@@ -41,4 +41,14 @@ export default class TaskService {
             })
         );
     }
+
+    updateTask(updatedTask: TaskPersisted): Promise<void> {
+        const body = this.taskMapper.persistedTaskToTaskUpdateDTO(updatedTask);
+        return this.taskClient.updateTask(updatedTask.id, body).then(() => {
+            this.snackbarStore.showMessage({
+                message: "Task aktualisiert",
+                level: Levels.INFO,
+            });
+        });
+    }
 }

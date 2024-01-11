@@ -6,6 +6,7 @@ import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.Task;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskCreateDTO;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
+import de.mrsebastian.todoappdemo.backend.task.rest.TaskUpdateDTO;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,6 +46,12 @@ public class TaskService {
     public void deleteTask(final UUID taskId) {
         checkIfExistsOrThrow(taskId);
         taskDAService.deleteTask(taskId);
+    }
+
+    @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
+    public void updateTask(final UUID taskId, final TaskUpdateDTO updateTask) {
+        checkIfExistsOrThrow(taskId);
+        taskDAService.updateTask(taskId, taskMapper.toUpdateDao(updateTask));
     }
 
     private void checkIfExistsOrThrow(final UUID taskId) {

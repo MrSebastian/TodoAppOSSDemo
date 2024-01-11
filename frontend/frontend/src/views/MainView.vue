@@ -18,6 +18,7 @@
                     <base-task-list
                         :tasks="tasks"
                         @changed="handleTaskListChanged"
+                        @change-requested="handleChangeRequested"
                     />
                 </div>
             </v-col>
@@ -26,6 +27,13 @@
         <base-task-create-dialog
             v-model="taskCreateDialogVisible"
             @added="handleNewTaskAdded"
+        />
+
+        <the-task-edit-dialog
+            v-model="taskEditDialogVisible"
+            :task="taskToEdit"
+            @update:model-value="taskEditDialogVisibilityChanged"
+            @edit="handleChangeSaveRequest"
         />
     </v-container>
 </template>
@@ -37,6 +45,7 @@ import HealthService from "@/api/HealthService";
 import BaseTaskAddButton from "@/features/task/components/BaseTaskAddButton.vue";
 import BaseTaskCreateDialog from "@/features/task/components/BaseTaskCreateDialog.vue";
 import BaseTaskList from "@/features/task/components/BaseTaskList.vue";
+import TheTaskEditDialog from "@/features/task/components/TheTaskEditDialog.vue";
 import TaskService from "@/features/task/services/TaskService";
 import TaskPersisted from "@/features/task/types/TaskPersisted";
 import { useSnackbarStore } from "@/stores/snackbar";
@@ -47,6 +56,8 @@ const status = ref("DOWN");
 
 const taskService = new TaskService();
 const taskCreateDialogVisible = ref(false);
+const taskEditDialogVisible = ref(false);
+const taskToEdit = ref(TaskPersisted.createDefault());
 
 const tasks = ref<TaskPersisted[]>([]);
 
@@ -59,6 +70,13 @@ onMounted(() => {
 
     loadTasks();
 });
+
+function handleChangeSaveRequest(changedTask: TaskPersisted): void {
+    taskService
+        .updateTask(changedTask)
+        .then(() => (taskEditDialogVisible.value = false))
+        .then(() => loadTasks());
+}
 
 function handleNewTaskAdded(): void {
     loadTasks();
@@ -82,5 +100,14 @@ function loadTasks(): void {
 
 function showTaskCreateDialog() {
     taskCreateDialogVisible.value = true;
+}
+
+function taskEditDialogVisibilityChanged(taskDialogVisible: boolean) {
+    taskEditDialogVisible.value = taskDialogVisible;
+}
+
+function handleChangeRequested(taskToChange: TaskPersisted) {
+    taskToEdit.value = taskToChange.clone();
+    taskEditDialogVisible.value = true;
 }
 </script>

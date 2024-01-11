@@ -5,6 +5,7 @@
             :key="index"
             :task="task"
             @delete="handleDeleteRequest"
+            @edit="handleEditRequest"
         />
     </v-list>
 </template>
@@ -23,9 +24,16 @@ interface IProps {
 const taskService = new TaskService();
 
 const props = defineProps<IProps>();
-const emit = defineEmits<(e: "changed") => void>();
+const emit = defineEmits<{
+    (e: "changed"): void;
+    (e: "changeRequested", taskToEdit: TaskPersisted): void;
+}>();
 
 function handleDeleteRequest(taskId: string) {
     taskService.deleteTask(taskId).then(() => emit("changed"));
+}
+
+function handleEditRequest(taskToEdit: TaskPersisted): void {
+    emit("changeRequested", taskToEdit);
 }
 </script>

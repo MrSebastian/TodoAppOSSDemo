@@ -12,3 +12,22 @@ Content-Type: application/json
   "dueDate": null,
   "creatorId": "b75a10fd-9476-4fab-a410-0351bb5dd68d"
 }
+
+### Create Task without Creator
+POST http://localhost:39146/tasks
+Content-Type: application/json
+
+{
+"title": "Task with Creator",
+"description": "Just another task. But this one has a linked creator",
+"dueDate": null
+}
+
+### Update Task
+PUT http://localhost:39146/tasks/8df388d0-883e-406e-a2ed-d599c4f3377f
+Content-Type: application/json
+
+{
+  "title": "Updated task title",
+  "description": "update task description"
+}

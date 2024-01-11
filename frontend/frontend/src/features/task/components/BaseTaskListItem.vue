@@ -6,12 +6,20 @@
         <p>{{ props.task.description }}</p>
 
         <template #append>
-            <v-btn
-                icon
-                variant="flat"
-                @click="handleDeleteClicked"
-                ><v-icon>mdi-delete</v-icon></v-btn
-            >
+            <div>
+                <v-btn
+                    icon
+                    variant="flat"
+                    @click="handleDeleteClicked"
+                    ><v-icon>mdi-delete</v-icon></v-btn
+                >
+                <v-btn
+                    icon
+                    variant="flat"
+                    @click="handleEditClicked"
+                    ><v-icon>mdi-pencil</v-icon></v-btn
+                >
+            </div>
         </template>
     </v-list-item>
 </template>
@@ -26,11 +34,18 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits<(e: "delete", value: string) => void>();
+const emit = defineEmits<{
+    (e: "delete", value: string): void;
+    (e: "edit", task: TaskPersisted): void;
+}>();
 
 const dueDate = computed(() => (props.task.dueDate ? props.task.dueDate : "-"));
 
 function handleDeleteClicked() {
     emit("delete", props.task.id);
+}
+
+function handleEditClicked() {
+    emit("edit", props.task);
 }
 </script>
