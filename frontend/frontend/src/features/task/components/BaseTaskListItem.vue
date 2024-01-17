@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from "vue";
+import { computed } from "vue";
 
 import TaskPersisted from "@/features/task/types/TaskPersisted";
 
