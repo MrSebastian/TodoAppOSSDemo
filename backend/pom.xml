@@ -332,6 +332,9 @@
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amapstruct.defaultComponentModel=SPRING</arg>
+                        <arg>
+                            -Amapstruct.unmappedTargetPolicy=ERROR
+                        </arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
