@@ -4,6 +4,7 @@ import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskCreateDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskUpdateDao;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -11,9 +12,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Qualifier("TaskDaoDocumentMapper")
 public interface TaskDocumentMapper {
 
+    @Mapping(target = "creator", ignore = true)
     TaskDao toDao(TaskDocument taskDocument);
 
+    @Mapping(target = "id", ignore = true)
     TaskDocument toDocument(TaskCreateDao taskCreateDao);
 
+    @Mapping(target = "id", ignore = true)
     void updateDocument(TaskUpdateDao taskUpdateDao, @MappingTarget TaskDocument taskDocument);
 }
