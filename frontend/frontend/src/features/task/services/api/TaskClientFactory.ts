@@ -2,7 +2,7 @@ import type { TaskClientInterface } from "@/features/task/services/api/TaskClien
 
 import { API_BASE } from "@/Constants";
 import TaskClientLocalStorage from "@/features/task/services/api/impl/localstorage/TaskClientLocalStorage";
-import TaskRestClient from "@/features/task/services/api/TaskRestClient";
+import TaskRestClient from "@/features/task/services/api/impl/rest/TaskRestClient";
 
 export default class TaskClientFactory {
     static getTaskClient(): TaskClientInterface {
