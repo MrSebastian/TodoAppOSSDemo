@@ -31,6 +31,13 @@
                         @keyup.enter="search"
                     />
                 </v-col>
+
+                <v-col
+                    cols="3"
+                    class="justify-end"
+                >
+                    <user-info-menu />
+                </v-col>
             </v-row>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer">
@@ -57,6 +64,7 @@ import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import TheSnackbar from "@/components/TheSnackbar.vue";
+import UserInfoMenu from "@/features/user/components/UserInfoMenu.vue";
 import UserService from "@/features/user/services/UserService";
 import { useSnackbarStore } from "@/stores/snackbar";
 
