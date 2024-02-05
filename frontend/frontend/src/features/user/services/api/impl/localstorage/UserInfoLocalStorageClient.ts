@@ -12,7 +12,7 @@ export default class UserInfoLocalStorageClient
     private STORED_USERINFO_ROLES_SEPARATOR = ";";
 
     private readonly defaultUserName = "local user";
-    private readonly defaultUserRoles: string[] = [];
+    private readonly defaultUserRoles: string[] = ["TASK_ADMIN", "TASK_READER"];
 
     getUserInfo(): Promise<UserInfoDTO> {
         return Promise.resolve(this.createUserInfoFromStoreOrWithDefaults());
