@@ -1,9 +1,9 @@
 import UserInfoMapper from "@/features/user/services/api/model/UserInfoMapper";
-import UserInfoClient from "@/features/user/services/api/UserInfoClient";
+import UserInfoClientFactory from "@/features/user/services/api/UserInfoClientFactory";
 import { useUserStore } from "@/stores/user";
 
 export default class UserService {
-    private readonly userInfoClient = new UserInfoClient();
+    private readonly userInfoClient = UserInfoClientFactory.getClient();
 
     private readonly userInfoMapper = new UserInfoMapper();
 

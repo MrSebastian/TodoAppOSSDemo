@@ -1,16 +1,11 @@
-import FetchUtils from "@/api/FetchUtils";
-import { API_BASE } from "@/Constants";
+import HealthClientFactory from "@/api/HealthClientFactory";
 import HealthState from "@/types/HealthState";
 
 export default class HealthService {
+    private static readonly healthClient =
+        HealthClientFactory.getHealthClient();
+
     static checkHealth(): Promise<HealthState> {
-        return fetch(`${API_BASE}/actuator/health`, FetchUtils.getGETConfig())
-            .then((response) => {
-                FetchUtils.defaultResponseHandler(response);
-                return response.json();
-            })
-            .catch((err) => {
-                FetchUtils.defaultResponseHandler(err);
-            });
+        return this.healthClient.getHealthState();
     }
 }

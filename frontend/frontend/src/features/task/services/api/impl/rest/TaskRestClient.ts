@@ -5,7 +5,7 @@ import { API_BACKEND_BASE } from "@/Constants";
 import TaskCreateDTO from "@/features/task/services/api/model/TaskCreateDTO";
 import TaskDTO from "@/features/task/services/api/model/TaskDTO";
 
-export default class TaskClient {
+export default class TaskRestClient {
     private readonly PATH_TASKS = "/tasks";
 
     private readonly fetchUtils = new FetchUtils();
