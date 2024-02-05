@@ -10,7 +10,9 @@ export const useUserStore = defineStore("user", {
         username: "",
         roles: [],
     }),
-    getters: {},
+    getters: {
+        userState: (state): UserState => state,
+    },
     actions: {
         setUsername(payload: string): void {
             this.username = payload;
