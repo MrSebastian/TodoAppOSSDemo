@@ -5,11 +5,13 @@ export interface UserState {
     roles: string[];
 }
 
+const initialUserState: UserState = {
+    username: "",
+    roles: [],
+};
+
 export const useUserStore = defineStore("user", {
-    state: (): UserState => ({
-        username: "",
-        roles: [],
-    }),
+    state: (): UserState => initialUserState,
     getters: {
         userState: (state): UserState => state,
     },
