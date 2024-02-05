@@ -7,13 +7,12 @@ import { API_BASE } from "@/Constants";
 export default class UserInfoRestClient implements UserInfoClientInterface {
     private readonly URL = `${API_BASE}/api/sso/userinfo`;
     getUserInfo(): Promise<UserInfoDTO> {
-        return fetch(this.URL, FetchUtils.getGETConfig())
-            .then((response) => response.json())
-            .catch((err) => {
-                FetchUtils.defaultResponseHandler(
-                    err,
-                    "Berechtigungen konnten nicht erfasst werden"
-                );
-            });
+        return fetch(this.URL, FetchUtils.getGETConfig()).then((response) => {
+            FetchUtils.defaultResponseHandler(
+                response,
+                "Berechtigungen konnten nicht erfasst werden"
+            );
+            return response.json();
+        });
     }
 }
