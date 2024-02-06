@@ -5,7 +5,7 @@
                 icon
                 v-bind="props"
             >
-                <v-icon>mdi-account-circle</v-icon>
+                <v-icon size="x-large">mdi-account-circle</v-icon>
             </v-btn>
         </template>
 
