@@ -1,5 +1,5 @@
 <template>
-    <v-menu>
+    <v-menu :close-on-content-click="false">
         <template #activator="{ props }">
             <v-btn
                 icon
