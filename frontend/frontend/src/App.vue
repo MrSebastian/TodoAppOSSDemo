@@ -2,7 +2,7 @@
     <v-app>
         <the-snackbar />
         <v-app-bar color="primary">
-            <v-row align="center">
+            <v-row class="justify-space-between">
                 <v-col
                     cols="3"
                     class="d-flex align-center justify-start"
@@ -34,7 +34,7 @@
 
                 <v-col
                     cols="3"
-                    class="justify-end"
+                    class="d-flex align-center justify-end"
                 >
                     <user-info-menu />
                 </v-col>
