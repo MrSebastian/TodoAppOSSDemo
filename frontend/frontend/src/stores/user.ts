@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export interface UserState {
-    username: string | undefined;
+    username: string;
     roles: string[];
 }
 
