@@ -2,7 +2,7 @@
     <v-app>
         <the-snackbar />
         <v-app-bar color="primary">
-            <v-row align="center">
+            <v-row class="justify-space-between">
                 <v-col
                     cols="3"
                     class="d-flex align-center justify-start"
@@ -31,6 +31,13 @@
                         @keyup.enter="search"
                     />
                 </v-col>
+
+                <v-col
+                    cols="3"
+                    class="d-flex align-center justify-end"
+                >
+                    <user-info-menu />
+                </v-col>
             </v-row>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer">
@@ -57,6 +64,7 @@ import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import TheSnackbar from "@/components/TheSnackbar.vue";
+import UserInfoMenu from "@/features/user/components/UserInfoMenu.vue";
 import UserService from "@/features/user/services/UserService";
 import { useSnackbarStore } from "@/stores/snackbar";
 
