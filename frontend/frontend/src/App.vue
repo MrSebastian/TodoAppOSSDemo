@@ -45,6 +45,9 @@
                 <v-list-item :to="{ path: '/getstarted' }">
                     <v-list-item-title>Get started</v-list-item-title>
                 </v-list-item>
+                <v-list-item :to="{ path: '/persons' }">
+                    <v-list-item-title>Personen</v-list-item-title>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-main>
