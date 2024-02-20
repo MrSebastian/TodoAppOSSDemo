@@ -4,4 +4,8 @@ export default class Person {
         public firstname?: string,
         public lastname?: string
     ) {}
+
+    static createDefault(): Person {
+        return new Person("", undefined, undefined);
+    }
 }
