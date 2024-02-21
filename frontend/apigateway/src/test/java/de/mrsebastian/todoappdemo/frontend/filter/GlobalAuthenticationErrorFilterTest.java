@@ -4,9 +4,15 @@
  */
 package de.mrsebastian.todoappdemo.frontend.filter;
 
-import de.mrsebastian.todoappdemo.frontend.ApiGatewayApplication;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static de.mrsebastian.todoappdemo.frontend.TestConstants.SPRING_TEST_PROFILE;
+
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
+import de.mrsebastian.todoappdemo.frontend.ApiGatewayApplication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,12 +24,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
-import static de.mrsebastian.todoappdemo.frontend.TestConstants.SPRING_TEST_PROFILE;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
