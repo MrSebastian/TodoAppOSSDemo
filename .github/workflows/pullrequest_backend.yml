@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'backend/**'
+  pull_request_target:
+    paths:
+      - 'backend/**'
 
 jobs:
   merge_locally:
