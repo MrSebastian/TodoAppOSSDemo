@@ -8,7 +8,7 @@ on:
       - 'backend/**'
 
 jobs:
-  merge_locally:
+  checkout_and_verify:
     runs-on: ubuntu-latest
 
     steps:
