@@ -1,10 +1,9 @@
 package de.mrsebastian.todoappdemo.backend.exception;
 
+import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.UUID;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
