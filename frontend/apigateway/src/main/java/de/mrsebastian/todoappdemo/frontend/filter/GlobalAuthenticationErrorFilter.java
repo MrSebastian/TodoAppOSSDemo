@@ -4,6 +4,7 @@
  */
 package de.mrsebastian.todoappdemo.frontend.filter;
 
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.reactivestreams.Publisher;
@@ -22,8 +23,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * This {@link GlobalFilter} replaces the body by a generic authentication error body,
