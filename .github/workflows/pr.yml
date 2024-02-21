@@ -19,9 +19,7 @@ jobs:
       - name: Merge PR into target branch locally
         with:
           TARGET_BRANCH: ${{ github.base_ref }}
-        run: |
-          git branch
-          git merge ${{ TARGET_BRANCH }}
+        run: git merge ${{ TARGET_BRANCH }}
           
 
       - name: Set up JDK 17
