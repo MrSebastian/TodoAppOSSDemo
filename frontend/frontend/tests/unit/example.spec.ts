@@ -36,4 +36,8 @@ describe("TheSnackbar.vue", () => {
 
         expect(wrapper.html()).toContain(message);
     });
+
+    it("some useless test for 2", () => {
+        expect(true).toBeTruthy();
+    });
 });
