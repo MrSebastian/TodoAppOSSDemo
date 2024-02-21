@@ -15,11 +15,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Merge PR into target branch locally
         env:
           TARGET_BRANCH: ${{ github.base_ref }}
-        run: |
-          git branch
-          git merge "$TARGET_BRANCH"
+        run: git merge "origin/$TARGET_BRANCH"
+          
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
