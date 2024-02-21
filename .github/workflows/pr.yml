@@ -1,9 +1,9 @@
 name: Lokaler Merge Workflow
 
 on:
-  push:
-    paths:
-      - 'backend/**'
+#  push:
+#    paths:
+#      - 'backend/**'
   pull_request:
     types: [opened, reopened]
 
