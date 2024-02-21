@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Merge PR into target branch locally
-        with:
+        env:
           TARGET_BRANCH: ${{ github.base_ref }}
         run: git merge ${{ TARGET_BRANCH }}
           
