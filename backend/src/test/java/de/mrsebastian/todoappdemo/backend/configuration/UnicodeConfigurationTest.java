@@ -4,9 +4,17 @@
  */
 package de.mrsebastian.todoappdemo.backend.configuration;
 
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
+import static de.mrsebastian.todoappdemo.backend.TestConstants.TheEntityDto;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import de.mrsebastian.todoappdemo.backend.MicroServiceApplication;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.Task;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.TaskRepository;
+import java.net.URI;
+import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -14,15 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.net.URI;
-import java.util.UUID;
-
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static de.mrsebastian.todoappdemo.backend.TestConstants.TheEntityDto;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(
         classes = { MicroServiceApplication.class },

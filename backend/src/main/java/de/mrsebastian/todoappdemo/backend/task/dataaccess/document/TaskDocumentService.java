@@ -6,13 +6,12 @@ import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskCreateDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskUpdateDao;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @Profile(Profiles.PROFILE_MONGO)

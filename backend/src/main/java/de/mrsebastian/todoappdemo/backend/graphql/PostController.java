@@ -4,11 +4,10 @@ import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
 import de.mrsebastian.todoappdemo.backend.person.service.PersonService;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
 import de.mrsebastian.todoappdemo.backend.task.service.TaskService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
