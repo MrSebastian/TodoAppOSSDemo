@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Merge PR into target branch locally
-        run: git merge ${{ github.base_ref }}
+        with:
+          TARGET_BRANCH: ${{ github.base_ref }}
+        run: git merge ${{ TARGET_BRANCH }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
