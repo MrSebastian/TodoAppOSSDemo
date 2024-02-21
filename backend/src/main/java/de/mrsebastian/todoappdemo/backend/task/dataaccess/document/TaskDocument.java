@@ -3,10 +3,9 @@ package de.mrsebastian.todoappdemo.backend.task.dataaccess.document;
 import de.mrsebastian.todoappdemo.backend.domain.document.BaseDocument;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDate;
 
 @Document
 @Data

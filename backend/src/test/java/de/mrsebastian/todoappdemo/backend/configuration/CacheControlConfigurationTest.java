@@ -4,6 +4,12 @@
  */
 package de.mrsebastian.todoappdemo.backend.configuration;
 
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
+import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import de.mrsebastian.todoappdemo.backend.MicroServiceApplication;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -15,12 +21,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_DB_H2;
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_TEST_PROFILE;
-import static de.mrsebastian.todoappdemo.backend.TestConstants.SPRING_NO_SECURITY_PROFILE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(
         classes = { MicroServiceApplication.class },

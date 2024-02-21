@@ -4,11 +4,10 @@
  */
 package de.mrsebastian.todoappdemo.backend.configuration.nfcconverter;
 
+import de.mrsebastian.todoappdemo.backend.exception.NfcException;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.io.Reader;
-
-import de.mrsebastian.todoappdemo.backend.exception.NfcException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.lang.NonNull;

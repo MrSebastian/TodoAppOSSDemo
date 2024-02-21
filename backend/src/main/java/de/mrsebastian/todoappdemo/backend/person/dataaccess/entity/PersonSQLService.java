@@ -4,13 +4,12 @@ import de.mrsebastian.todoappdemo.backend.configuration.Profiles;
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonCreateDao;
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDao;
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDataAccessService;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @Profile(Profiles.PROFILE_SQL)

@@ -5,12 +5,11 @@ import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDataAccessServ
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonCreateDTO;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
