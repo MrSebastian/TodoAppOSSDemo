@@ -4,6 +4,16 @@
             v-model="person.email"
             label="EMail"
         />
+
+        <v-text-field
+            v-model="person.firstname"
+            label="Vorname"
+        />
+
+        <v-text-field
+            v-model="person.lastname"
+            label="Nachname"
+        />
     </div>
 </template>
 
