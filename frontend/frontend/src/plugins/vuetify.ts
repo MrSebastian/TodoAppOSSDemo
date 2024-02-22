@@ -2,6 +2,7 @@ import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 
 import { createVuetify } from "vuetify";
+import { aliases } from "vuetify/iconsets/mdi";
 
 export default createVuetify({
     theme: {
@@ -15,6 +16,12 @@ export default createVuetify({
                     error: "#FF0000",
                 },
             },
+        },
+    },
+    icons: {
+        aliases: {
+            ...aliases,
+            deleteItem: "mdi-delete",
         },
     },
 });

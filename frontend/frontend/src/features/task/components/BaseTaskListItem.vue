@@ -7,18 +7,8 @@
 
         <template #append>
             <div>
-                <v-btn
-                    icon
-                    variant="flat"
-                    @click="handleDeleteClicked"
-                    ><v-icon>mdi-delete</v-icon></v-btn
-                >
-                <v-btn
-                    icon
-                    variant="flat"
-                    @click="handleEditClicked"
-                    ><v-icon>mdi-pencil</v-icon></v-btn
-                >
+                <base-delete-icon-button @click="handleDeleteClicked" />
+                <base-edit-icon-button @click="handleEditClicked" />
             </div>
         </template>
     </v-list-item>
@@ -27,6 +17,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+import BaseDeleteIconButton from "@/components/common/buttons/icon/BaseDeleteIconButton.vue";
+import BaseEditIconButton from "@/components/common/buttons/icon/BaseEditIconButton.vue";
 import TaskPersisted from "@/features/task/types/TaskPersisted";
 
 interface IProps {
