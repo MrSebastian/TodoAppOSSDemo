@@ -4,6 +4,8 @@
  */
 package de.mrsebastian.todoappdemo.frontend.filter;
 
+import static de.mrsebastian.todoappdemo.frontend.TestConstants.SPRING_TEST_PROFILE;
+
 import de.mrsebastian.todoappdemo.frontend.ApiGatewayApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,8 +15,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
-import static de.mrsebastian.todoappdemo.frontend.TestConstants.SPRING_TEST_PROFILE;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(

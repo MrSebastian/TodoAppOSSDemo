@@ -16,7 +16,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>3.2.0</spring.boot.version>
+        <spring.boot.version>3.2.2</spring.boot.version>
         <spring.cloud.version>2023.0.0</spring.cloud.version>
         <logstash.encoder>7.0.1</logstash.encoder>
         <apache.commons.collections4>4.4</apache.commons.collections4>
@@ -426,6 +426,10 @@
                 <version>3.2.1</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
+                    <sourceDirectories>
+                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                        <sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+                    </sourceDirectories>
                 </configuration>
                 <executions>
                     <execution>
