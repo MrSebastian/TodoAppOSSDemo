@@ -1,11 +1,12 @@
 import type TaskUpdateDTO from "@/features/task/services/api/model/TaskUpdateDTO";
+import type { TaskClientInterface } from "@/features/task/services/api/TaskClientInterface";
 
 import FetchUtils from "@/api/FetchUtils";
 import { API_BACKEND_BASE } from "@/Constants";
 import TaskCreateDTO from "@/features/task/services/api/model/TaskCreateDTO";
 import TaskDTO from "@/features/task/services/api/model/TaskDTO";
 
-export default class TaskRestClient {
+export default class TaskRestClient implements TaskClientInterface {
     private readonly PATH_TASKS = "/tasks";
 
     private readonly fetchUtils = new FetchUtils();
