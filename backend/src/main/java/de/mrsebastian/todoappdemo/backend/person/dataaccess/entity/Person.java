@@ -32,14 +32,4 @@ public class Person extends BaseEntity {
     @Email
     @ToString.Include
     private String email;
-
-    @Override
-    public boolean equals(Object o) {
-        return isEqual(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return getHashcode();
-    }
 }

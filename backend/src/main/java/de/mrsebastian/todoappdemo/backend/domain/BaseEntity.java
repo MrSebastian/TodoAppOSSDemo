@@ -40,11 +40,13 @@ public abstract class BaseEntity implements Cloneable, Serializable {
     @ToString.Include
     private UUID id;
 
-    public int getHashcode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(this.getId());
     }
 
-    public boolean isEqual(final Object otherEntity) {
+    @Override
+    public boolean equals(final Object otherEntity) {
         return otherEntityIsSame(otherEntity) || isCompatibleClassWithEqualNonNullId(otherEntity);
     }
 
