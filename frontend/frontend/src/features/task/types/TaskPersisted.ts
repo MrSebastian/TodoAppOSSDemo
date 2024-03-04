@@ -5,13 +5,14 @@ export default class TaskPersisted extends Task {
         public id: string,
         title: string,
         description: string | null,
-        dueDate: string | null
+        dueDate: string | null,
+        assigneeId: string | null
     ) {
-        super(title, description, dueDate);
+        super(title, description, dueDate, assigneeId);
     }
 
     static createDefault(): TaskPersisted {
-        return new TaskPersisted("", "", null, null);
+        return new TaskPersisted("", "", null, null, null);
     }
 
     clone(): TaskPersisted {
@@ -19,7 +20,8 @@ export default class TaskPersisted extends Task {
             this.id,
             this.title,
             this.description,
-            this.dueDate
+            this.dueDate,
+            this.assigneeId
         );
     }
 }
