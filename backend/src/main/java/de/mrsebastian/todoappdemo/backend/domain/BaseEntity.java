@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.UUID;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,8 +24,7 @@ import org.hibernate.annotations.UuidGenerator;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
+@ToString(onlyExplicitlyIncluded = true)
 @SuperBuilder
 public abstract class BaseEntity implements Cloneable, Serializable {
 
@@ -37,6 +35,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
     @GeneratedValue(generator = "uuid")
     @UuidGenerator
     @JdbcTypeCode(VARCHAR)
+    @ToString.Include
     private UUID id;
 
 }
