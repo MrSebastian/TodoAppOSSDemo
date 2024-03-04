@@ -28,6 +28,7 @@ public class PersonDocumentService implements PersonDataAccessService {
     @Override
     public PersonDao createPerson(PersonCreateDao personCreateDao) {
         val personToCreate = personDaoMapper.toPersonDocument(personCreateDao);
+        personToCreate.setId(UUID.randomUUID());
         return personDaoMapper.toDao(repository.save(personToCreate));
     }
 
