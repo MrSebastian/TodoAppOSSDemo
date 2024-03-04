@@ -1,9 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.person.dataaccess.entity;
 
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
-import de.mrsebastian.todoappdemo.backend.utility.entity.EntityEqualsAndHashCodeFactory;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,16 +33,13 @@ public class Person extends BaseEntity {
     @ToString.Include
     private String email;
 
-    @Transient
-    private final EntityEqualsAndHashCodeFactory equalsAndHashCodeFactory = new EntityEqualsAndHashCodeFactory(this);
-
     @Override
     public boolean equals(Object o) {
-        return equalsAndHashCodeFactory.isEqual(o);
+        return isEqual(o);
     }
 
     @Override
     public int hashCode() {
-        return equalsAndHashCodeFactory.getHashcode();
+        return getHashcode();
     }
 }
