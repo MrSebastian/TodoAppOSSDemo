@@ -1,3 +1,4 @@
+import type TaskAssigneeDTO from "@/features/task/services/api/model/TaskAssigneeDTO";
 import type { TaskClientInterface } from "@/features/task/services/api/TaskClientInterface";
 
 import Task from "@/features/task/services/api/impl/localstorage/Task";
@@ -39,9 +40,32 @@ export default class TaskClientLocalStorage implements TaskClientInterface {
 
     updateTask(taskId: string, taskUpdateDTO: TaskUpdateDTO): Promise<void> {
         const taskToUpdate = this.getTask(taskId);
-        if (!!taskToUpdate) {
+        if (taskToUpdate) {
             this.mapper.updateTask(taskToUpdate, taskUpdateDTO);
             this.saveTask(taskToUpdate);
+        }
+
+        return Promise.resolve();
+    }
+
+    setAssignee(
+        taskId: string,
+        taskAssigneeDTO: TaskAssigneeDTO
+    ): Promise<void> {
+        const taskToSetAssignee = this.getTask(taskId);
+        if (taskToSetAssignee) {
+            taskToSetAssignee.assigneeId = taskAssigneeDTO.personId;
+            this.saveTask(taskToSetAssignee);
+        }
+
+        return Promise.resolve();
+    }
+
+    removeAssignee(taskId: string): Promise<void> {
+        const taskToSetAssignee = this.getTask(taskId);
+        if (taskToSetAssignee) {
+            taskToSetAssignee.assigneeId = null;
+            this.saveTask(taskToSetAssignee);
         }
 
         return Promise.resolve();
@@ -63,7 +87,7 @@ export default class TaskClientLocalStorage implements TaskClientInterface {
         );
     }
 
-    private getTask(taskId: String): Task | undefined {
+    private getTask(taskId: string): Task | undefined {
         const storedTasks = this.getOrCreateTasksOfLocalStorage();
         return storedTasks.find((task) => task.id === taskId);
     }

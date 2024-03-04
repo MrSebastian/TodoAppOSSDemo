@@ -3,6 +3,7 @@ export default class Task {
         public id: string,
         public title: string,
         public description: string | null,
-        public dueDate: string | null
+        public dueDate: string | null,
+        public assigneeId: string | null
     ) {}
 }

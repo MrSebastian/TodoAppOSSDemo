@@ -1,3 +1,4 @@
+import TaskAssigneeDTO from "@/features/task/services/api/model/TaskAssigneeDTO";
 import TaskCreateDTO from "@/features/task/services/api/model/TaskCreateDTO";
 import TaskDTO from "@/features/task/services/api/model/TaskDTO";
 import TaskUpdateDTO from "@/features/task/services/api/model/TaskUpdateDTO";
@@ -14,7 +15,8 @@ export default class TaskMapper {
             dto.id,
             dto.title,
             dto.description,
-            dto.dueDate
+            dto.dueDate,
+            dto.assigneeId
         );
     }
 
@@ -24,5 +26,9 @@ export default class TaskMapper {
             persistedTask.description ?? "",
             persistedTask.dueDate
         );
+    }
+
+    personIdToTaskAssigneeDTO(personId: string): TaskAssigneeDTO {
+        return new TaskAssigneeDTO(personId);
     }
 }
