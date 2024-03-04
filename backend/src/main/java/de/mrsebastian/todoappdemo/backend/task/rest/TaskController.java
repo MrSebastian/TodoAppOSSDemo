@@ -46,4 +46,16 @@ public class TaskController {
         taskService.updateTask(taskId, updateTaskData);
     }
 
+    @PutMapping("{id}/assignee")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateAssignee(@PathVariable("id") final UUID taskId, @Valid @RequestBody TaskAssigneeDTO assigneeDTO) {
+        taskService.updateTaskAssignee(taskId, assigneeDTO);
+    }
+
+    @DeleteMapping("{id}/assignee")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeAssignee(@PathVariable("id") final UUID taskId) {
+        taskService.updateTaskAssignee(taskId, null);
+    }
+
 }
