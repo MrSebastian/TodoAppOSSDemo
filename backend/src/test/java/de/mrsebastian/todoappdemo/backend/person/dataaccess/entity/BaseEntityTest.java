@@ -124,7 +124,6 @@ class BaseEntityTest {
         private boolean boolProperty;
     }
 
-
     @Getter
     @Setter
     @AllArgsConstructor

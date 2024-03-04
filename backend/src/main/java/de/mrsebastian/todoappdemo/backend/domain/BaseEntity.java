@@ -55,7 +55,8 @@ public abstract class BaseEntity implements Cloneable, Serializable {
     }
 
     private boolean isCompatibleClassWithEqualNonNullId(Object otherEntity) {
-        return (otherEntity instanceof BaseEntity otherAsBaseEntity) && otherEntityIsAnInstanceOfOurEntity(otherEntity) && idsAreEqualAndNonNull(otherAsBaseEntity);
+        return (otherEntity instanceof BaseEntity otherAsBaseEntity) && otherEntityIsAnInstanceOfOurEntity(otherEntity)
+                && idsAreEqualAndNonNull(otherAsBaseEntity);
     }
 
     private boolean otherEntityIsAnInstanceOfOurEntity(final Object otherEntity) {
