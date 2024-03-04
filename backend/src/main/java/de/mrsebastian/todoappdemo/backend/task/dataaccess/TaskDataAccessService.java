@@ -13,5 +13,9 @@ public interface TaskDataAccessService {
 
     void updateTask(UUID taskId, TaskUpdateDao taskUpdateDao);
 
+    void removeAssignee(UUID taskId);
+
+    void setAssignee(UUID taskId, UUID personId);
+
     List<TaskDao> getTasks();
 }

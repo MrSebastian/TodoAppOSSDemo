@@ -16,8 +16,10 @@ public interface TaskDocumentMapper {
     TaskDao toDao(TaskDocument taskDocument);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "assigneeId", ignore = true)
     TaskDocument toDocument(TaskCreateDao taskCreateDao);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "assigneeId", ignore = true)
     void updateDocument(TaskUpdateDao taskUpdateDao, @MappingTarget TaskDocument taskDocument);
 }

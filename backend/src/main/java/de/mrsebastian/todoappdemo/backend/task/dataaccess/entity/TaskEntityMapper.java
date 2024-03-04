@@ -16,9 +16,11 @@ public interface TaskEntityMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "creator", ignore = true)
+    @Mapping(target = "assigneeId", ignore = true)
     Task toEntity(TaskCreateDao taskCreateDao);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "creator", ignore = true)
+    @Mapping(target = "assigneeId", ignore = true)
     void updateEntity(TaskUpdateDao taskUpdateDao, @MappingTarget Task taskEntity);
 }

@@ -4,6 +4,7 @@ import de.mrsebastian.todoappdemo.backend.domain.document.BaseDocument;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.UUID;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,4 +21,6 @@ public class TaskDocument extends BaseDocument {
     private String description;
 
     private LocalDate dueDate;
+
+    private UUID assigneeId;
 }

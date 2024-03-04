@@ -39,7 +39,7 @@ public class TaskEntityService implements TaskDataAccessService {
 
     @Override
     public void updateTask(UUID taskId, TaskUpdateDao taskUpdateDao) {
-        val task = repository.findById(taskId).orElseThrow(() -> new NotFoundException(taskId, Task.class));
+        val task = getTaskOrThrow(taskId);
         taskDaoMapper.updateEntity(taskUpdateDao, task);
         repository.save(task);
     }
@@ -47,5 +47,25 @@ public class TaskEntityService implements TaskDataAccessService {
     @Override
     public List<TaskDao> getTasks() {
         return repository.findAll().stream().map(taskDaoMapper::toDao).toList();
+    }
+
+    @Override
+    public void removeAssignee(UUID taskId) {
+        loadTaskUpdateAssigneeAndSave(taskId, null);
+    }
+
+    @Override
+    public void setAssignee(UUID taskId, UUID personId) {
+        loadTaskUpdateAssigneeAndSave(taskId, personId);
+    }
+
+    private Task getTaskOrThrow(final UUID taskId) {
+        return repository.findById(taskId).orElseThrow(() -> new NotFoundException(taskId, Task.class));
+    }
+
+    private void loadTaskUpdateAssigneeAndSave(final UUID taskId, final UUID assigneeId) {
+        val task = getTaskOrThrow(taskId);
+        task.setAssigneeId(assigneeId);
+        repository.save(task);
     }
 }
