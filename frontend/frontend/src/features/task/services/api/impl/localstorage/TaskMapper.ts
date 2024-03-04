@@ -12,12 +12,19 @@ export default class TaskMapper {
             uuidv4().toString(),
             createDTO.title,
             createDTO.description,
-            createDTO.dueDate
+            createDTO.dueDate,
+            null
         );
     }
 
     toTaskDTO(task: Task): TaskDTO {
-        return new TaskDTO(task.id, task.title, task.description, task.dueDate);
+        return new TaskDTO(
+            task.id,
+            task.title,
+            task.description,
+            task.dueDate,
+            task.assigneeId
+        );
     }
 
     updateTask(taskToUpdate: Task, updateData: TaskUpdateDTO) {

@@ -4,9 +4,11 @@ import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
 import de.mrsebastian.todoappdemo.backend.person.service.PersonService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.Task;
+import de.mrsebastian.todoappdemo.backend.task.rest.TaskAssigneeDTO;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskCreateDTO;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
 import de.mrsebastian.todoappdemo.backend.task.rest.TaskUpdateDTO;
+import jakarta.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -51,6 +53,16 @@ public class TaskService {
     public void updateTask(final UUID taskId, final TaskUpdateDTO updateTask) {
         checkIfExistsOrThrow(taskId);
         taskDAService.updateTask(taskId, taskMapper.toUpdateDao(updateTask));
+    }
+
+    @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
+    public void updateTaskAssignee(final UUID taskId, @Nullable final TaskAssigneeDTO taskAssigneeDTO) {
+        checkIfExistsOrThrow(taskId);
+        if (taskAssigneeDTO == null) {
+            taskDAService.removeAssignee(taskId);
+        } else {
+            taskDAService.setAssignee(taskId, taskAssigneeDTO.personId());
+        }
     }
 
     private void checkIfExistsOrThrow(final UUID taskId) {

@@ -4,7 +4,7 @@
     <v-btn
         icon
         variant="flat"
-        ><v-icon>$delete</v-icon></v-btn
+        ><v-icon>$deleteItem</v-icon></v-btn
     >
 </template>
 

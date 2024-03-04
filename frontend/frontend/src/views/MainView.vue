@@ -17,6 +17,7 @@
                     >
                     <base-task-list
                         :tasks="tasks"
+                        :task-assignable-persons="persons"
                         @changed="handleTaskListChanged"
                         @change-requested="handleChangeRequested"
                     />
@@ -42,6 +43,8 @@
 import { onMounted, ref } from "vue";
 
 import HealthService from "@/api/HealthService";
+import PersonService from "@/features/person/services/PersonService";
+import PersonPersisted from "@/features/person/types/PersonPersisted";
 import BaseTaskAddButton from "@/features/task/components/BaseTaskAddButton.vue";
 import BaseTaskCreateDialog from "@/features/task/components/BaseTaskCreateDialog.vue";
 import BaseTaskList from "@/features/task/components/BaseTaskList.vue";
@@ -54,11 +57,14 @@ import HealthState from "@/types/HealthState";
 const snackbarStore = useSnackbarStore();
 const status = ref("DOWN");
 
+const personService = new PersonService();
+
 const taskService = new TaskService();
 const taskCreateDialogVisible = ref(false);
 const taskEditDialogVisible = ref(false);
 const taskToEdit = ref(TaskPersisted.createDefault());
 
+const persons = ref<PersonPersisted[]>([]);
 const tasks = ref<TaskPersisted[]>([]);
 
 onMounted(() => {
@@ -69,6 +75,7 @@ onMounted(() => {
         });
 
     loadTasks();
+    loadPersons();
 });
 
 function handleChangeSaveRequest(changedTask: TaskPersisted): void {
@@ -92,6 +99,10 @@ function handleTaskListChanged(): void {
 
 function handleReloadClicked(): void {
     loadTasks();
+}
+
+function loadPersons(): void {
+    personService.getPersonen().then((result) => (persons.value = result));
 }
 
 function loadTasks(): void {

@@ -6,6 +6,7 @@ import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskCreateDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDao;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskUpdateDao;
+import jakarta.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class TaskDocumentService implements TaskDataAccessService {
 
     @Override
     public void updateTask(UUID taskId, TaskUpdateDao taskUpdateDao) {
-        val task = repository.findById(taskId).orElseThrow(() -> new NotFoundException(taskId, TaskDocument.class));
+        val task = getTaskOrThrow(taskId);
         taskDaoMapper.updateDocument(taskUpdateDao, task);
         repository.save(task);
     }
@@ -49,5 +50,25 @@ public class TaskDocumentService implements TaskDataAccessService {
     @Override
     public List<TaskDao> getTasks() {
         return repository.findAll().stream().map(taskDaoMapper::toDao).toList();
+    }
+
+    @Override
+    public void removeAssignee(UUID taskId) {
+        updateDateAssigneeRefOfReferencedTask(taskId, null);
+    }
+
+    @Override
+    public void setAssignee(UUID taskId, UUID personId) {
+        updateDateAssigneeRefOfReferencedTask(taskId, personId);
+    }
+
+    private TaskDocument getTaskOrThrow(final UUID taskId) {
+        return repository.findById(taskId).orElseThrow(() -> new NotFoundException(taskId, TaskDocument.class));
+    }
+
+    private void updateDateAssigneeRefOfReferencedTask(final UUID taskId, @Nullable final UUID assigneeRef) {
+        val task = getTaskOrThrow(taskId);
+        task.setAssigneeId(assigneeRef);
+        repository.save(task);
     }
 }

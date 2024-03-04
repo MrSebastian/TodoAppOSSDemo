@@ -7,5 +7,5 @@ import java.util.UUID;
 import lombok.Builder;
 
 @Builder
-public record TaskDao(@NotNull UUID id, @NotNull String title, @NotNull String description, LocalDate dueDate, PersonDTO creator) {
+public record TaskDao(@NotNull UUID id, @NotNull String title, @NotNull String description, LocalDate dueDate, PersonDTO creator, UUID assigneeId) {
 }

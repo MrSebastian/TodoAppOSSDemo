@@ -1,6 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.person.rest;
 
 import de.mrsebastian.todoappdemo.backend.person.service.PersonService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PersonDTO createPerson(@RequestBody PersonCreateDTO personCreateDTO) {
+    public PersonDTO createPerson(@Valid @RequestBody PersonCreateDTO personCreateDTO) {
         return personService.createPerson(personCreateDTO);
     }
 }
