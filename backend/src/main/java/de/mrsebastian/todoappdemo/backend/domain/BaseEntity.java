@@ -42,7 +42,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getId());
+        return 0x89;
     }
 
     @Override
