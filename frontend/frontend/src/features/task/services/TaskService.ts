@@ -51,4 +51,33 @@ export default class TaskService {
             });
         });
     }
+
+    updateTaskAssignee(
+        taskId: string,
+        assigneeId: string | null
+    ): Promise<void> {
+        return assigneeId === null
+            ? this.removeAssignee(taskId)
+            : this.assignPerson(taskId, assigneeId);
+    }
+
+    assignPerson(taskId: string, assigneeId: string): Promise<void> {
+        const taskAssigneeDTO =
+            this.taskMapper.personIdToTaskAssigneeDTO(assigneeId);
+        return this.taskClient.setAssignee(taskId, taskAssigneeDTO).then(() => {
+            this.snackbarStore.showMessage({
+                message: "Person zugewiesen",
+                level: Levels.INFO,
+            });
+        });
+    }
+
+    removeAssignee(taskId: string): Promise<void> {
+        return this.taskClient.removeAssignee(taskId).then(() => {
+            this.snackbarStore.showMessage({
+                message: "Zuweisung entfernt",
+                level: Levels.INFO,
+            });
+        });
+    }
 }
