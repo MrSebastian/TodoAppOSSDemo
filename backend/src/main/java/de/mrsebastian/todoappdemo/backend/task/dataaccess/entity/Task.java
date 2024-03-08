@@ -13,27 +13,32 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 
 @Entity
 @Table(name = "tasks")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+@ToString(onlyExplicitlyIncluded = true, callSuper = true)
 public class Task extends BaseEntity {
 
     @NotNull
     @Size(min = 1)
+    @ToString.Include
     private String title;
 
     @NotNull
     @Size(max = 1000, min = 1)
+    @ToString.Include
     private String description;
 
+    @ToString.Include
     private LocalDate dueDate;
 
     @OneToOne
@@ -41,5 +46,6 @@ public class Task extends BaseEntity {
     private Person creator;
 
     @JdbcTypeCode(VARCHAR)
+    @ToString.Include
     private UUID assigneeId;
 }
