@@ -47,7 +47,9 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           tag: ${{ github.event.inputs.release-tag }}
-          tag-push: "--force"
+          message: Build release version ${{ github.event.inputs.release-version }}
+          add: '*.pom'
+          tag_push: "--force"
 
       #      - name: Create GitHub Release
       #        id: create_release
@@ -65,3 +67,9 @@ jobs:
 
       - name: Set new development version
         run: mvn versions:set versions:commit -D ${{ github.event.inputs.development-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
+
+      - name: commit development version
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: Build next development version ${{ github.event.inputs.development-version }}
+          add: '*.pom'
