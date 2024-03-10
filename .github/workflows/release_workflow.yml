@@ -1,4 +1,4 @@
-name: Release and publish
+name: Publish
 on:
   workflow_dispatch:
     inputs:
@@ -6,70 +6,22 @@ on:
         default: ''
         required: true
         description: 'was ist das projekt directory'
-      branch:
-        description: "Branch to release from ?"
-        required: true
-        default: "main"
-      release-version:
-        description: "Release version ?"
-        required: true
-      release-tag:
-        description: "Release tag ?"
-        required: true
-      development-version:
-        description: "Next Development version ?"
-        required: true
 jobs:
-  release:
+  publish-package:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch }}
-
-      - name: Setup git user
-        uses: fregante/setup-git-user@v2
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Set release version
-        run: mvn versions:set versions:commit -DnewVersion=${{ github.event.inputs.release-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
-
-      - name: commit release version
-        uses: EndBug/add-and-commit@v9
-        with:
-          tag: ${{ github.event.inputs.release-tag }}
-          message: Build release version ${{ github.event.inputs.release-version }}
-          add: '**/pom.xml'
-          tag_push: "--force"
-
-      #      - name: Create GitHub Release
-      #        id: create_release
-      #        uses: softprops/action-gh-release@v1
-      #        with:
-      #          tag_name: ${{ github.event.inputs.release-tag }}
-      #          draft: false
-      #          prerelease: false
-      #          generate_release_notes: true
-      #
-      #      - name: Publish package
-      #        run: mvn --batch-mode -f ${{ github.event.inputs.project-dir }}/pom.xml deploy
-      #        env:
-      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set new development version
-        run: mvn versions:set versions:commit -DnewVersion=${{ github.event.inputs.development-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
-
-      - name: commit development version
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: Build next development version ${{ github.event.inputs.development-version }}
-          add: '**/pom.xml'
+      - name: Publish package
+        run: mvn --batch-mode -f ${{ github.event.inputs.project-dir }}/pom.xml deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
