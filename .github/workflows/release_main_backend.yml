@@ -1,8 +1,5 @@
 name: Publish backend package to GitHub Packages
 on:
-  push:
-    branches:
-      - 'main'
   release:
     types: [ created ]
 jobs:

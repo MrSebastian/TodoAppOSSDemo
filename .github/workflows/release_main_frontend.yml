@@ -1,8 +1,5 @@
 name: Publish frontend package to GitHub Packages
 on:
-  push:
-    branches:
-      - 'main'
   release:
     types: [ created ]
 jobs:
