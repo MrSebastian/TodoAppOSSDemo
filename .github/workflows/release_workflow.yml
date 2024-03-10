@@ -49,19 +49,19 @@ jobs:
           tag: ${{ github.event.inputs.release-tag }}
           tag-push: "--force"
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.event.inputs.release-tag }}
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-
-      - name: Publish package
-        run: mvn --batch-mode -f ${{ github.event.inputs.project-dir }}/pom.xml deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #      - name: Create GitHub Release
+      #        id: create_release
+      #        uses: softprops/action-gh-release@v1
+      #        with:
+      #          tag_name: ${{ github.event.inputs.release-tag }}
+      #          draft: false
+      #          prerelease: false
+      #          generate_release_notes: true
+      #
+      #      - name: Publish package
+      #        run: mvn --batch-mode -f ${{ github.event.inputs.project-dir }}/pom.xml deploy
+      #        env:
+      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set new development version
         run: mvn versions:set versions:commit -D ${{ github.event.inputs.development-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
