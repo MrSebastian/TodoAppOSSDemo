@@ -41,7 +41,7 @@ jobs:
           distribution: "temurin"
 
       - name: Set release version
-        run: mvn versions:set versions:commit -D ${{ github.event.inputs.release-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
+        run: mvn versions:set versions:commit -DnewVersion=${{ github.event.inputs.release-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
 
       - name: commit release version
         uses: EndBug/add-and-commit@v9
@@ -66,7 +66,7 @@ jobs:
       #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set new development version
-        run: mvn versions:set versions:commit -D ${{ github.event.inputs.development-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
+        run: mvn versions:set versions:commit -DnewVersion=${{ github.event.inputs.development-version }} -f ${{ github.event.inputs.project-dir }}/pom.xml
 
       - name: commit development version
         uses: EndBug/add-and-commit@v9
