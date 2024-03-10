@@ -47,6 +47,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           tag: ${{ github.event.inputs.release-tag }}
+          tag-push: "--force"
 
       - name: Create GitHub Release
         id: create_release
