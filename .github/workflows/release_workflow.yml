@@ -48,7 +48,7 @@ jobs:
         with:
           tag: ${{ github.event.inputs.release-tag }}
           message: Build release version ${{ github.event.inputs.release-version }}
-          add: '*.pom'
+          add: ${{ github.event.inputs.project-dir }}/**/pom.xml
           tag_push: "--force"
 
       #      - name: Create GitHub Release
@@ -72,4 +72,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: Build next development version ${{ github.event.inputs.development-version }}
-          add: '*.pom'
+          add: ${{ github.event.inputs.project-dir }}/**/pom.xml
