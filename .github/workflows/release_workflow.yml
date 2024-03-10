@@ -50,4 +50,5 @@ jobs:
         with:
           context: ./${{ github.event.inputs.project-dir }}
           push: true
-          tags: ${{ github.event.inputs.project-dir }}-latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
