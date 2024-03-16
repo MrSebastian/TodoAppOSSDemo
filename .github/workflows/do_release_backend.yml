@@ -1,0 +1,38 @@
+name: doBackendRelease
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-version:
+        required: true
+        description: release version
+      development-version:
+        required: true
+        description: next development version
+      release-tag:
+        required: true
+        description: git tag for release
+
+jobs:
+  release-mvn-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup git user
+        uses: fregante/setup-git-user@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          cache: "maven"
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Perform maven release
+        run: >
+          mvn -B -ntp release:prepare release:perform
+          -DreleaseVersion=${{ github.event.inputs.release-version }} 
+          -DdevelopmentVersion=${{ github.event.inputs.development-version }} 
+          -Dtag=${{ github.event.inputs.release-tag }} 
+          -Darguments="-DskipTests"
