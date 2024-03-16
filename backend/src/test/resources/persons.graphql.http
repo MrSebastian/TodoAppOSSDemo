@@ -5,10 +5,10 @@ GRAPHQL http://localhost:39146/graphql
 
 query {
     getPersons {
-      id
-      firstname
-      lastname
-      email
+        id
+        firstname
+        lastname
+        email
     }
 }
 
