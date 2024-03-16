@@ -43,6 +43,13 @@ public class TaskService {
         return taskDAService.getTasks().stream().map(taskMapper::toDTO).toList();
     }
 
+    @PreAuthorize(
+        "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
+    )
+    public List<TaskDTO> getTaskWithAssignee(final UUID assigneeId) {
+        return getTasks().stream().filter(task -> assigneeId.equals(task.assigneeId())).toList();
+    }
+
     @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
     public void deleteTask(final UUID taskId) {
         checkIfExistsOrThrow(taskId);
