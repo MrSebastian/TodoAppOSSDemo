@@ -37,7 +37,7 @@ public class PostController {
 
     @SchemaMapping
     public List<TaskOfPerson> tasks(Person person) {
-        log.atInfo().log("requesting tasks of person > {}", person);
+        log.atDebug().log("collection tasks of person with id > {}", person.id());
 
         if (person.id() == null) {
             return Collections.emptyList();
