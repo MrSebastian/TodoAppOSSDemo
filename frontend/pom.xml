@@ -13,9 +13,17 @@
 
 
     <properties>
-       		<!-- SonarQube -->
-		<sonar.scanner.version>3.9.0.2155</sonar.scanner.version>
+        <!-- SonarQube -->
+        <sonar.scanner.version>3.9.0.2155</sonar.scanner.version>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/MrSebastian/TodoAppOSSDemo</url>
+        </repository>
+    </distributionManagement>
 
 
     <build>
@@ -42,10 +50,10 @@
                 </configuration>
             </plugin>
             <plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>${sonar.scanner.version}</version>
-			</plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.scanner.version}</version>
+            </plugin>
         </plugins>
     </build>
 
