@@ -11,3 +11,20 @@ query {
       email
     }
 }
+
+### GraphQL Persons with Tasks
+GRAPHQL http://localhost:39146/graphql
+
+query {
+    getPersons {
+        id
+        firstname
+        lastname
+        email
+        tasks {
+            id
+            title
+            description
+        }
+    }
+}
