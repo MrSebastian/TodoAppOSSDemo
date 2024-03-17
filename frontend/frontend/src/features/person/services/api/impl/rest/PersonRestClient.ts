@@ -9,6 +9,7 @@ export default class PersonRestClient implements PersonClientInterface {
     private readonly PATH_PERSON = "/person";
 
     private readonly fetchUtils = new FetchUtils();
+
     createPerson(person: PersonCreateDTO): Promise<PersonDTO> {
         return this.fetchUtils.doFetch<PersonDTO>(
             `${API_BACKEND_BASE}${this.PATH_PERSON}`,
@@ -20,6 +21,13 @@ export default class PersonRestClient implements PersonClientInterface {
         return this.fetchUtils.doFetch<PersonDTO[]>(
             `${API_BACKEND_BASE}${this.PATH_PERSON}`,
             FetchUtils.getGETConfig()
+        );
+    }
+
+    deletePerson(id: string): Promise<void> {
+        return this.fetchUtils.doFetch<void>(
+            `${API_BACKEND_BASE}${this.PATH_PERSON}/${id}`,
+            FetchUtils.getDeletConfig()
         );
     }
 }

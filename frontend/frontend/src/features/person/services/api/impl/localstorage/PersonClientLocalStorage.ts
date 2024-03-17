@@ -27,6 +27,19 @@ export default class PersonClientLocalStorage implements PersonClientInterface {
         );
     }
 
+    deletePerson(id: string): Promise<void> {
+        const personsOfLocalStorage = this.getOrCreatePersonsOfLocalStorage();
+        const indexOfPersonToDelete = personsOfLocalStorage.findIndex(
+            (person) => person.id === id
+        );
+        if (indexOfPersonToDelete !== -1) {
+            personsOfLocalStorage.splice(indexOfPersonToDelete);
+            this.saveAllPersons(personsOfLocalStorage);
+        }
+
+        return Promise.resolve();
+    }
+
     private getOrCreatePersonsOfLocalStorage(): Array<Person> {
         let localStoragePersonsAsString = localStorage.getItem(
             this.KEY_PERSON_ARRAY
@@ -46,9 +59,10 @@ export default class PersonClientLocalStorage implements PersonClientInterface {
     private savePerson(person: Person): void {
         const localPersons = this.getOrCreatePersonsOfLocalStorage();
         localPersons.push(person);
-        localStorage.setItem(
-            this.KEY_PERSON_ARRAY,
-            JSON.stringify(localPersons)
-        );
+        this.saveAllPersons(localPersons);
+    }
+
+    private saveAllPersons(persons: Person[]): void {
+        localStorage.setItem(this.KEY_PERSON_ARRAY, JSON.stringify(persons));
     }
 }

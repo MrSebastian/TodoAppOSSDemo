@@ -27,4 +27,8 @@ export default class PersonService {
                 )
             );
     }
+
+    deletePerson(personId: string): Promise<void> {
+        return this.personClient.deletePerson(personId);
+    }
 }
