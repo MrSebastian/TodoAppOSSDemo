@@ -1,8 +1,8 @@
 <template>
     <v-container>
         <v-row class="text-center">
-            <v-col cols="12"
-                ><base-person-add-button @click="handlePersonAddClicked" />
+            <v-col cols="12">
+                <base-person-add-button @click="handlePersonAddClicked" />
             </v-col>
         </v-row>
 
@@ -13,11 +13,15 @@
                         icon
                         variant="flat"
                         @click="handleReloadClicked"
-                        ><v-icon>mdi-reload</v-icon></v-btn
                     >
+                        <v-icon>mdi-reload</v-icon>
+                    </v-btn>
                 </div>
                 <div>
-                    <base-person-list :persons="persons" />
+                    <base-person-list
+                        :persons="persons"
+                        @delete="handlePersonDeleteRequest"
+                    />
                 </div>
             </v-col>
         </v-row>
@@ -48,6 +52,10 @@ onMounted(() => {
 
 function handlePersonAdded() {
     loadPersons();
+}
+
+function handlePersonDeleteRequest(personIdForDeletion: string): void {
+    personService.deletePerson(personIdForDeletion).then(() => loadPersons());
 }
 
 function handlePersonAddClicked() {

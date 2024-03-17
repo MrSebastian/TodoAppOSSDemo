@@ -4,6 +4,7 @@
             v-for="(person, index) in props.persons"
             :key="index"
             :person="person"
+            @delete="handleDeleteRequest"
         />
     </v-list>
 </template>
@@ -18,6 +19,13 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits<{
+    (e: "delete", value: string): void;
+}>();
+
+function handleDeleteRequest(personIdToDelete: string) {
+    emit("delete", personIdToDelete);
+}
 </script>
 
 <style scoped></style>
