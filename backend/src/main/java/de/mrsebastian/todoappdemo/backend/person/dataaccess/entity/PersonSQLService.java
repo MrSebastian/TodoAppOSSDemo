@@ -30,6 +30,11 @@ public class PersonSQLService implements PersonDataAccessService {
     }
 
     @Override
+    public void deletePerson(UUID id) {
+        personRepository.deleteById(id);
+    }
+
+    @Override
     public boolean personExists(UUID id) {
         return personRepository.existsById(id);
     }
