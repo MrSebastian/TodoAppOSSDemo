@@ -72,6 +72,11 @@ public class TaskService {
         }
     }
 
+    @PreAuthorize("hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name())")
+    public void removePersonFromTasks(final UUID personId) {
+        getTaskWithAssignee(personId).forEach(task -> taskDAService.removeAssignee(task.id()));
+    }
+
     private void checkIfExistsOrThrow(final UUID taskId) {
         if (!taskDAService.taskExsits(taskId)) {
             throw new NotFoundException(taskId, Task.class);
