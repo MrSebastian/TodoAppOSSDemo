@@ -5,10 +5,12 @@ import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDataAccessServ
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonCreateDTO;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
+import de.mrsebastian.todoappdemo.backend.person.service.events.PersonDeleteEvent;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,8 @@ public class PersonService {
 
     private final PersonDataAccessService personDAService;
 
+    private final ApplicationEventPublisher applicationEventPublisher;
+
     public List<PersonDTO> getPersonen() {
         return personDAService.getPersonen().stream().map(personMapper::toDto).toList();
     }
@@ -26,6 +30,12 @@ public class PersonService {
     public PersonDTO createPerson(final PersonCreateDTO personCreateDTO) {
         val personDaoForCreate = personMapper.toCreateDao(personCreateDTO);
         return personMapper.toDto(personDAService.createPerson(personDaoForCreate));
+    }
+
+    public void deletePerson(final UUID personId) {
+        existsOrThrow(personId);
+        personDAService.deletePerson(personId);
+        applicationEventPublisher.publishEvent(new PersonDeleteEvent(personId));
     }
 
     public void existsOrThrow(final UUID personId) {

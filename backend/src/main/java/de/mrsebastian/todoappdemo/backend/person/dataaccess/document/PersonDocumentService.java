@@ -33,6 +33,11 @@ public class PersonDocumentService implements PersonDataAccessService {
     }
 
     @Override
+    public void deletePerson(UUID id) {
+        repository.deleteById(id);
+    }
+
+    @Override
     public boolean personExists(UUID id) {
         return repository.existsById(id);
     }

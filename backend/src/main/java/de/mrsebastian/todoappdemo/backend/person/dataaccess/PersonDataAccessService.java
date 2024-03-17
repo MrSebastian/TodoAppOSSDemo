@@ -9,5 +9,7 @@ public interface PersonDataAccessService {
 
     PersonDao createPerson(PersonCreateDao personCreateDao);
 
+    void deletePerson(UUID id);
+
     boolean personExists(UUID id);
 }
