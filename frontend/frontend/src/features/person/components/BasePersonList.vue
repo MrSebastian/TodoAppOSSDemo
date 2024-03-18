@@ -5,6 +5,7 @@
             :key="index"
             :person="person"
             @delete="handleDeleteRequest"
+            @edit="handleEditRequest"
         />
     </v-list>
 </template>
@@ -21,10 +22,15 @@ interface IProps {
 const props = defineProps<IProps>();
 const emit = defineEmits<{
     (e: "delete", value: string): void;
+    (e: "edit", value: PersonPersisted): void;
 }>();
 
 function handleDeleteRequest(personIdToDelete: string) {
     emit("delete", personIdToDelete);
+}
+
+function handleEditRequest(personToEdit: PersonPersisted) {
+    emit("edit", personToEdit);
 }
 </script>
 
