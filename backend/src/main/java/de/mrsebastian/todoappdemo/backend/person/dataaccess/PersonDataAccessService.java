@@ -12,4 +12,6 @@ public interface PersonDataAccessService {
     void deletePerson(UUID id);
 
     boolean personExists(UUID id);
+
+    void updatePerson(UUID id, PersonUpdateDao personUpdateDao);
 }
