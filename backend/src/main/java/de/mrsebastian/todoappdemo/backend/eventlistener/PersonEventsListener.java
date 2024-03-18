@@ -1,4 +1,4 @@
-package de.mrsebastian.todoappdemo.backend.task.service.events;
+package de.mrsebastian.todoappdemo.backend.eventlistener;
 
 import de.mrsebastian.todoappdemo.backend.person.service.events.PersonDeleteEvent;
 import de.mrsebastian.todoappdemo.backend.task.service.TaskService;
