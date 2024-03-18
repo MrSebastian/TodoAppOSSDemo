@@ -5,6 +5,7 @@ import de.mrsebastian.todoappdemo.backend.person.dataaccess.PersonDataAccessServ
 import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonCreateDTO;
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
+import de.mrsebastian.todoappdemo.backend.person.rest.PersonUpdateDTO;
 import de.mrsebastian.todoappdemo.backend.person.service.events.PersonDeleteEvent;
 import java.util.List;
 import java.util.UUID;
@@ -42,5 +43,10 @@ public class PersonService {
         if (!personDAService.personExists(personId)) {
             throw new NotFoundException(personId, Person.class);
         }
+    }
+
+    public void updatePerson(final UUID personId, final PersonUpdateDTO personUpdateDTO) {
+        existsOrThrow(personId);
+        personDAService.updatePerson(personId, personMapper.toUpdateDao(personUpdateDTO));
     }
 }
