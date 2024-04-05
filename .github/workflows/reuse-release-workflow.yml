@@ -42,8 +42,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=match,pattern=(${{inputs.project-dir}})/v(\d)\d\d,group=2
+            type=match,pattern=(${{inputs.project-dir}})/v(\d\d)\d,group=2
             type=match,pattern=(${{inputs.project-dir}})/v(.*),group=2
             type=raw,value=latest-dev
 
