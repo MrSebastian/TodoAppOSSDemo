@@ -42,7 +42,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=match,pattern=(${{inputs.project-dir}})/v(.*),group=1
+            type=match,pattern=(${{inputs.project-dir}})/v(.*),group=2
             type=raw,value=latest-dev
 
       - name: Build and push image
