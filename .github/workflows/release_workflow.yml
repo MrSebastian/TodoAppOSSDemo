@@ -5,6 +5,7 @@ on:
       project-dir:
         default: ''
         required: true
+        type: string
         description: 'was ist das projekt directory'
 
 jobs:
