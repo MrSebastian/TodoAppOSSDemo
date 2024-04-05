@@ -3,7 +3,6 @@ on:
   workflow_call:
     inputs:
       project-dir:
-        default: ''
         required: true
         description: 'was ist das projekt directory'
 
