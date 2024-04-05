@@ -1,4 +1,4 @@
-name: Publish
+name: Trigger Publish
 on:
   workflow_dispatch:
     inputs:
