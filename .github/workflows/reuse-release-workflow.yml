@@ -4,6 +4,7 @@ on:
     inputs:
       project-dir:
         required: true
+        type: string
         description: 'was ist das projekt directory'
 
 env:
