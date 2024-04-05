@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "${{ github.repository }}-${{ inputs.project-dir }}"
+  IMAGE_NAME: ${{ github.repository }}-${{ inputs.project-dir }}
 
 jobs:
   publish-package:
