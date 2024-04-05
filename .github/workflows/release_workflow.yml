@@ -9,6 +9,6 @@ on:
 
 jobs:
   publish-package:
-    uses: ./.github/workflows/reusable/release-workflow.yml
+    uses: ./.github/workflows/reuse-release-workflow.yml
     with:
       project-dir: ${{ github.event.inputs.project-dir }}
