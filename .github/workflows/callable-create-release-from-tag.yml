@@ -15,7 +15,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  publish-ghcr-image:
+  create-gh-release:
     permissions:
       contents: write
     runs-on: ubuntu-latest
