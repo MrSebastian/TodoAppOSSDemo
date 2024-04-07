@@ -46,36 +46,14 @@ jobs:
       - name: build jar without tests
         run: mvn -B -ntp -DskipTests package
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
+      - name: Create GitHub Release
+        id: create_release
         env:
           service: ${{ steps.tagName.outputs.service }}
-          image: ${{ env.REGISTRY }}/${{ github.repository }}-${{ service }}
-          tagDefinitionMajorOnly: "type=match,pattern=(${{ service }})/v(\d).\d.\d,group=2"
-          tagDefinitionMajorMinor: "type=match,pattern=(${{ service }})/v(\d.\d).\d,group=2"
-          tagDefinitionFullVersion: "type=match,pattern=(${{ service }})/v(.*),group=2"
+        uses: softprops/action-gh-release@v1
         with:
-          images: ${{ image }}
-          tags: |
-            ${{ tagDefinitionMajorOnly }}
-            ${{ tagDefinitionMajorMinor }}
-            ${{ tagDefinitionFullVersion }}
-            type=raw,value=latest
-
-      - name: Build and push image
-        uses: docker/build-push-action@v5
-        env:
-          service: ${{ steps.tagName.outputs.service }}
-        with:
-          context: ./${{ service }}
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          files: |
+            ${{ service }}/target/*.jar
+          draft: false
+          prerelease: false
+          generate_release_notes: false
