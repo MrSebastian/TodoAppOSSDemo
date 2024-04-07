@@ -1,4 +1,5 @@
 import type PersonCreateDTO from "@/features/person/services/api/model/PersonCreateDTO";
+import type PersonUpdateDTO from "@/features/person/services/api/model/PersonUpdateDTO";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,5 +23,11 @@ export default class PersonMapper {
             person.firstname,
             person.lastname
         );
+    }
+
+    updatePerson(personToUpdate: Person, updateData: PersonUpdateDTO): void {
+        personToUpdate.email = updateData.email;
+        personToUpdate.firstname = updateData.firstname;
+        personToUpdate.lastname = updateData.lastname;
     }
 }

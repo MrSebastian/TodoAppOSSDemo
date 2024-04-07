@@ -4,6 +4,8 @@ type Task {
     description: String!,
     dueDate: String
     creator: Person
+    assigneeId: ID
+    assignee: Person
 }
 
 type Person {
@@ -11,6 +13,16 @@ type Person {
     firstname: String
     lastname: String,
     email: String!
+    tasks: [TaskOfPerson]
+}
+
+type TaskOfPerson {
+    id: ID!
+    title: String!,
+    description: String!,
+    dueDate: String
+    creatorId: ID
+    assigneeId: ID
 }
 
 type Query {

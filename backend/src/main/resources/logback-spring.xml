@@ -44,6 +44,12 @@
             <appender-ref ref="STDOUT" />
         </logger>
 
+        <logger name="de.mrsebastian.todoappdemo.backend.graphql"
+                level="debug"
+                additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
         <!-- Logger usage -->
         <root level="info">
             <appender-ref ref="STDOUT" />

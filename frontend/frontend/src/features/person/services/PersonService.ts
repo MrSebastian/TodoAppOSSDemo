@@ -27,4 +27,14 @@ export default class PersonService {
                 )
             );
     }
+
+    deletePerson(personId: string): Promise<void> {
+        return this.personClient.deletePerson(personId);
+    }
+
+    updatePerson(updatedPerson: PersonPersisted): Promise<void> {
+        const body =
+            this.personMapper.persistedPersonToPersonUpdateDTO(updatedPerson);
+        return this.personClient.updatePerson(updatedPerson.id, body);
+    }
 }

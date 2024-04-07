@@ -5,9 +5,26 @@ GRAPHQL http://localhost:39146/graphql
 
 query {
     getPersons {
-      id
-      firstname
-      lastname
-      email
+        id
+        firstname
+        lastname
+        email
+    }
+}
+
+### GraphQL Persons with Tasks
+GRAPHQL http://localhost:39146/graphql
+
+query {
+    getPersons {
+        id
+        firstname
+        lastname
+        email
+        tasks {
+            id
+            title
+            description
+        }
     }
 }
