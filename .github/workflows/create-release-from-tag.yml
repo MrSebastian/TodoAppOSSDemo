@@ -37,11 +37,9 @@ jobs:
   publish-ghcr-image:
     permissions:
       contents: write
-    runs-on: ubuntu-latest
     needs:
       - extract-service
-    uses:
-      ./.github/workflows/callable-create-release-from-tag.yml
+    uses: ./.github/workflows/callable-create-release-from-tag.yml
     with:
       tag: ${{ needs.extract-service.outputs.service }}/v${{ needs.extract-service.outputs.version }}
       service: ${{ needs.extract-service.outputs.service }}
