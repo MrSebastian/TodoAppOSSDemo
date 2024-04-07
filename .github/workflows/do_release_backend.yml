@@ -9,9 +9,9 @@ on:
       development-version:
         required: true
         description: next development version
-      release-tag:
+      service:
         required: true
-        description: git tag for release
+        description: service to build (backend, frontend, ...)
 
 jobs:
   prepare-release:
@@ -31,13 +31,13 @@ jobs:
           java-version: 17
           distribution: "temurin"
           cache: 'maven'
-          cache-dependency-path: 'backend/pom.xml' # optional
+          cache-dependency-path: '${{ github.event.inputs.service }}/pom.xml' # optional
       - name: Perform maven release
         run: >
           mvn -B -ntp release:prepare -f backend/pom.xml
           -DreleaseVersion=${{ github.event.inputs.release-version }} 
           -DdevelopmentVersion=${{ github.event.inputs.development-version }} 
-          -Dtag=${{ github.event.inputs.release-tag }} 
+          -Dtag=${{ github.event.inputs.service }}/v${{ github.event.inputs.release-version }}
           -Darguments="-DskipTests"
 
 #  release-mvn-artifact:
