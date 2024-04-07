@@ -1,4 +1,4 @@
-name: build gh release from tag
+name: build ghcr image from tag
 
 on:
   push:
