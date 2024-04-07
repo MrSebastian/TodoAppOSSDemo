@@ -21,22 +21,17 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
-      - name: Setup git user
-        uses: fregante/setup-git-user@v2
-      - name: Install Java and Maven
-        uses: actions/setup-java@v4
+      - name: Java Maven release
+        uses: qcastel/github-actions-maven-release@v1.12.41
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk/
         with:
-          java-version: 17
-          distribution: "temurin"
-          cache: 'maven'
-          cache-dependency-path: '${{ github.event.inputs.service }}/pom.xml'
-      - name: Perform maven release
-        run: >
-          mvn -B -ntp release:prepare -f backend/pom.xml
-          -DreleaseVersion=${{ github.event.inputs.release-version }} 
-          -DdevelopmentVersion=${{ github.event.inputs.development-version }} 
-          -Dtag=${{ github.event.inputs.service }}/v${{ github.event.inputs.release-version }}
-          -Darguments="-DskipTests"
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSPHRASE }}
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
+          skip-perform: true
+          maven-development-version-number: ${{ github.event.inputs.development-version }}
+          maven-release-version-number: ${{ github.event.inputs.release-version }}
 
 #  build-gh-release:
 #    permissions:
