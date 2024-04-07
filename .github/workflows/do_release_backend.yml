@@ -31,7 +31,7 @@ jobs:
 
       - name: Perform maven release
         run: >
-          mvn -B -ntp release:prepare release:perform
+          mvn -B -ntp release:prepare release:perform -f backend/pom.xml
           -DreleaseVersion=${{ github.event.inputs.release-version }} 
           -DdevelopmentVersion=${{ github.event.inputs.development-version }} 
           -Dtag=${{ github.event.inputs.release-tag }} 
