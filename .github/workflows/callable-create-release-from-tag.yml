@@ -42,7 +42,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{ steps.getTagNameParts.outputs.service }}/target/*.jar
+            ${{ inputs.service }}/target/*.jar
           tag_name: ${{ inputs.tag }}
           draft: false
           prerelease: false
