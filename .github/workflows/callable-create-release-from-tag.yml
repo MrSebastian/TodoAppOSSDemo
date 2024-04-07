@@ -43,6 +43,7 @@ jobs:
         with:
           files: |
             ${{ steps.getTagNameParts.outputs.service }}/target/*.jar
+          tag_name: ${{ inputs.tag }}
           draft: false
           prerelease: false
           generate_release_notes: false
