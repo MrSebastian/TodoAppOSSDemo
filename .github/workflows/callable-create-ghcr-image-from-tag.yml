@@ -53,11 +53,13 @@ jobs:
           # tags:
           # - Major
           # - Major.Minor
+          # - Major.Minor.Patch
           # - full semver: 1.2.3
           # - latest
           tags: |
             type=match,pattern=(${{ inputs.service }})/v(\d).\d.\d,group=2
             type=match,pattern=(${{ inputs.service }})/v(\d.\d).\d,group=2
+            type=match,pattern=(${{ inputs.service }})/v(\d.\d.\d),group=2
             type=match,pattern=(${{ inputs.service }})/v(.*),group=2
             type=raw,value=latest
 
