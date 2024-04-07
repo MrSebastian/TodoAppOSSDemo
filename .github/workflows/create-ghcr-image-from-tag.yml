@@ -57,12 +57,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         env:
-          image: ${{ env.REGISTRY }}/${{ github.repository }}-${{ steps.getTagNameParts.outputs.service }}
           tagDefinitionMajorOnly: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d).\d.\d,group=2
           tagDefinitionMajorMinor: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d.\d).\d,group=2
           tagDefinitionFullVersion: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(.*),group=2
         with:
-          images: ${{ image }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}-${{ steps.getTagNameParts.outputs.service }}
           tags: |
             $tagDefinitionMajorOnly
             $tagDefinitionMajorMinor
