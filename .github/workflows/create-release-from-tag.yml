@@ -42,7 +42,7 @@ jobs:
           distribution: 'temurin'
 
       - name: build jar without tests
-        run: mvn -B -ntp -DskipTests package
+        run: mvn -B -ntp -DskipTests package -f ${{ steps.getTagNameParts.outputs.service }}/pom.xml
 
       - name: Create GitHub Release
         id: create_release
