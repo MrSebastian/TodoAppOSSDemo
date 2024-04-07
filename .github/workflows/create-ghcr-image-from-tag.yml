@@ -56,16 +56,17 @@ jobs:
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
-        env:
-          tagDefinitionMajorOnly: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d).\d.\d,group=2
-          tagDefinitionMajorMinor: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d.\d).\d,group=2
-          tagDefinitionFullVersion: type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(.*),group=2
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}-${{ steps.getTagNameParts.outputs.service }}
+          # tags:
+          # - Major
+          # - Major.Minor
+          # - full semver: 1.2.3
+          # - latest
           tags: |
-            $tagDefinitionMajorOnly
-            $tagDefinitionMajorMinor
-            $tagDefinitionFullVersion
+            type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d).\d.\d,group=2
+            type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(\d.\d).\d,group=2
+            type=match,pattern=(${{ steps.getTagNameParts.outputs.service }})/v(.*),group=2
             type=raw,value=latest
 
       - name: Build and push image
