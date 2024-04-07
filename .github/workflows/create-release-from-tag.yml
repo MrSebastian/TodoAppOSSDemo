@@ -5,8 +5,11 @@ on:
     tags:
       - "*/v*"
 
+env:
+  REGISTRY: ghcr.io
+
 jobs:
-  get-service-from-tag:
+  publish-ghcr-image:
     runs-on: ubuntu-latest
     steps:
       - uses: olegtarasov/get-tag@v2.1.3
@@ -14,6 +17,7 @@ jobs:
         with:
           tagRegex: (?<service>.*)\/v(?<version>.*) #example: backend/v1.2.3
           tagRegexGroup: 0
+
       - name: show-service
         env:
           ghRef: ${{ github.ref }}
@@ -25,3 +29,53 @@ jobs:
           echo "Service: $service"
           echo "Version: $version"
           echo "tagFromAction: $tagFromAction"
+
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        env:
+          service: ${{ steps.tagName.outputs.service }}
+        with:
+          cache: 'maven'
+          cache-dependency-path: '${{ service }}/pom.xml'
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: build jar without tests
+        run: mvn -B -ntp -DskipTests package
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        env:
+          service: ${{ steps.tagName.outputs.service }}
+          image: ${{ env.REGISTRY }}/${{ github.repository }}-${{ service }}
+          tagDefinitionMajorOnly: "type=match,pattern=(${{ service }})/v(\d).\d.\d,group=2"
+          tagDefinitionMajorMinor: "type=match,pattern=(${{ service }})/v(\d.\d).\d,group=2"
+          tagDefinitionFullVersion: "type=match,pattern=(${{ service }})/v(.*),group=2"
+        with:
+          images: ${{ image }}
+          tags: |
+            ${{ tagDefinitionMajorOnly }}
+            ${{ tagDefinitionMajorMinor }}
+            ${{ tagDefinitionFullVersion }}
+            type=raw,value=latest
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        env:
+          service: ${{ steps.tagName.outputs.service }}
+        with:
+          context: ./${{ service }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
