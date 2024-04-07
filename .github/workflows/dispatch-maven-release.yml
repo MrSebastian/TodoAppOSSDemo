@@ -27,7 +27,7 @@ jobs:
           JAVA_HOME: /usr/lib/jvm/java-17-openjdk/
         with:
           ssh-private-key: ${{ secrets.DEYPLOY_KEY_2 }}
-          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dtag=${{ github.event.inputs.service }}/v${{ github.event.inputs.release-version }}"
           skip-perform: true
           maven-development-version-number: ${{ github.event.inputs.development-version }}
           maven-release-version-number: ${{ github.event.inputs.release-version }}
