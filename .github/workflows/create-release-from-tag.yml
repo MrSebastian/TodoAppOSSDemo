@@ -14,6 +14,11 @@ jobs:
         with:
           tagRegex: (?<service>.*)\/v(?<version>.*)" #example: backend/v1.2.3
       - name: show-service
+        env:
+          ghRef: ${{ github.ref }}
+          service: ${{ steps.tagName.outputs.service }}
+          version: ${{ steps.tagName.outputs.version }}
         run: |
-          echo ${{ steps.tagName.outputs.service }}
-          echo ${{ steps.tagName.outputs.version }}
+          echo "Ref: $ghRef"
+          echo "Service: $service"
+          echo "Version: $version"
