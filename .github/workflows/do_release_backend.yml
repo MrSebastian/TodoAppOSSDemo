@@ -50,8 +50,8 @@ jobs:
     steps:
       - name: checkout release tag
         uses: actions/checkout@v4
-      #        with:
-      #          ref: ${{ github.event.inputs.release-tag }}
+        with:
+          ref: ${{ github.event.inputs.release-tag }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
