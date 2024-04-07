@@ -59,8 +59,8 @@ jobs:
         env:
           service: ${{ steps.tagName.outputs.service }}
           image: ${{ env.REGISTRY }}/${{ github.repository }}-${{ service }}
-          tagDefinitionMajorOnly: "type=match,pattern=(${{ service }})/v(\d).\d.\d,group=2"
-          tagDefinitionMajorMinor: "type=match,pattern=(${{ service }})/v(\d.\d).\d,group=2"
+          tagDefinitionMajorOnly: "type=match,pattern=(${{ service }})/v(\\d).\\d.\\d,group=2"
+          tagDefinitionMajorMinor: "type=match,pattern=(${{ service }})/v(\\d.\\d).\\d,group=2"
           tagDefinitionFullVersion: "type=match,pattern=(${{ service }})/v(.*),group=2"
         with:
           images: ${{ image }}
