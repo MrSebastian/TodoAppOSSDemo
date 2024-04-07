@@ -49,6 +49,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}-${{ inputs.service }}
+          context: git
           # tags:
           # - Major
           # - Major.Minor
