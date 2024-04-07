@@ -1,4 +1,4 @@
-name: doBackendRelease
+name: build maven release
 
 on:
   workflow_dispatch:
