@@ -18,7 +18,9 @@ jobs:
           ghRef: ${{ github.ref }}
           service: ${{ steps.tagName.outputs.service }}
           version: ${{ steps.tagName.outputs.version }}
+          tagFromAction: ${{ steps.tagName.outputs.tag }}
         run: |
           echo "Ref: $ghRef"
           echo "Service: $service"
           echo "Version: $version"
+          echo "tagFromAction: $tagFromAction"
