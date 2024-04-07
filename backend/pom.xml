@@ -40,9 +40,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:${project.scm.url}</connection>
-        <developerConnection>scm:git:${project.scm.url}</developerConnection>
-        <url>git@github.com:MrSebastian/TodoAppOSSDemo.git</url>
+        <connection>scm:git:${project.scm.url}.git</connection>
+        <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
+        <url>https://github.com/MrSebastian/TodoAppOSSDemo</url>
         <tag>HEAD</tag>
     </scm>
 
