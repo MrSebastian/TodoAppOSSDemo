@@ -32,7 +32,7 @@ jobs:
           skip-perform: true
           maven-development-version-number: ${{ github.event.inputs.development-version }}
           maven-release-version-number: ${{ github.event.inputs.release-version }}
-          release-branch-name: ${{ github.ref }}
+          release-branch-name: try-github-action-for-release
 
 #  build-gh-release:
 #    permissions:
