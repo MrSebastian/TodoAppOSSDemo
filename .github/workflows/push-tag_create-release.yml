@@ -39,7 +39,7 @@ jobs:
       contents: write
     needs:
       - extract-service
-    uses: ./.github/workflows/callable-create-release-from-tag.yml
+    uses: ./.github/workflows/callables/create-release-from-tag.yml
     with:
       tag: ${{ needs.extract-service.outputs.service }}/v${{ needs.extract-service.outputs.version }}
       service: ${{ needs.extract-service.outputs.service }}

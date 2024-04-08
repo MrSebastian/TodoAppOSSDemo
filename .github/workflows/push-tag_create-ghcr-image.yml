@@ -39,7 +39,7 @@ jobs:
       packages: write
     needs:
       - extract-service
-    uses: ./.github/workflows/callable-create-ghcr-image-from-tag.yml
+    uses: ./.github/workflows/callables/create-ghcr-image-from-tag.yml
     with:
       tag: ${{ needs.extract-service.outputs.service }}/v${{ needs.extract-service.outputs.version }}
       service: ${{ needs.extract-service.outputs.service }}
