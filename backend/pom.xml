@@ -4,7 +4,7 @@
 
     <groupId>de.mrsebastian.todoappdemo</groupId>
     <artifactId>backend</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3-RC8</version>
     <name>backend</name>
 
 
@@ -41,7 +41,7 @@
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>git@github.com:MrSebastian/TodoAppOSSDemo.git</url>
-        <tag>HEAD</tag>
+        <tag>backend/v0.0.3-RC8</tag>
     </scm>
 
     <distributionManagement>
