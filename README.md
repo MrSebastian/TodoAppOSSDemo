@@ -1,4 +1,4 @@
-# TodoAppOSSDemo2
+# TodoAppOSSDemo
 
 ## IDE Setup
 
