@@ -10,6 +10,11 @@ on:
         required: true
         type: string
         description: 'name of service to use'
+      image-name:
+        required: false
+        type: string
+        default: ''
+        description: 'explicit image name'
 
 env:
   REGISTRY: ghcr.io
@@ -47,8 +52,10 @@ jobs:
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
+        env:
+          default-image-name: ${{ github.repository }}-${{ inputs.service }}
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}-${{ inputs.service }}
+          images: ${{ env.REGISTRY }}/${{ inputs.image-name || env.default-image-name }}
           context: git
           # tags:
           # - Major
