@@ -5,10 +5,14 @@ on:
     inputs:
       ref:
         required: true
-        description: 'tag that is used for build'
+        description: 'tag/branch that is used for build'
       service:
         required: true
         description: 'name of service to use'
+      image-name:
+        required: false
+        default: ''
+        description: 'optional explicit image name'
 
 jobs:
   build-ghcr-image:
@@ -19,3 +23,4 @@ jobs:
     with:
       tag: ${{ github.event.inputs.ref }}
       service: ${{ github.event.inputs.service }}
+      image-name: ${{ github.event.inputs.image-name }}
