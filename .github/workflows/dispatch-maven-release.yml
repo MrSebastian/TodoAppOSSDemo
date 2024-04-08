@@ -44,7 +44,7 @@ jobs:
     needs:
       - prepare-release
     uses:
-      ./.github/workflows/create-release-from-tag.yml
+      ./.github/workflows/callable-create-release-from-tag.yml
     with:
       tag: ${{ github.event.inputs.service }}/v${{ github.event.inputs.release-version }}
       service: ${{ github.event.inputs.service }}
@@ -55,7 +55,7 @@ jobs:
     needs:
       - prepare-release
     uses:
-      ./.github/workflows/create-ghcr-image-from-tag.yml
+      ./.github/workflows/callable-create-ghcr-image-from-tag.yml
     with:
       tag: ${{ github.event.inputs.service }}/v${{ github.event.inputs.release-version }}
       service: ${{ github.event.inputs.service }}
