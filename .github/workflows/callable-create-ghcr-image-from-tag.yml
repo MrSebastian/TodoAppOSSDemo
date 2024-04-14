@@ -65,6 +65,7 @@ jobs:
           tags: |
             type=match,pattern=(${{ inputs.service }})/v(\d).\d.\d,group=2,enable=${{ inputs.tag != '' }}
             type=match,pattern=(${{ inputs.service }})/v(\d.\d).\d,group=2,enable=${{ inputs.tag != '' }}
+            type=match,pattern=(${{ inputs.service }})/v(\d.\d.\d),group=2,enable=${{ inputs.tag != '' }}
             type=match,pattern=(${{ inputs.service }})/v(.*),group=2,enable=${{ inputs.tag != '' }}
             type=raw,value=latest
 
