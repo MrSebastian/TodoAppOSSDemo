@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'frontend/**'
+      - '.github/workflows/pullrequest_frontend.yml'
 
 jobs:
   checkout_and_verify:

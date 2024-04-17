@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'frontend/**'
+      - '.github/workflows/push_main_frontend.yml'
 
 jobs:
   checkout_and_verify:
