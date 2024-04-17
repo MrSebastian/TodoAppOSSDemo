@@ -60,7 +60,8 @@ jobs:
           # tags:
           # - Major
           # - Major.Minor
-          # - full semver: 1.2.3
+          # - Major.Minor.Path
+          # - full semver: 1.2.3-PRE
           # - latest
           tags: |
             type=match,pattern=(${{ inputs.service }})/v(\d).\d.\d,group=2,enable=${{ inputs.tag != '' }}
