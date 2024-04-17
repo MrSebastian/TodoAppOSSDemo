@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       tag:
-        required: true
+        required: false
         type: string
         description: 'tag that is used for build'
       service:
@@ -29,7 +29,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.tag }}
+          ref: ${{ inputs.tag || github.ref}}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -60,12 +60,14 @@ jobs:
           # tags:
           # - Major
           # - Major.Minor
-          # - full semver: 1.2.3
+          # - Major.Minor.Path
+          # - full semver: 1.2.3-PRE
           # - latest
           tags: |
-            type=match,pattern=(${{ inputs.service }})/v(\d).\d.\d,group=2
-            type=match,pattern=(${{ inputs.service }})/v(\d.\d).\d,group=2
-            type=match,pattern=(${{ inputs.service }})/v(.*),group=2
+            type=match,pattern=(${{ inputs.service }})/v(\d).\d.\d,group=2,enable=${{ inputs.tag != '' }}
+            type=match,pattern=(${{ inputs.service }})/v(\d.\d).\d,group=2,enable=${{ inputs.tag != '' }}
+            type=match,pattern=(${{ inputs.service }})/v(\d.\d.\d),group=2,enable=${{ inputs.tag != '' }}
+            type=match,pattern=(${{ inputs.service }})/v(.*),group=2,enable=${{ inputs.tag != '' }}
             type=raw,value=latest
 
       - name: Build and push image
