@@ -68,7 +68,8 @@ jobs:
             type=match,pattern=(${{ inputs.service }})/v(\d.\d).\d,group=2,enable=${{ inputs.tag != '' }}
             type=match,pattern=(${{ inputs.service }})/v(\d.\d.\d),group=2,enable=${{ inputs.tag != '' }}
             type=match,pattern=(${{ inputs.service }})/v(.*),group=2,enable=${{ inputs.tag != '' }}
-            type=raw,value=latest
+            type=raw,value=latest,enable=${{ inputs.tag != '' }}
+            type=raw,value=latest-dev,enable=${{ inputs.tag == '' }}
 
       - name: Build and push image
         uses: docker/build-push-action@v5
