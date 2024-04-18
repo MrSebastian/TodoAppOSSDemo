@@ -16,6 +16,8 @@ jobs:
       pom-dir: 'backend'
 
   publish-ghcr-image:
+    permissions:
+      packages: write
     uses:
       ./.github/workflows/callable-create-ghcr-image-from-tag.yml
     with:
