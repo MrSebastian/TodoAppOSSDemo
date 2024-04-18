@@ -78,3 +78,16 @@ info.application.name: ${spring.application.name}
 info.application.version: @project.version@
 
 config.map5xxto400: false
+
+app:
+  routes:
+    sso:
+      uri: http://kubernetes.docker.internal:8100
+    backend:
+      uri: http://localhost:39146/
+  oauth2:
+    issuer-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.oauth2.keycloak.realm}
+    keycloak:
+      realm: testrealm
+      client-id: testclient
+      client-secret: top-secret
