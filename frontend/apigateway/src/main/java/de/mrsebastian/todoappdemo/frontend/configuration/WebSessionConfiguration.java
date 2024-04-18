@@ -26,7 +26,6 @@ import org.springframework.session.hazelcast.HazelcastIndexedSessionRepository;
 
 /**
  * This class configures Hazelcast as the ReactiveSessionRepository.
- *
  */
 @Configuration
 @EnableSpringWebSession
@@ -98,7 +97,7 @@ public class WebSessionConfiguration {
 
     /**
      * Adds the session timeout in seconds to the hazelcast configuration.
-     *
+     * <p>
      * Since we are creating the map it's important to evict sessions
      * by setting a reasonable value for time to live.
      *
