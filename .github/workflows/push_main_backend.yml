@@ -14,3 +14,9 @@ jobs:
       ./.github/workflows/callable-run-mvn-verify.yml
     with:
       pom-dir: 'backend'
+
+  publish-ghcr-image:
+    uses:
+      ./.github/workflows/callable-create-ghcr-image-from-tag.yml
+    with:
+      service: 'backend'
