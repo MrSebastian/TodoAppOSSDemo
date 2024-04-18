@@ -29,6 +29,25 @@ spring:
   jackson:
     serialization:
       indent-output: on
+  profiles:
+    include:
+      - routes
+    group:
+      env-docker:
+        - log-dev
+        - local-hazel
+
+  # security config
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${app.oauth2.issuer-uri}
+        registration:
+          keycloak:
+            client-id: ${app.oauth2.keycloak.client-id}
+            client-secret: ${app.oauth2.keycloak.client-secret}
   session:
     timeout: 36000  # in seconds; Goal: same lifetime as SSO Session (e.g. 10 hours)
   zipkin:
