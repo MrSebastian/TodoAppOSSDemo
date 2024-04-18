@@ -56,7 +56,7 @@ public class WebSessionConfiguration {
     }
 
     @Bean
-    @Profile({ "local", "test" })
+    @Profile({ "local", "test", "local-hazel" })
     public Config localConfig(@Value(
         "${spring.session.timeout}"
     ) int timeout) {
