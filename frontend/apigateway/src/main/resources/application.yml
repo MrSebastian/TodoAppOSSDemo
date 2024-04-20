@@ -1,11 +1,53 @@
 spring:
   application.name: @project.artifactId@
   banner.location: banner.txt
+
+  # spring cloud gateway config
+  cloud:
+    gateway:
+      actuator:
+        verbose:
+          enabled: false
+      globalcors:
+        corsConfigurations:
+          # The cors configuration to allow frontend developers cross origin request via this api gateway
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:8081"
+              - "http://127.0.0.1:8081"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
+      default-filters:
+        - RemoveResponseHeader=Expires
+        - RemoveRequestHeader=cookie
+        - RemoveRequestHeader=x-xsrf-token
+        - TokenRelay=
   main:
     web-application-type: reactive
   jackson:
     serialization:
       indent-output: on
+  profiles:
+    include:
+      - routes
+    group:
+      env-docker:
+        - log-dev
+        - local-hazel
+
+  # security config
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${app.oauth2.issuer-uri}
+        registration:
+          keycloak:
+            client-id: ${app.oauth2.keycloak.client-id}
+            client-secret: ${app.oauth2.keycloak.client-secret}
   session:
     timeout: 36000  # in seconds; Goal: same lifetime as SSO Session (e.g. 10 hours)
   zipkin:
@@ -55,3 +97,16 @@ info.application.name: ${spring.application.name}
 info.application.version: @project.version@
 
 config.map5xxto400: false
+
+app:
+  routes:
+    sso:
+      uri: http://kubernetes.docker.internal:8100
+    backend:
+      uri: http://localhost:39146/
+  oauth2:
+    issuer-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.oauth2.keycloak.realm}
+    keycloak:
+      realm: testrealm
+      client-id: testclient
+      client-secret: top-secret

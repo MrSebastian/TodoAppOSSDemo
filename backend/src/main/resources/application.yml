@@ -1,3 +1,7 @@
+security:
+  oauth2:
+    resource.user-info-uri: ${app.oauth2.userinfo-uri}
+
 spring:
   application.name: @project.artifactId@
   banner.location: banner.txt
@@ -16,6 +20,14 @@ spring:
         - persistence-sql
       db-mongo:
         - persistence-mongo
+      env-docker:
+        - db-postgre
+        - log-dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${app.oauth2.jwk-set-uri}
 
 server:
   shutdown: "graceful"
@@ -45,3 +57,9 @@ management:
       enabled: true
 info.application.name: @project.artifactId@
 info.application.version: @project.version@
+
+app:
+  oauth2:
+    jwk-set-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.realm}/protocol/openid-connect/certs
+    userinfo-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.realm}/protocol/openid-connect/userinfo
+  realm: testrealm
