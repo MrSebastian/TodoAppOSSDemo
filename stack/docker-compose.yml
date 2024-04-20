@@ -2,10 +2,13 @@ name: 'todo-app'
 
 services:
   # services
-  frontend:
+  frontend-local-build:
     container_name: todo-app-frontend
     ports:
       - 8200:8080
+    profiles:
+      - local-build
+      - local-build-frontend
     environment:
       SERVER_PORT: 8080
       SPRING_PROFILES_ACTIVE: env-docker
@@ -15,9 +18,25 @@ services:
     build: ./../frontend
     networks:
       - app
+  frontend:
+    container_name: todo-app-frontend
+    image: ghcr.io/mrsebastian/todoappossdemo-frontend:latest-dev
+    ports:
+      - 8200:8080
+    environment:
+      SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: env-docker
+      APP_ROUTES_BACKEND_URI: http://todo-app-backend:8080/
+    extra_hosts:
+      - "kubernetes.docker.internal:host-gateway"
+    networks:
+      - app
 
-  backend:
+  backend-local-build:
     container_name: todo-app-backend
+    profiles:
+      - local-build
+      - local-build-backend
     ports:
       - 8201:8080
     environment:
@@ -29,7 +48,22 @@ services:
       - "kubernetes.docker.internal:host-gateway"
     build: ./../backend
     networks:
-      - postgres
+      - db
+      - app
+  backend:
+    container_name: todo-app-backend
+    image: ghcr.io/mrsebastian/todoappossdemo-backend:latest-dev
+    ports:
+      - 8201:8080
+    environment:
+      SPRING_PROFILES_ACTIVE: env-docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://todo-app-postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: todo
+      SPRING_DATASOURCE_PASSWORD: todo
+    extra_hosts:
+      - "kubernetes.docker.internal:host-gateway"
+    networks:
+      - db
       - app
   # infrastructure
 
@@ -38,8 +72,12 @@ services:
     container_name: todo-app-oracledb-xe
     ports:
       - 1521:1521
+    profiles:
+      - oracledb-xe
     environment:
       ORACLE_PWD: secret
+    networks:
+      - db
   # sqlplus sys/secret@XEPDB1 as sysdba
   # SQL> CREATE USER todoapp IDENTIFIED BY todosecret QUOTA UNLIMITED ON USERS;
   # SQL> GRANT CONNECT, RESOURCE TO todoapp;
@@ -49,40 +87,57 @@ services:
     container_name: todo-app-gvenzl-oracledb-xe
     ports:
       - 1521:1521
+    profiles:
+      - oracledb-gvenzl
     environment:
       ORACLE_PASSWORD: secret
       APP_USER: pp
       APP_USER_PASSWORD: ppsecret
+    networks:
+      - db
 
   mariadb:
     image: mariadb
     container_name: todo-app-mariadb
     ports:
       - 3306:3306
+    profiles:
+      - mariadb
     environment:
       MARIADB_USER: example-user
       MARIADB_PASSWORD: my_cool_secret
       MARIADB_DATABASE: exmple-database
       MARIADB_ROOT_PASSWORD: my-secret-pw
+    networks:
+      - db
   mongo:
     image: mongo
     container_name: todo-app-mongo
     ports:
       - 27017:27017
+    profiles:
+      - mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: todo
+    networks:
+      - db
+      - mongodb
 
   mongo-express:
     image: mongo-express
     container_name: todo-app-mongo-express
     ports:
       - 8181:8081
+    profiles:
+      - mongodb
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    networks:
+      - mongodb
 
   postgres-app:
     image: postgres:16.1-alpine3.18
@@ -94,7 +149,9 @@ services:
       POSTGRES_USER: todo
       POSTGRES_PASSWORD: todo
     networks:
-      postgres:
+      - db
+      - postgres
+
 
   # Keycloak (SSO)
   keycloak:
@@ -158,8 +215,10 @@ services:
       - 8101:80
     networks:
       - postgres
+      - db
 
 networks:
   keycloak:
   postgres:
   app:
+  db:
