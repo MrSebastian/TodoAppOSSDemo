@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        required: true
+        required: false
         description: 'tag/branch that is used for build'
+        default: ''
       service:
         required: true
         description: 'name of service to use'
