@@ -1,0 +1,16 @@
+name: verify backend-rest-api main push
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'backend-rest-api/**'
+      - '.github/workflows/push_main_backend-rest-api.yml'
+
+jobs:
+  checkout_and_verify:
+    uses:
+      ./.github/workflows/callable-run-mvn-verify.yml
+    with:
+      pom-dir: 'backend-rest-api'
