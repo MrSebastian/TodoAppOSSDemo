@@ -1,6 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.task.dataaccess.entity;
 
 import static java.sql.Types.VARCHAR;
+
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
