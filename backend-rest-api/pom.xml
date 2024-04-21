@@ -25,6 +25,8 @@
         <org.projectlombok.lombok.version>1.18.26</org.projectlombok.lombok.version>
         <spring.boot.version>3.2.4</spring.boot.version>
         <spring.cloud.version>2023.0.1</spring.cloud.version>
+        <!-- TestCoverage -->
+        <jacoco.version>0.8.11</jacoco.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +52,32 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <append>true</append>
+                            <destFile>${sonar.jacoco.reportPath}</destFile>
+                            <!-- Sets the VM argument line used when unit tests are run. -->
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
