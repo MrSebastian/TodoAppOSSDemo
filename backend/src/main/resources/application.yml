@@ -63,3 +63,9 @@ app:
     jwk-set-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.realm}/protocol/openid-connect/certs
     userinfo-uri: http://kubernetes.docker.internal:8100/auth/realms/${app.realm}/protocol/openid-connect/userinfo
   realm: testrealm
+
+todoapp:
+  api:
+    task:
+      rest:
+        base-path: tasks
