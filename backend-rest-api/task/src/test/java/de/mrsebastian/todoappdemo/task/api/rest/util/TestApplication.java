@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("de.mrsebastian.todoappdemo.backend.task.api.rest")
+@ComponentScan("de.mrsebastian.todoappdemo.task.api.rest")
 public class TestApplication {
 
     public static void main(String[] args) {
