@@ -1,0 +1,14 @@
+name: verify backend pull request
+
+on:
+  pull_request:
+    paths:
+      - 'backend-rest-api/**'
+      - '.github/workflows/pullrequest_backend-rest-api.yml'
+
+jobs:
+  checkout_and_verify:
+    uses:
+      ./.github/workflows/callable-run-mvn-verify.yml
+    with:
+      pom-dir: 'backend-rest-api'
