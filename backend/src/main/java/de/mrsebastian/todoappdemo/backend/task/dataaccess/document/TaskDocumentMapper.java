@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Qualifier("TaskDaoDocumentMapper")
 public interface TaskDocumentMapper {
 
-    @Mapping(target = "creator", ignore = true)
     TaskDao toDao(TaskDocument taskDocument);
 
     @Mapping(target = "id", ignore = true)
@@ -21,5 +20,6 @@ public interface TaskDocumentMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "assigneeId", ignore = true)
+    @Mapping(target = "creatorId", ignore = true)
     void updateDocument(TaskUpdateDao taskUpdateDao, @MappingTarget TaskDocument taskDocument);
 }
