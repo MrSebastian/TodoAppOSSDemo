@@ -12,6 +12,10 @@ on:
       service:
         required: true
         description: service to build (backend, frontend, ...)
+      no-ghcr-image:
+        required: false
+        default: false
+        description: should a container image be build
 
 jobs:
   prepare-release:
@@ -50,6 +54,7 @@ jobs:
       service: ${{ github.event.inputs.service }}
 
   build-ghcr-image:
+    if: ${{ github.event.inputs.service != false}}
     permissions:
       packages: write
     needs:
