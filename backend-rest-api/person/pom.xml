@@ -53,12 +53,6 @@
                             <version>${org.projectlombok.lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                    <compilerArgs>
-                        <arg>-Amapstruct.defaultComponentModel=SPRING</arg>
-                        <arg>
-                            -Amapstruct.unmappedTargetPolicy=ERROR
-                        </arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
