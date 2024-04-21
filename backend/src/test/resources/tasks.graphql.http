@@ -1,19 +1,28 @@
-GET http://localhost:39146/graphql
+GET {{ backend }}/graphql
 
 ### get healthstatus
-GET http://localhost:39146/actuator/health
+GET {{ backend }}/actuator/health
 
 ### GraphQL Tasks
-GRAPHQL http://localhost:39146/graphql
+GRAPHQL {{ backend }}/graphql
+Authorization: {{ token_type }} {{ auth_token }}
 
 query {
     getTasks {
-      id
-      title
-      dueDate
-      creator {
-       email
-       id
-      }
+        id
+        title
+        dueDate
+        creatorId
+        creator {
+            email
+            id
+        }
+        assigneeId
+        assignee {
+            id
+            email
+            firstname
+            lastname
+        }
     }
 }

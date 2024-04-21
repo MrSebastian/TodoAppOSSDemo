@@ -22,5 +22,7 @@ public class TaskDocument extends BaseDocument {
 
     private LocalDate dueDate;
 
+    private UUID creatorId;
+
     private UUID assigneeId;
 }
