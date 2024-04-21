@@ -1,0 +1,33 @@
+### get token for admin
+POST {{ sso }}/auth/realms/testrealm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+password = admin &
+grant_type = password &
+client_secret = top-secret &
+client_id = testclient &
+username = admin
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+    client.global.set("token_type", response.body.token_type);
+%}
+
+### get token for normal
+POST {{ sso }}/auth/realms/testrealm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+password = normal &
+grant_type = password &
+client_secret = top-secret &
+client_id = testclient &
+username = normal
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+    client.global.set("token_type", response.body.token_type);
+%}
+
+### get userinfo with auth_token
+GET {{ sso }}/auth/realms/testrealm/protocol/openid-connect/userinfo
+Authorization: {{ token_type }} {{ auth_token }}
