@@ -25,6 +25,8 @@ query {
             id
             title
             description
+            creatorId
+            assigneeId
         }
     }
 }

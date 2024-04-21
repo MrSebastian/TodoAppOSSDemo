@@ -8,12 +8,20 @@ GRAPHQL http://localhost:39146/graphql
 
 query {
     getTasks {
-      id
-      title
-      dueDate
-      creator {
-       email
-       id
-      }
+        id
+        title
+        dueDate
+        creatorId
+        creator {
+            email
+            id
+        }
+        assigneeId
+        assignee {
+            id
+            email
+            firstname
+            lastname
+        }
     }
 }
