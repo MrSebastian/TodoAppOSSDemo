@@ -4,10 +4,10 @@ import de.mrsebastian.todoappdemo.backend.exception.NotFoundException;
 import de.mrsebastian.todoappdemo.backend.person.service.PersonService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.TaskDataAccessService;
 import de.mrsebastian.todoappdemo.backend.task.dataaccess.entity.Task;
-import de.mrsebastian.todoappdemo.backend.task.rest.TaskAssigneeDTO;
-import de.mrsebastian.todoappdemo.backend.task.rest.TaskCreateDTO;
-import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
-import de.mrsebastian.todoappdemo.backend.task.rest.TaskUpdateDTO;
+import de.mrsebastian.todoappdemo.task.api.rest.model.TaskAssigneeDTO;
+import de.mrsebastian.todoappdemo.task.api.rest.model.TaskCreateDTO;
+import de.mrsebastian.todoappdemo.task.api.rest.model.TaskDTO;
+import de.mrsebastian.todoappdemo.task.api.rest.model.TaskUpdateDTO;
 import jakarta.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
@@ -37,14 +37,14 @@ public class TaskService {
     }
 
     @PreAuthorize(
-        "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
+            "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
     )
     public List<TaskDTO> getTasks() {
         return taskDAService.getTasks().stream().map(taskMapper::toDTO).toList();
     }
 
     @PreAuthorize(
-        "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
+            "hasAnyRole(T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_ADMIN.name(), T(de.mrsebastian.todoappdemo.backend.security.AuthoritiesEnum).TASK_READER.name())"
     )
     public List<TaskDTO> getTaskWithAssignee(final UUID assigneeId) {
         return getTasks().stream().filter(task -> assigneeId.equals(task.assigneeId())).toList();
