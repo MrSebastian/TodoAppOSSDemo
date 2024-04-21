@@ -1,4 +1,4 @@
-name: verify backend pull request
+name: verify backend-rest-api pull request
 
 on:
   pull_request:

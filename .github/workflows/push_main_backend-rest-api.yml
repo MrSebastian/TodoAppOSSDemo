@@ -1,4 +1,4 @@
-name: verify backend main push
+name: verify backend-rest-api main push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'main'
     paths:
       - 'backend-rest-api/**'
-      - '.github/workflows/push_main_pullrequest_backend-rest-api.yml'
+      - '.github/workflows/push_main_backend-rest-api.yml'
 
 jobs:
   checkout_and_verify:
