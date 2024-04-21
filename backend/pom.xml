@@ -76,6 +76,19 @@
 
     <dependencies>
 
+        <!-- app-api -->
+        <dependency>
+            <groupId>de.mrsebastian.todoappdemo.api</groupId>
+            <artifactId>task</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.mrsebastian.todoappdemo.api</groupId>
+            <artifactId>person</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
