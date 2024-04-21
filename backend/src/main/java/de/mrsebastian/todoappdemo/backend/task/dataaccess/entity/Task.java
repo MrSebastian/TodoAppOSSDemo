@@ -1,12 +1,8 @@
 package de.mrsebastian.todoappdemo.backend.task.dataaccess.entity;
 
 import static java.sql.Types.VARCHAR;
-
 import de.mrsebastian.todoappdemo.backend.domain.BaseEntity;
-import de.mrsebastian.todoappdemo.backend.person.dataaccess.entity.Person;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -41,9 +37,9 @@ public class Task extends BaseEntity {
     @ToString.Include
     private LocalDate dueDate;
 
-    @OneToOne
-    @JoinColumn(name = "creator")
-    private Person creator;
+    @JdbcTypeCode(VARCHAR)
+    @ToString.Include
+    private UUID creatorId;
 
     @JdbcTypeCode(VARCHAR)
     @ToString.Include

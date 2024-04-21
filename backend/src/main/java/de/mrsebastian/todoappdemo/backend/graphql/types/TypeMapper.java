@@ -11,8 +11,7 @@ public interface TypeMapper {
     Person personDtoToPersonType(PersonDTO personDTO);
 
     @Mapping(target = "id", source = "taskDTO.id")
-    Task taskDtoToTaskType(TaskDTO taskDTO, PersonDTO assignee);
+    Task taskDtoToTaskType(TaskDTO taskDTO, PersonDTO assignee, PersonDTO creator);
 
-    @Mapping(target = "creatorId", source = "creator.id")
     TaskOfPerson taskDtoToTaskOfPersonType(TaskDTO taskDTO);
 }

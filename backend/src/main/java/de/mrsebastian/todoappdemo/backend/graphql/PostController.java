@@ -27,7 +27,7 @@ public class PostController {
 
     @QueryMapping
     public List<Task> getTasks() {
-        return taskService.getTasks().stream().map(taskDTO -> typeMapper.taskDtoToTaskType(taskDTO, null)).toList();
+        return taskService.getTasks().stream().map(taskDTO -> typeMapper.taskDtoToTaskType(taskDTO, null, null)).toList();
     }
 
     @QueryMapping
@@ -44,5 +44,25 @@ public class PostController {
         }
 
         return taskService.getTaskWithAssignee(person.id()).stream().map(typeMapper::taskDtoToTaskOfPersonType).toList();
+    }
+
+    @SchemaMapping
+    public Person creator(Task task) {
+        if (task.creatorId() != null) {
+            return typeMapper.personDtoToPersonType(
+                    personService.getPersonen().stream().filter(person -> person.id().equals(task.creatorId())).findFirst().get());
+        } else {
+            return null;
+        }
+    }
+
+    @SchemaMapping
+    public Person assignee(Task task) {
+        if (task.assigneeId() != null) {
+            return typeMapper.personDtoToPersonType(
+                    personService.getPersonen().stream().filter(person -> person.id().equals(task.assigneeId())).findFirst().get());
+        } else {
+            return null;
+        }
     }
 }
