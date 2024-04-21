@@ -27,7 +27,7 @@ public class PostController {
 
     @QueryMapping
     public List<Task> getTasks() {
-        return taskService.getTasks().stream().map(taskDTO -> typeMapper.taskDtoToTaskType(taskDTO, null, null)).toList();
+        return taskService.getTasks().stream().map(typeMapper::taskDtoToTaskType).toList();
     }
 
     @QueryMapping
