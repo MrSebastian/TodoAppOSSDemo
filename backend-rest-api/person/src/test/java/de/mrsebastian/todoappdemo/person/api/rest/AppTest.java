@@ -92,5 +92,30 @@ public class AppTest {
     @Nested
     class RequestBodyAreValidated {
 
+        @Test
+        void createPerson() throws Exception {
+            val requestBody = new PersonCreateDTO(null, null, null);
+            val request = MockMvcRequestBuilders.post("/api/person").contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(requestBody));
+
+            val result = mockMvc.perform(request).andReturn();
+
+            Assertions.assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+            Mockito.verify(personAPI, Mockito.times(0)).createPerson(Mockito.any());
+        }
+
+        @Test
+        void updatePerson() throws Exception {
+            val personId = UUID.randomUUID();
+            val requestBody = new PersonUpdateDTO(null, null, null);
+
+            val request = MockMvcRequestBuilders.put("/api/person/" + personId).contentType(MediaType.APPLICATION_JSON).content(
+                    objectMapper.writeValueAsString(requestBody));
+
+            val result = mockMvc.perform(request).andReturn();
+
+            Assertions.assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+            Mockito.verify(personAPI, Mockito.times(0)).updatePerson(Mockito.any(), Mockito.any());
+        }
     }
 }
