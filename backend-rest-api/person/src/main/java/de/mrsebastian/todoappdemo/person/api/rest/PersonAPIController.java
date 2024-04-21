@@ -43,7 +43,7 @@ public class PersonAPIController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePerson(@PathVariable("id") final UUID personId, @RequestBody final PersonUpdateDTO personUpdateDTO) {
+    public void updatePerson(@PathVariable("id") final UUID personId, @Valid @RequestBody final PersonUpdateDTO personUpdateDTO) {
         personAPI.updatePerson(personId, personUpdateDTO);
     }
 }
