@@ -10,3 +10,9 @@ Content-Type: application/json
   "lastname": "lastname",
   "email": "email"
 }
+
+### Create Person - invalide request
+POST http://localhost:39146/person
+Content-Type: application/json
+
+{}
