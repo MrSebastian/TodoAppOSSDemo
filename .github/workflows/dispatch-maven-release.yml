@@ -15,7 +15,7 @@ on:
       no-ghcr-image:
         required: false
         default: false
-        description: should a container image be build
+        description: should building a container image be SKIPPED?
 
 jobs:
   prepare-release:
