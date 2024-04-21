@@ -13,4 +13,4 @@ jobs:
     uses:
       ./.github/workflows/callable-run-mvn-verify.yml
     with:
-      pom-dir: 'backend'
+      pom-dir: 'backend-rest-api'
