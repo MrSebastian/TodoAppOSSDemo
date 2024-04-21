@@ -4,7 +4,7 @@
 
     <groupId>de.mrsebastian.todoappdemo.api</groupId>
     <artifactId>parent</artifactId>
-    <version>0.1.0-RC1</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -32,7 +32,7 @@
         <connection>scm:git:${project.scm.url}.git</connection>
         <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
         <url>https://github.com/MrSebastian/TodoAppOSSDemo</url>
-        <tag>backend-rest-api/v0.1.0-RC1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
