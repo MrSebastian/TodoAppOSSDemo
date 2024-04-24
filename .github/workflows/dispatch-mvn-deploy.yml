@@ -1,0 +1,17 @@
+name: dispatch maven deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      pom-dir:
+        required: true
+        description: service to build (backend, frontend, ...)
+
+jobs:
+  mvn-deploy:
+    permissions:
+      contents: write
+    uses:
+      ./.github/workflows/callable-run-mvn-deploy.yml
+    with:
+      pom-dir: ${{ github.event.inputs.service }}
