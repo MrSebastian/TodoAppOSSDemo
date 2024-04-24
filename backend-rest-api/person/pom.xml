@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>de.mrsebastian.todoappdemo.api</groupId>
-        <artifactId>parent</artifactId>
+        <groupId>de.mrsebastian.todoappdemo</groupId>
+        <artifactId>api-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>person</artifactId>
+    <artifactId>person-api</artifactId>
 
     <dependencies>
         <dependency>
