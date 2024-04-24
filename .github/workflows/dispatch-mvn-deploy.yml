@@ -6,6 +6,10 @@ on:
       pom-dir:
         required: true
         description: service to build (backend, frontend, ...)
+        options:
+          - backend
+          - backend-rest-api
+          - frontend
 
 jobs:
   mvn-deploy:
