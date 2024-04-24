@@ -5,6 +5,7 @@ on:
     inputs:
       pom-dir:
         required: true
+        type: choice
         description: service to build (backend, frontend, ...)
         options:
           - backend
