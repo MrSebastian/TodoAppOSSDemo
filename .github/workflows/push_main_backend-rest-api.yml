@@ -14,3 +14,13 @@ jobs:
       ./.github/workflows/callable-run-mvn-verify.yml
     with:
       pom-dir: 'backend-rest-api'
+
+  mvn-deploy:
+    permissions:
+      contents: write
+    needs:
+      - checkout_and_verify
+    uses:
+      ./.github/workflows/callable-run-mvn-deploy.yml
+    with:
+      pom-dir: 'backend-rest-api'
