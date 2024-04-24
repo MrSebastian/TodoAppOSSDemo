@@ -14,4 +14,4 @@ jobs:
     uses:
       ./.github/workflows/callable-run-mvn-deploy.yml
     with:
-      pom-dir: ${{ github.event.inputs.service }}
+      pom-dir: ${{ github.event.inputs.pom-dir }}
