@@ -5,13 +5,18 @@ on:
     inputs:
       pom-dir:
         required: true
+        type: choice
         description: service to build (backend, frontend, ...)
+        options:
+          - backend
+          - backend-rest-api
+          - frontend
 
 jobs:
   mvn-deploy:
     permissions:
-      contents: write
+      packages: write
     uses:
       ./.github/workflows/callable-run-mvn-deploy.yml
     with:
-      pom-dir: ${{ github.event.inputs.service }}
+      pom-dir: ${{ github.event.inputs.pom-dir }}
