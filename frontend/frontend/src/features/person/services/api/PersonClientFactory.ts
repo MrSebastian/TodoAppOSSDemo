@@ -6,7 +6,7 @@ import PersonRestClient from "@/features/person/services/api/impl/rest/PersonRes
 
 export default class PersonClientFactory {
     static getPersonClient(): PersonClientInterface {
-        if (DONT_USE_RESTCLIENT === "true") {
+        if (DONT_USE_RESTCLIENT) {
             return new PersonClientLocalStorage();
         } else {
             return new PersonRestClient();
