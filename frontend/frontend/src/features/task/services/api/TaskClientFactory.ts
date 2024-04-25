@@ -6,7 +6,7 @@ import TaskRestClient from "@/features/task/services/api/impl/rest/TaskRestClien
 
 export default class TaskClientFactory {
     static getTaskClient(): TaskClientInterface {
-        if (DONT_USE_RESTCLIENT === "true") {
+        if (DONT_USE_RESTCLIENT) {
             return new TaskClientLocalStorage();
         } else {
             return new TaskRestClient();

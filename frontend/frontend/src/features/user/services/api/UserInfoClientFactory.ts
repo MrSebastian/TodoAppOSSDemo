@@ -6,7 +6,7 @@ import UserInfoRestClient from "@/features/user/services/api/impl/rest/UserInfoR
 
 export default class UserInfoClientFactory {
     static getClient(): UserInfoClientInterface {
-        if (DONT_USE_RESTCLIENT === "true") {
+        if (DONT_USE_RESTCLIENT) {
             return new UserInfoLocalStorageClient();
         } else {
             return new UserInfoRestClient();
