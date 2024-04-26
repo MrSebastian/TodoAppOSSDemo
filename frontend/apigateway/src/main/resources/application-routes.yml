@@ -18,7 +18,7 @@ spring:
           predicates:
             - Path=/api/sso/userinfo
           filters:
-            - RewritePath=/api/sso/userinfo, /auth/realms/${spring.realm}/protocol/openid-connect/userinfo
+            - RewritePath=/api/sso/userinfo, /auth/realms/${app.oauth2.keycloak.realm}/protocol/openid-connect/userinfo
         - id: backend
           uri: ${app.routes.backend.uri}
           predicates:
