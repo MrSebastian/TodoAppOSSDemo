@@ -28,6 +28,14 @@ export default class PersonService {
             );
     }
 
+    getPerson(personId: string): Promise<PersonPersisted> {
+        return this.personClient
+            .getPerson(personId)
+            .then((person) =>
+                this.personMapper.personDtoToPersonPersisted(person)
+            );
+    }
+
     deletePerson(personId: string): Promise<void> {
         return this.personClient.deletePerson(personId);
     }

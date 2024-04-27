@@ -50,7 +50,7 @@ public class PostController {
     public Person creator(Task task) {
         if (task.creatorId() != null) {
             return typeMapper.personDtoToPersonType(
-                    personService.getPersonen().stream().filter(person -> person.id().equals(task.creatorId())).findFirst().get());
+                    personService.getPerson(task.creatorId()));
         } else {
             return null;
         }
@@ -60,7 +60,7 @@ public class PostController {
     public Person assignee(Task task) {
         if (task.assigneeId() != null) {
             return typeMapper.personDtoToPersonType(
-                    personService.getPersonen().stream().filter(person -> person.id().equals(task.assigneeId())).findFirst().get());
+                    personService.getPerson(task.assigneeId()));
         } else {
             return null;
         }

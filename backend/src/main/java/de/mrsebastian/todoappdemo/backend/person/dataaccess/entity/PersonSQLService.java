@@ -48,6 +48,11 @@ public class PersonSQLService implements PersonDataAccessService {
         personRepository.save(personToUpdate);
     }
 
+    @Override
+    public PersonDao getPerson(final UUID id) {
+        return sqlDaoMapper.toDao(getPersonOrThrow(id));
+    }
+
     private Person getPersonOrThrow(final UUID id) {
         return personRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Person.class));
     }

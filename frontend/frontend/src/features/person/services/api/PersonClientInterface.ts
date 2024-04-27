@@ -5,6 +5,8 @@ import type PersonUpdateDTO from "@/features/person/services/api/model/PersonUpd
 export interface PersonClientInterface {
     getPersonen(): Promise<PersonDTO[]>;
 
+    getPerson(id: string): Promise<PersonDTO>;
+
     createPerson(person: PersonCreateDTO): Promise<PersonDTO>;
 
     deletePerson(id: string): Promise<void>;
