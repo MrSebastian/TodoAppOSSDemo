@@ -25,6 +25,13 @@ export default class PersonRestClient implements PersonClientInterface {
         );
     }
 
+    getPerson(id: string): Promise<PersonDTO> {
+        return this.fetchUtils.doFetch<PersonDTO>(
+            `${API_BACKEND_BASE}${this.PATH_PERSON}/${id}`,
+            FetchUtils.getGETConfig()
+        );
+    }
+
     deletePerson(id: string): Promise<void> {
         return this.fetchUtils.doFetch<void>(
             `${API_BACKEND_BASE}${this.PATH_PERSON}/${id}`,

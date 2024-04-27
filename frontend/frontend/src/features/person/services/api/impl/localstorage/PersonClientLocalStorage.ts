@@ -28,6 +28,23 @@ export default class PersonClientLocalStorage implements PersonClientInterface {
         );
     }
 
+    getPerson(id: string): Promise<PersonDTO> {
+        const personsOfLocalStorage = this.getOrCreatePersonsOfLocalStorage();
+        const indexOfPersonToGet = this.getIndexOfPersonById(
+            id,
+            personsOfLocalStorage
+        );
+        if (indexOfPersonToGet !== -1) {
+            return Promise.resolve(
+                this.personMapper.personToPersonDTO(
+                    personsOfLocalStorage[indexOfPersonToGet]
+                )
+            );
+        } else {
+            throw new Error(`person with id ${id} not found`);
+        }
+    }
+
     deletePerson(id: string): Promise<void> {
         const personsOfLocalStorage = this.getOrCreatePersonsOfLocalStorage();
         const indexOfPersonToDelete = this.getIndexOfPersonById(
