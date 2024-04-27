@@ -44,4 +44,9 @@ public class PersonController {
     public void updatePerson(@PathVariable("id") UUID personId, @RequestBody PersonUpdateDTO personUpdateDTO) {
         personService.updatePerson(personId, personUpdateDTO);
     }
+
+    @GetMapping("{id}")
+    public PersonDTO getPerson(@PathVariable("id") UUID personId) {
+        return personService.getPerson(personId);
+    }
 }

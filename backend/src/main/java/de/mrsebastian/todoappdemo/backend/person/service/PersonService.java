@@ -45,6 +45,10 @@ public class PersonService {
         }
     }
 
+    public PersonDTO getPerson(final UUID personId) {
+        return personMapper.toDto(personDAService.getPerson(personId));
+    }
+
     public void updatePerson(final UUID personId, final PersonUpdateDTO personUpdateDTO) {
         existsOrThrow(personId);
         personDAService.updatePerson(personId, personMapper.toUpdateDao(personUpdateDTO));

@@ -51,6 +51,11 @@ public class PersonDocumentService implements PersonDataAccessService {
         repository.save(personToUpdate);
     }
 
+    @Override
+    public PersonDao getPerson(final UUID id) {
+        return personDaoMapper.toDao(getPersonOrThrow(id));
+    }
+
     private PersonDocument getPersonOrThrow(final UUID id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException(id, PersonDocument.class));
     }
