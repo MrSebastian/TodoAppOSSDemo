@@ -5,7 +5,7 @@
         width="400px"
     >
         <v-card>
-            <v-card-title>Person erstellen</v-card-title>
+            <v-card-title>Person bearbeiten</v-card-title>
             <v-card-text>
                 <v-form ref="refForm">
                     <base-person-fields :person="person" />
@@ -13,7 +13,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-btn @click="handleCancelClicked">Abbrechen</v-btn>
-                <v-btn @click="handleSaveClicked">Erstellen</v-btn>
+                <v-btn @click="handleSaveClicked">Speichern</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
