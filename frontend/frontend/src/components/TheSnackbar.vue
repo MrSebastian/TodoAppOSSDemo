@@ -41,7 +41,7 @@ watch(
     () => {
         color.value = snackbarStore.level;
         if (color.value === "error") {
-            timeout.value = 0;
+            timeout.value = -1;
         } else {
             timeout.value = defaultTimeout;
         }
