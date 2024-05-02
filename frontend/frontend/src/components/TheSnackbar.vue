@@ -22,6 +22,8 @@ import { ref, watch } from "vue";
 
 import { useSnackbarStore } from "@/stores/snackbar";
 
+const SNACKBAR_TIMEOUT_INDEFINITELY = -1;
+
 const snackbarStore = useSnackbarStore();
 
 const defaultTimeout = 5000;
@@ -41,7 +43,7 @@ watch(
     () => {
         color.value = snackbarStore.level;
         if (color.value === "error") {
-            timeout.value = 0;
+            timeout.value = SNACKBAR_TIMEOUT_INDEFINITELY;
         } else {
             timeout.value = defaultTimeout;
         }
