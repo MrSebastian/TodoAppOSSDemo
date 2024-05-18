@@ -1,0 +1,40 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "keycloak",
+            "Group": "Servers",
+            "Host": "postgres-keycloak",
+            "Port": 5432,
+            "MaintenanceDB": "keycloak",
+            "Username": "keycloak-user",
+            "UseSSHTunnel": 0,
+            "TunnelPort": "22",
+            "TunnelAuthentication": 0,
+            "KerberosAuthentication": false,
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10,
+                "sslcert": "<STORAGE_DIR>/.postgresql/postgresql.crt",
+                "sslkey": "<STORAGE_DIR>/.postgresql/postgresql.key"
+            }
+        },
+        "2": {
+            "Name": "app-db",
+            "Group": "Servers",
+            "Host": "postgres-app",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "todo",
+            "UseSSHTunnel": 0,
+            "TunnelPort": "22",
+            "TunnelAuthentication": 0,
+            "KerberosAuthentication": false,
+            "ConnectionParameters": {
+                "sslmode": "prefer",
+                "connect_timeout": 10,
+                "sslcert": "<STORAGE_DIR>/.postgresql/postgresql.crt",
+                "sslkey": "<STORAGE_DIR>/.postgresql/postgresql.key"
+            }
+        }
+    }
+}
