@@ -208,13 +208,17 @@ services:
 
   # Tools
   postgres-pg-admin:
-    image: dpage/pgadmin4:7.8
+    image: dpage/pgadmin4:8.6
     container_name: todo-app-pg-admin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@a.de
       PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_SERVER_JSON_FILE: /ext-mount/servers.json
     ports:
       - 8101:80
+    volumes:
+      - './pgadmin/configdir:/var/lib/pgadmin'
+      - './pgadmin/initservers:/ext-mount'
     networks:
       - postgres
       - db
