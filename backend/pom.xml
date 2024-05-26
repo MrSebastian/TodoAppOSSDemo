@@ -172,7 +172,15 @@
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-oracle</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-hsqldb</artifactId>
         </dependency>
         <!-- Hibernate Model Gen for type safe criterias -->
         <dependency>
