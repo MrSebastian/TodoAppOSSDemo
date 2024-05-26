@@ -23,7 +23,7 @@
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <!-- Version muss mit der in den spring-boot-dependencies bereitgestellten Lombok-Version übereinstimmen -->
         <org.projectlombok.lombok.version>1.18.26</org.projectlombok.lombok.version>
-        <spring.boot.version>3.2.5</spring.boot.version>
+        <spring.boot.version>3.3.0</spring.boot.version>
         <spring.cloud.version>2023.0.1</spring.cloud.version>
         <!-- TestCoverage -->
         <jacoco.version>0.8.12</jacoco.version>
