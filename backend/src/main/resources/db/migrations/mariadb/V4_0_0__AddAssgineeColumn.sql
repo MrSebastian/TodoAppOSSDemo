@@ -1,1 +1,2 @@
-ALTER TABLE tasks ADD COLUMN assigneeId varchar2(36);
+ALTER TABLE tasks
+    ADD COLUMN assigneeId varchar(36);
