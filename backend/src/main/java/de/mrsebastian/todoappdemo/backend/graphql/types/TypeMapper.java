@@ -1,7 +1,7 @@
 package de.mrsebastian.todoappdemo.backend.graphql.types;
 
 import de.mrsebastian.todoappdemo.backend.person.rest.PersonDTO;
-import de.mrsebastian.todoappdemo.backend.task.rest.TaskDTO;
+import de.mrsebastian.todoappdemo.task.api.rest.model.TaskDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

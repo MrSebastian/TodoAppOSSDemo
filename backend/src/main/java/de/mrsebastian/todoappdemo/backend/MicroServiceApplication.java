@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(
         basePackages = {
                 "org.springframework.data.jpa.convert.threeten",
-                "de.mrsebastian.todoappdemo.backend"
+                "de.mrsebastian.todoappdemo.backend",
+                "de.mrsebastian.todoappdemo.task.api.rest"
         }
 )
 @EnableAutoConfiguration
