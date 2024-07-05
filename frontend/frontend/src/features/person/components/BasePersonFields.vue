@@ -2,16 +2,19 @@
     <div>
         <v-text-field
             v-model="person.email"
+            data-testid="email"
             label="EMail"
         />
 
         <v-text-field
             v-model="person.firstname"
+            data-testid="firstname"
             label="Vorname"
         />
 
         <v-text-field
             v-model="person.lastname"
+            data-testid="lastname"
             label="Nachname"
         />
     </div>
