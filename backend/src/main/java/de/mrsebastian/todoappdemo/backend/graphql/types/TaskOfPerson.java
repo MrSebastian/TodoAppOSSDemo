@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record TaskOfPerson(@NotNull UUID id, @NotNull String title, @NotNull String description, String dueDate,
-                           UUID creatorId, UUID assigneeId) {
+        UUID creatorId, UUID assigneeId) {
 }
