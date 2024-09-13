@@ -46,7 +46,7 @@
     "stylus": "^0.63.0",
     "typescript": "^5.2.2",
     "unplugin-fonts": "^1.0.3",
-    "vite": "^4.4.11",
+    "vite": "^5.0.0",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-vuetify": "1.0.2",
     "vitest": "^2.0.0",
