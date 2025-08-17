@@ -180,7 +180,7 @@ services:
       - keycloak
 
   init-keycloak:
-    image: klg71/keycloakmigration:0.2.55
+    image: klg71/keycloakmigration:0.2.106
     container_name: todo-app-init-keycloak
     depends_on:
       - keycloak
